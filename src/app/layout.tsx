@@ -1,15 +1,64 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Afnan B R | AI Engineer & Full-Stack Developer",
-  description: "Portfolio of Afnan B R - AI Engineer specializing in multi-agent systems, Vertex AI, LangGraph, and full-stack development. CSE student at NxtWave NIAT.",
-  keywords: ["AI", "Machine Learning", "LLM", "Vertex AI", "Full-Stack Developer", "Cloud Engineer", "React", "Node.js"],
+  metadataBase: new URL("https://afnan-portfolio-eta.vercel.app"),
+  title: "Afnan B.R. — AI Product Builder & Full-Stack Developer",
+  description:
+    "Portfolio of Afnan B.R., an AI and full-stack product builder creating multi-agent automation systems, client platforms and machine-learning applications.",
+  keywords: [
+    "AI product builder",
+    "multi-agent systems",
+    "full-stack developer",
+    "Gemini",
+    "Anthropic",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Supabase",
+    "LightGBM",
+    "Bengaluru",
+  ],
+  authors: [{ name: "Afnan B.R.", url: "https://afnan-portfolio-eta.vercel.app" }],
+  creator: "Afnan B.R.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: "https://afnan-portfolio-eta.vercel.app",
+  },
   openGraph: {
-    title: "Afnan B R | AI Engineer & Full-Stack Developer",
-    description: "AI-powered solutions, multi-agent systems, and full-stack applications",
     type: "website",
+    url: "https://afnan-portfolio-eta.vercel.app",
+    title: "Afnan B.R. — AI Product Builder & Full-Stack Developer",
+    description:
+      "Portfolio of Afnan B.R., an AI and full-stack product builder creating multi-agent automation systems, client platforms and machine-learning applications.",
+    siteName: "Afnan B.R. Portfolio",
     locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Afnan B.R. — AI Product Builder & Full-Stack Developer",
+    description:
+      "Portfolio of Afnan B.R., an AI and full-stack product builder creating multi-agent automation systems, client platforms and machine-learning applications.",
+    creator: "@AfnanBR",
   },
 };
 
@@ -19,8 +68,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-dark antialiased">
+    <html lang="en" className={`${plusJakartaSans.variable} ${inter.variable}`}>
+      <head>
+        <meta name="theme-color" content="#050817" />
+      </head>
+      <body className="bg-[#050817] antialiased">
         {children}
       </body>
     </html>

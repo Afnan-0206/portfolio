@@ -14,7 +14,7 @@ function GithubIcon({ size = 12 }: { size?: number }) {
 
 export default function MoreBuilds() {
   return (
-    <section className="relative px-6 pb-28 sm:px-8 lg:px-12">
+    <section className="relative px-6 pt-4 pb-28 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -23,12 +23,13 @@ export default function MoreBuilds() {
           transition={{ duration: 0.5 }}
           className="mb-10"
         >
-          <p className="font-mono text-xs font-semibold tracking-widest text-[#8FA2B8] uppercase">
-            MORE BUILDS &amp; EXPERIMENTS
+          <p className="font-mono text-xs font-semibold tracking-widest text-[#E2B36E] uppercase">
+            ADDITIONAL BUILDS &amp; EXPERIMENTS
           </p>
+          <p className="mt-2 text-sm text-[#A1A1AA]">Technical tools, utility libraries, and focused explorations.</p>
         </motion.div>
 
-        <div className="grid gap-5 sm:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-3">
           {experiments.map((exp, i) => (
             <motion.article
               key={exp.id}
@@ -36,53 +37,39 @@ export default function MoreBuilds() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.06 }}
-              className="group relative rounded-[1.25rem] border border-white/10 bg-[#091126]/85 p-6 backdrop-blur-sm shadow-md transition-all duration-300 hover:border-[#22D3EE]/30"
+              className="group relative rounded-2xl border border-white/10 bg-[#121316] p-6 backdrop-blur-sm shadow-card transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:shadow-card-hover flex flex-col justify-between"
               aria-label={exp.title}
             >
-              <h3 className="mb-2.5 text-base font-bold text-[#F8FAFC]">{exp.title}</h3>
-              <p className="mb-5 text-sm leading-6 text-[#C7D2E2]">{exp.description}</p>
-              <div className="mb-5 flex flex-wrap gap-1.5">
-                {exp.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-white/5 bg-[#0C1530]/80 px-2.5 py-0.5 font-mono text-[9px] text-[#C7D2E2]"
-                  >
-                    {t}
-                  </span>
-                ))}
+              <div>
+                <h3 className="mb-2 text-base font-bold text-[#F4F4F5]">{exp.title}</h3>
+                <p className="mb-5 text-sm leading-relaxed text-[#A1A1AA]">{exp.description}</p>
+                <div className="mb-5 flex flex-wrap gap-1.5">
+                  {exp.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full border border-white/5 bg-[#17181D] px-2.5 py-0.5 font-mono text-[10px] text-[#A1A1AA]"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <a
-                href={exp.repoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#8FA2B8] underline underline-offset-4 transition hover:text-[#22D3EE]"
-                aria-label={`View ${exp.title} on GitHub`}
-              >
-                <GithubIcon size={13} />
-                View on GitHub
-                <ArrowUpRight size={11} aria-hidden="true" />
-              </a>
+
+              <div className="border-t border-white/5 pt-4 mt-auto">
+                <a
+                  href={exp.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-[#A1A1AA] hover:text-[#FFFFFF] transition"
+                >
+                  <GithubIcon size={12} />
+                  <span>View Repository</span>
+                  <ArrowUpRight size={12} />
+                </a>
+              </div>
             </motion.article>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-10 text-center"
-        >
-          <a
-            href="https://github.com/Afnan-0206"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#8FA2B8] underline underline-offset-4 transition hover:text-[#22D3EE]"
-          >
-            Explore all projects on GitHub
-            <ArrowUpRight size={14} aria-hidden="true" />
-          </a>
-        </motion.div>
       </div>
     </section>
   );

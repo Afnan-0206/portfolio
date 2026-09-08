@@ -9,27 +9,27 @@ module.exports = {
     extend: {
       colors: {
         bg: {
-          primary:   "#050817",
-          secondary: "#091126",
-          elevated:  "#0C1530",
-          purpleMuted: "#211A33",
+          primary:   "#090A0C", // Deep obsidian
+          secondary: "#121316", // Rich charcoal
+          elevated:  "#18191E", // Elevated surface
+          card:      "#141519", // Clean card background
+          subtle:    "#1D1E24", // Subtle border fill
         },
         border: {
-          DEFAULT: "rgba(148, 163, 184, 0.20)",
-          subtle:  "rgba(148, 163, 184, 0.10)",
+          DEFAULT: "rgba(255, 255, 255, 0.08)",
+          subtle:  "rgba(255, 255, 255, 0.05)",
+          hover:   "rgba(255, 255, 255, 0.15)",
         },
         text: {
-          primary:   "#F8FAFC",
-          secondary: "#C7D2E2",
-          muted:     "#8FA2B8",
+          primary:   "#F4F4F5", // Crisp chalk white
+          secondary: "#A1A1AA", // Muted slate gray
+          muted:     "#71717A", // Subtle tertiary
         },
         accent: {
-          cyan:   "#22D3EE",
-          cyanDeep: "#0E7490",
-          violet: "#8B5CF6",
-          green:  "#34D399",
           amber:  "#F59E0B",
-          pink:   "#EC4899",
+          warm:   "#E2B36E",
+          emerald:"#10B981",
+          silver: "#E4E4E7",
         },
       },
       fontFamily: {
@@ -40,15 +40,13 @@ module.exports = {
         "2xs": ["0.625rem", { lineHeight: "1rem" }],
       },
       letterSpacing: {
-        "ultra": "0.4em",
-        "wide-xl": "0.3em",
+        "ultra": "0.3em",
+        "wide-xl": "0.2em",
       },
       boxShadow: {
-        "glow-cyan":   "0 0 40px -10px rgba(34,211,238,0.3)",
-        "glow-violet": "0 0 40px -10px rgba(139,92,246,0.3)",
-        "glow-green":  "0 0 40px -10px rgba(52,211,153,0.3)",
-        "card":        "0 24px 80px -30px rgba(0,0,0,0.8)",
-        "card-hover":  "0 32px 100px -20px rgba(0,0,0,0.85)",
+        "card":        "0 12px 40px -10px rgba(0,0,0,0.6)",
+        "card-hover":  "0 20px 50px -10px rgba(0,0,0,0.8)",
+        "warm-glow":   "0 0 30px -8px rgba(226,179,110,0.2)",
       },
       animation: {
         "fade-in":    "fadeIn 0.5s ease-out",

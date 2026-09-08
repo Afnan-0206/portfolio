@@ -1,35 +1,40 @@
 "use client";
 
-import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import FeaturedWork from "@/components/FeaturedWork";
 import MoreBuilds from "@/components/MoreBuilds";
+import NetworkingSection from "@/components/NetworkingSection";
 import About from "@/components/About";
 import Capabilities from "@/components/Capabilities";
 import Journey from "@/components/Journey";
 import Credentials from "@/components/Credentials";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import ScrollProgress from "@/components/ScrollProgress";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#050817] font-sans noise">
+    <div className="relative min-h-screen overflow-x-hidden bg-[#090A0C] font-sans noise text-[#F4F4F5]">
       
-      {/* Cinematic Full-Page Background */}
-      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#050817]" aria-hidden="true">
+      {/* Scroll progress bar + back to top */}
+      <ScrollProgress />
+
+      {/* Atmospheric Background — In Hero only, blending into obsidian */}
+      <div className="pointer-events-none absolute top-0 inset-x-0 h-[100vh] z-0 overflow-hidden bg-[#08090B]" aria-hidden="true">
         <Image
           src="/hero-background.jpg"
-          alt="Cinematic background portrait"
+          alt="Atmospheric background texture"
           fill
           priority
-          className="object-cover object-[center_35%] md:object-center opacity-40 md:opacity-45 brightness-[0.70] contrast-[1.05] saturate-[0.80]"
+          className="object-cover object-[center_35%] md:object-center opacity-25 grayscale-[30%] brightness-[0.7] contrast-[1.05]"
           sizes="100vw"
         />
-        {/* Layered lighting overlays & spot glows */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050817]/20 via-[#050817]/50 to-[#050817]/80" />
-        <div className="absolute top-0 left-1/4 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#22D3EE]/6 blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 h-[500px] w-[500px] rounded-full bg-[#8B5CF6]/6 blur-[120px]" />
+        {/* Deep obsidian gradient overlays: fades completely into #08090B at bottom */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08090B]/30 via-[#08090B]/60 to-[#08090B]" />
+        {/* Subtle warm accent light */}
+        <div className="absolute top-1/4 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#E2B36E]/4 blur-[160px]" />
       </div>
 
       {/* Navigation */}
@@ -38,61 +43,47 @@ export default function Home() {
       {/* Main content layer */}
       <main id="main-content" className="relative z-10">
         
-        {/* Hero Section - portrait clearly visible */}
-        <div className="relative bg-transparent">
-          <Hero />
-        </div>
+        {/* Hero Section */}
+        <Hero />
 
         {/* Transitional statement */}
-        <div className="relative bg-[#050817]/45 px-4 py-16 sm:px-6 lg:px-8 backdrop-blur-xs">
+        <div className="relative px-6 py-16 sm:px-8 lg:px-12 border-y border-white/5 bg-[#090A0C]/60 backdrop-blur-xs">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xl font-medium leading-9 text-[#C7D2E2] sm:text-2xl">
-              I care about more than making interfaces look good. I build the{" "}
-              <span className="text-[#F8FAFC]">workflow behind them</span>—data,
-              automation, AI reasoning, validation and the final user experience.
+            <p className="text-xl font-medium leading-relaxed text-[#A1A1AA] sm:text-2xl">
+              I care about more than making interfaces look pretty. I build the{" "}
+              <span className="text-[#F4F4F5]">workflow behind them</span>—data pipelines,
+              deterministic validation, multi-agent reasoning, and resilient user software.
             </p>
           </div>
         </div>
 
-        {/* Featured Work - darker overlay for high readability */}
-        <div className="relative bg-[#050817]/65 backdrop-blur-xs">
-          <FeaturedWork />
-        </div>
+        {/* Featured Work */}
+        <FeaturedWork />
 
         {/* More Builds */}
-        <div className="relative bg-[#050817]/70 backdrop-blur-xs">
-          <MoreBuilds />
-        </div>
+        <MoreBuilds />
 
-        {/* About Section - reveals a little more of the portrait */}
-        <div className="relative bg-[#050817]/50 backdrop-blur-xs">
-          <About />
-        </div>
+        {/* Networking & Founders Section */}
+        <NetworkingSection />
 
-        {/* Capabilities - dark navy glass layer */}
-        <div className="relative bg-[#050817]/75 backdrop-blur-xs">
-          <Capabilities />
-        </div>
+        {/* About Section */}
+        <About />
 
-        {/* Journey - subtle purple/navy lighting */}
-        <div className="relative bg-[#050817]/60 backdrop-blur-xs">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#050817]/0 via-[#211A33]/15 to-[#050817]/0" aria-hidden="true" />
-          <Journey />
-        </div>
+        {/* Capabilities */}
+        <Capabilities />
 
-        {/* Credentials - near-solid container with portrait visible at the edges */}
-        <div className="relative bg-[#050817]/70 backdrop-blur-xs">
-          <Credentials />
-        </div>
+        {/* Journey */}
+        <Journey />
 
-        {/* Contact Section - dramatic cinematic background reveal */}
-        <div className="relative bg-[#050817]/45 backdrop-blur-xs">
-          <ContactSection />
-        </div>
+        {/* Credentials */}
+        <Credentials />
+
+        {/* Contact Section */}
+        <ContactSection />
       </main>
 
       {/* Footer */}
-      <div className="relative z-10 bg-[#050817]/90 backdrop-blur-md">
+      <div className="relative z-10">
         <Footer />
       </div>
     </div>

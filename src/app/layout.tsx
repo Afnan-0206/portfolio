@@ -60,6 +60,17 @@ export const metadata: Metadata = {
       "Portfolio of Afnan B.R., an AI and full-stack product builder creating multi-agent automation systems, client platforms and machine-learning applications.",
     creator: "@AfnanBR",
   },
+  // Icons are served from /public/ — do NOT put icon.png/favicon.ico in src/app/ as
+  // Next.js App Router tries to process them as dynamic image route handlers (→ 500 errors).
+  icons: {
+    icon: [
+      { url: "/images/afnan-avatar.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/images/afnan-avatar.png" },
+    ],
+    shortcut: ["/images/afnan-avatar.png"],
+  },
 };
 
 export default function RootLayout({
@@ -71,6 +82,9 @@ export default function RootLayout({
     <html lang="en" className={`${plusJakartaSans.variable} ${inter.variable}`}>
       <head>
         <meta name="theme-color" content="#050817" />
+        {/* favicon — served from /public/images/ to avoid App Router 500 errors */}
+        <link rel="icon" href="/images/afnan-avatar.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/afnan-avatar.png" />
       </head>
       <body className="bg-[#050817] antialiased">
         {children}

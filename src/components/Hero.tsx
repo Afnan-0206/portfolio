@@ -1,219 +1,410 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { motion, animate } from "framer-motion";
+import { ArrowDown, ArrowUpRight, Play, CheckCircle2, Terminal, RefreshCw } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import SpotlightCard from "@/components/SpotlightCard";
 
-function GithubIcon({ size = 15 }: { size?: number }) {
+const STATS = [
+  { value: 5, suffix: "+", label: "Production Builds", detail: "Shipped & Tested" },
+  { value: 6, suffix: "", label: "Multi-Agent Nodes", detail: "Orchestrated in AutoFix" },
+  { value: 3, suffix: "+", label: "Client Platforms", detail: "Active Deployments" },
+  { value: 8, suffix: "+", label: "Summits & Hackathons", detail: "AgentsNexus & BTW" },
+];
+
+function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
+  const [display, setDisplay] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          const controls = animate(0, value, {
+            duration: 1.2,
+            ease: "easeOut",
+            onUpdate: (v) => setDisplay(Math.round(v)),
+          });
+          return () => controls.stop();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [value]);
+
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.866-.014-1.699-2.782.605-3.369-1.343-3.369-1.343-.455-1.157-1.11-1.466-1.11-1.466-.908-.62.069-.607.069-.607 1.004.071 1.532 1.032 1.532 1.032.892 1.528 2.341 1.087 2.91.831.091-.647.35-1.087.636-1.336-2.22-.253-4.555-1.112-4.555-4.951 0-1.093.39-1.987 1.029-2.685-.103-.253-.446-1.27.098-2.646 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.91-1.295 2.75-1.025 2.75-1.025.545 1.376.202 2.393.1 2.646.64.698 1.028 1.592 1.028 2.685 0 3.85-2.339 4.695-4.566 4.943.359.309.679.919.679 1.852 0 1.336-.012 2.415-.012 2.744 0 .268.18.58.688.481A10.018 10.018 0 0022 12.017C22 6.484 17.523 2 12 2z" />
-    </svg>
+    <span ref={ref} className="tabular-nums font-bold text-[#F4F4F5]">
+      {display}{suffix}
+    </span>
   );
 }
 
-const PROOF_LABELS = [
-  "Multi-Agent AI",
-  "Full-Stack Products",
-  "Machine Learning",
-  "Client Systems",
+// Scenarios for the Live Interactive Agent Simulator
+interface SimulationScenario {
+  id: string;
+  title: string;
+  badge: string;
+  input: string;
+  agentSteps: {
+    agent: string;
+    action: string;
+    duration: number;
+    status: string;
+  }[];
+  output: string;
+}
+
+const SCENARIOS: SimulationScenario[] = [
+  {
+    id: "bizpilot",
+    title: "BizPilot: WhatsApp Quotation",
+    badge: "Multi-Agent AI",
+    input: '"Need 45 boxed lunches for tech meetup this Thursday 1pm, budget ₹250/head incl GST, send bill on WhatsApp."',
+    agentSteps: [
+      { agent: "01. Intake Agent", action: "Parsed JSON entity: { qty: 45, date: 'Thu', budget: 250, tax: 'GST' }", duration: 600, status: "Entities Extracted" },
+      { agent: "02. Context Agent", action: "Matched caterer menu #4 + client GSTIN verified in Supabase", duration: 700, status: "Context Resolved" },
+      { agent: "03. Pricing Engine", action: "Deterministic calculation: Subtotal ₹9,576 + 18% GST ₹1,724 = ₹11,300", duration: 600, status: "Math Verified" },
+      { agent: "04. Output Dispatch", action: "Generated verified PDF invoice + WhatsApp-ready reply template", duration: 500, status: "Dispatched" },
+    ],
+    output: "Quotation #BP-4892 generated: ₹11,300 with verified GST invoice & PDF download link.",
+  },
+  {
+    id: "autofix",
+    title: "AutoFix: Sentry Crash Triage",
+    badge: "Autonomous DevOps",
+    input: '"TypeError: Cannot read property \'session_id\' of undefined in AuthMiddleware at line 42"',
+    agentSteps: [
+      { agent: "01. Manager Agent", action: "Prioritized severity: High. Assigned investigation plan to Researcher", duration: 600, status: "Triaged" },
+      { agent: "02. Researcher", action: "Isolated Git commit 8a4f91b (JWT payload refactor missing null-check)", duration: 700, status: "Root Cause Found" },
+      { agent: "03. Tester Agent", action: "Drafted regression test reproducing undefined token edge-case", duration: 600, status: "Repro Confirmed" },
+      { agent: "04. Action Agent", action: "Constructed fix PR with optional chaining + automated test passing", duration: 500, status: "PR Ready" },
+    ],
+    output: "AutoFix PR #114 created: 'fix(auth): add optional chaining on session_id token'. Verified in 2.4s.",
+  },
+  {
+    id: "pg-lease",
+    title: "Vinayaka: Resident Onboarding",
+    badge: "Client SaaS",
+    input: '"New resident Rahul Sharma checked in Room 302, 3-sharing, ₹8,500/mo, deposit ₹15,000 paid via UPI"',
+    agentSteps: [
+      { agent: "01. Schema Ingress", action: "Validated KYC phone + Aadhaar hash + Room 302 availability", duration: 600, status: "KYC Verified" },
+      { agent: "02. Ledger Engine", action: "PostgreSQL transaction: resident created + deposit ledger credited", duration: 700, status: "Ledger Synced" },
+      { agent: "03. Policy Check", action: "Row-Level Security (RLS) confirmed admin authorization only", duration: 600, status: "Security Passed" },
+      { agent: "04. Welcome Service", action: "Sent digital rent receipt + WiFi credentials to resident phone", duration: 500, status: "Onboarded" },
+    ],
+    output: "Resident Rahul Sharma registered in Room 302. Receipt #SV-892 sent via SMS & WhatsApp.",
+  },
 ];
 
 export default function Hero() {
+  const [selectedScenario, setSelectedScenario] = useState<SimulationScenario>(SCENARIOS[0]);
+  const [activeStepIdx, setActiveStepIdx] = useState<number>(-1);
+  const [isSimulating, setIsSimulating] = useState<boolean>(false);
+  const [completed, setCompleted] = useState<boolean>(false);
+
+  const runSimulation = () => {
+    if (isSimulating) return;
+    setIsSimulating(true);
+    setCompleted(false);
+    setActiveStepIdx(0);
+
+    let current = 0;
+    const executeStep = () => {
+      if (current < selectedScenario.agentSteps.length - 1) {
+        current += 1;
+        setActiveStepIdx(current);
+        setTimeout(executeStep, selectedScenario.agentSteps[current].duration);
+      } else {
+        setIsSimulating(false);
+        setCompleted(true);
+      }
+    };
+
+    setTimeout(executeStep, selectedScenario.agentSteps[0].duration);
+  };
+
+  const handleScenarioChange = (scenario: SimulationScenario) => {
+    setSelectedScenario(scenario);
+    setActiveStepIdx(-1);
+    setCompleted(false);
+    setIsSimulating(false);
+  };
+
   const scrollToWork = () => {
     const el = document.getElementById("work");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen flex-col justify-center px-6 pt-32 pb-20 sm:px-8 lg:px-12"
+      className="relative flex min-h-[94vh] flex-col justify-center px-6 pt-36 pb-24 sm:px-8 lg:px-12 dot-grid-bg"
       aria-label="Introduction"
     >
       <div className="relative mx-auto w-full max-w-7xl">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
 
-          {/* ── Left column ── */}
+          {/* ── Left column: High-Impact Typography & Action ── */}
           <div className="space-y-8">
 
-            {/* Eyebrow */}
+            {/* Live Status Pill */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              transition={{ duration: 0.45 }}
+              className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-[#121317]/90 px-4 py-1.5 backdrop-blur-md shadow-sm"
             >
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-[#22D3EE]/20 bg-[#091126]/60 px-4.5 py-2 backdrop-blur-md shadow-sm">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#34D399] opacity-60" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#34D399]" />
-                </span>
-                <span className="text-[10px] font-semibold tracking-widest text-[#22D3EE] uppercase">
-                  AI PRODUCT BUILDER · BENGALURU, INDIA
-                </span>
-              </div>
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#10B981] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#10B981]" />
+              </span>
+              <span className="text-xs font-mono font-semibold tracking-wider text-[#A1A1AA] uppercase">
+                AI Product Builder · Bengaluru, India
+              </span>
             </motion.div>
 
             {/* Headline */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.08, ease: "easeOut" }}
-              className="space-y-3"
+              transition={{ duration: 0.5, delay: 0.08 }}
+              className="space-y-4"
             >
-              <h1 className="max-w-3xl text-4xl font-extrabold leading-[1.12] tracking-tight text-[#F8FAFC] sm:text-5xl lg:text-6xl">
+              <h1 className="max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl text-[#F4F4F5]">
                 I build{" "}
-                <span className="bg-gradient-to-r from-[#22D3EE] to-[#8B5CF6] bg-clip-text text-transparent">
-                  AI agents
+                <span className="text-gold-metallic">
+                  autonomous AI systems
                 </span>{" "}
-                and full-stack products that turn complex workflows into usable software.
+                and full-stack products that turn messy workflows into software.
               </h1>
-            </motion.div>
 
-            {/* Supporting copy */}
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.16, ease: "easeOut" }}
-              className="max-w-xl text-lg leading-8 text-[#C7D2E2]"
-            >
-              I&apos;m{" "}
-              <span className="text-[#F8FAFC] font-semibold">Afnan B.R.</span>, a
-              B.Tech CSE (AI/ML) student building multi-agent automation systems,
-              client platforms and machine-learning products—from WhatsApp business
-              workflows to DevOps incident response.
-            </motion.p>
+              <p className="max-w-2xl text-lg leading-relaxed text-[#A1A1AA]">
+                I&apos;m <span className="text-[#F4F4F5] font-semibold">Afnan B.R.</span>, an engineer translating chaotic human communications—from informal WhatsApp requests to complex DevOps triage—into production-grade multi-agent state machines, relational backends, and snappy user interfaces.
+              </p>
+            </motion.div>
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.24, ease: "easeOut" }}
-              className="flex flex-wrap items-center gap-4"
+              transition={{ duration: 0.45, delay: 0.16 }}
+              className="flex flex-wrap items-center gap-3.5"
             >
               <button
                 type="button"
                 onClick={scrollToWork}
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#22D3EE] to-[#8B5CF6] px-7 py-4 text-sm font-bold text-[#050817] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)]"
+                className="inline-flex items-center gap-2 rounded-full bg-[#F4F4F5] px-7 py-3.5 text-xs font-bold text-[#090A0C] shadow-lg transition-all duration-200 hover:bg-[#FFFFFF] hover:shadow-[0_0_24px_rgba(255,255,255,0.3)] active:scale-[0.98]"
               >
-                Explore My Work
-                <ArrowDown
-                  size={16}
-                  className="transition-transform duration-300 group-hover:translate-y-0.5"
-                  aria-hidden="true"
-                />
+                Explore Selected Work
+                <ArrowDown size={14} />
               </button>
 
-              <a
-                href="https://github.com/Afnan-0206"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#0C1530]/60 px-7 py-4 text-sm font-semibold text-[#F8FAFC] shadow-md transition-all duration-300 hover:border-[#22D3EE]/30 hover:bg-[#0C1530]"
+              <button
+                type="button"
+                onClick={scrollToContact}
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#141519] px-6 py-3.5 text-xs font-semibold text-[#F4F4F5] transition hover:border-white/30 hover:bg-[#1A1B22]"
               >
-                <GithubIcon size={16} />
-                View GitHub
-              </a>
+                Let&apos;s Talk
+              </button>
 
-              <a
-                href={`mailto:brafnan26@gmail.com?subject=${encodeURIComponent("Résumé request for Afnan B.R.")}`}
-                className="inline-flex items-center text-sm font-semibold text-[#8FA2B8] underline underline-offset-4 transition hover:text-[#22D3EE]"
+              <Link
+                href="/network"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-transparent px-5 py-3.5 text-xs font-semibold text-[#A1A1AA] transition hover:border-white/25 hover:text-[#F4F4F5]"
               >
-                Request Résumé
-              </a>
+                <span>Founders Directory</span>
+                <ArrowUpRight size={13} />
+              </Link>
             </motion.div>
 
-            {/* Availability badge */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.32 }}
-              className="text-xs font-medium tracking-wide text-[#8FA2B8]"
-            >
-              Open to AI/full-stack internships and selected freelance projects
-            </motion.p>
-
-            {/* Proof labels */}
+            {/* Stats Spotlight Grid */}
             <motion.div
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap gap-2.5"
+              transition={{ duration: 0.45, delay: 0.25 }}
+              className="grid grid-cols-2 gap-3 sm:grid-cols-4 pt-3 border-t border-white/5"
             >
-              {PROOF_LABELS.map((label) => (
-                <span
-                  key={label}
-                  className="rounded-full border border-white/10 bg-[#091126]/60 px-4 py-1.5 font-mono text-xs tracking-wider text-[#C7D2E2] backdrop-blur-sm"
+              {STATS.map((stat) => (
+                <SpotlightCard
+                  key={stat.label}
+                  className="p-3.5 bg-[#111217]"
                 >
-                  {label}
-                </span>
+                  <p className="text-2xl font-extrabold text-[#F4F4F5]">
+                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                  </p>
+                  <p className="mt-1 text-xs font-semibold text-[#E4E4E7]">
+                    {stat.label}
+                  </p>
+                  <p className="text-[10px] text-[#71717A]">
+                    {stat.detail}
+                  </p>
+                </SpotlightCard>
               ))}
             </motion.div>
           </div>
 
-          {/* ── Right column — Architecture visual ── */}
+          {/* ── Right column: Interactive Live Multi-Agent Simulator ── */}
           <motion.div
-            initial={{ opacity: 0, x: 16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="hidden lg:block"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.55, delay: 0.15 }}
           >
-            <div
-              className="relative rounded-[1.5rem] border border-white/10 bg-[#091126]/75 p-6 backdrop-blur-md shadow-card"
-              aria-label="System architecture illustration"
-              role="img"
-            >
-              {/* Top bar */}
-              <div className="mb-5 flex items-center gap-2 border-b border-white/5 pb-3">
-                <span className="h-3 w-3 rounded-full bg-[#EF4444]/80" />
-                <span className="h-3 w-3 rounded-full bg-[#F59E0B]/80" />
-                <span className="h-3 w-3 rounded-full bg-[#34D399]/80" />
-                <span className="ml-3 font-mono text-xs text-[#8FA2B8]">multi-agent pipeline</span>
-                <Sparkles size={13} className="ml-auto text-[#22D3EE]/60" aria-hidden="true" />
+            <SpotlightCard className="p-6 sm:p-7 bg-[#111217] shadow-2xl border border-white/10">
+              
+              {/* Simulator Header */}
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/5 pb-4 mb-5">
+                <div className="flex items-center gap-2">
+                  <Terminal size={16} className="text-[#E2B36E]" />
+                  <span className="font-mono text-xs font-bold text-[#F4F4F5] tracking-wider uppercase">
+                    LIVE MULTI-AGENT SIMULATOR
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-[#16171D] px-2.5 py-1 text-[10px] font-mono text-[#10B981]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse" />
+                  <span>Interactive Engine</span>
+                </div>
               </div>
 
-              {/* Pipeline nodes */}
-              <div className="space-y-2">
-                {[
-                  { step: "01", label: "Customer Message", sub: "Unstructured input", color: "#C7D2E2" },
-                  { step: "02", label: "Intake Agent",     sub: "Parse & classify",   color: "#22D3EE" },
-                  { step: "03", label: "Context Agent",    sub: "Customer lookup",     color: "#22D3EE" },
-                  { step: "04", label: "Generation Agent", sub: "Quote & invoice",     color: "#8B5CF6" },
-                  { step: "05", label: "Approval Agent",   sub: "Route high-value",    color: "#8B5CF6" },
-                  { step: "06", label: "Review Agent",     sub: "Verify output",       color: "#34D399" },
-                ].map((node, i) => (
-                  <div key={node.step} className="relative flex items-center gap-3">
-                    {/* Connector line */}
-                    {i < 5 && (
-                      <div className="absolute left-[18px] top-8 h-2.5 w-px bg-white/10" aria-hidden="true" />
-                    )}
-                    <div
-                      className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl border border-white/10 font-mono text-xs font-semibold"
-                      style={{ color: node.color, borderColor: `${node.color}25` }}
+              {/* Scenario Switcher Tabs */}
+              <div className="space-y-1.5 mb-5">
+                <p className="text-[11px] font-mono uppercase text-[#71717A] tracking-wider">
+                  1. Select Real-World Input Scenario:
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {SCENARIOS.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => handleScenarioChange(s)}
+                      className={`rounded-xl px-3 py-1.5 text-xs font-semibold transition-all ${
+                        selectedScenario.id === s.id
+                          ? "bg-[#F4F4F5] text-[#090A0C] shadow-sm font-bold"
+                          : "border border-white/10 bg-[#16171D] text-[#A1A1AA] hover:border-white/20 hover:text-[#F4F4F5]"
+                      }`}
                     >
-                      {node.step}
-                    </div>
-                    <div className="min-w-0 flex-1 rounded-xl border border-white/5 bg-[#0C1530]/80 px-4 py-2.5">
-                      <p className="text-xs font-semibold text-[#F8FAFC]">{node.label}</p>
-                      <p className="font-mono text-[10px] text-[#8FA2B8]">{node.sub}</p>
-                    </div>
-                    {i === 5 && (
-                      <span className="rounded-full bg-[#34D399]/10 px-2.5 py-1 font-mono text-[10px] font-semibold text-[#34D399] border border-[#34D399]/20">
-                        ✓ Output
-                      </span>
-                    )}
-                  </div>
-                ))}
+                      {s.badge}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {/* Footer stat */}
-              <div className="mt-4 flex items-center justify-between rounded-xl border border-white/5 bg-[#0C1530]/50 px-4 py-3">
-                <span className="font-mono text-[10px] text-[#8FA2B8]">BizPilot AI — 5-agent pipeline</span>
-                <span className="font-mono text-[10px] text-[#34D399] flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#34D399] animate-pulse" />
-                  live
-                </span>
+              {/* Input Message Card */}
+              <div className="rounded-xl border border-white/10 bg-[#15171D] p-3.5 mb-5 space-y-1.5">
+                <div className="flex items-center justify-between text-[10px] font-mono text-[#71717A] uppercase">
+                  <span>Raw Incoming Input</span>
+                  <span className="text-[#E2B36E] font-semibold">{selectedScenario.title}</span>
+                </div>
+                <p className="text-xs text-[#E4E4E7] font-mono italic leading-relaxed">
+                  {selectedScenario.input}
+                </p>
               </div>
-            </div>
+
+              {/* Agent Nodes Progress Pipeline */}
+              <div className="space-y-2 mb-5">
+                <div className="flex items-center justify-between text-[11px] font-mono text-[#71717A] uppercase">
+                  <span>2. Sequential Reasoning Pipeline:</span>
+                  <span className="text-xs text-[#E2B36E]">
+                    {activeStepIdx >= 0 ? `Stage ${activeStepIdx + 1}/4` : "Ready to Execute"}
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  {selectedScenario.agentSteps.map((step, idx) => {
+                    const isActive = activeStepIdx === idx;
+                    const isDone = activeStepIdx > idx || completed;
+
+                    return (
+                      <div
+                        key={step.agent}
+                        className={`flex items-start gap-3 rounded-xl border p-2.5 transition-all duration-300 ${
+                          isActive
+                            ? "border-[#E2B36E] bg-[#E2B36E]/10 shadow-[0_0_20px_rgba(226,179,110,0.15)]"
+                            : isDone
+                            ? "border-[#10B981]/30 bg-[#10B981]/5"
+                            : "border-white/5 bg-[#15171D]/60 opacity-60"
+                        }`}
+                      >
+                        <div
+                          className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg font-mono text-[10px] font-bold ${
+                            isActive
+                              ? "bg-[#E2B36E] text-[#090A0C]"
+                              : isDone
+                              ? "bg-[#10B981] text-[#090A0C]"
+                              : "border border-white/10 bg-[#111217] text-[#71717A]"
+                          }`}
+                        >
+                          {isDone ? <CheckCircle2 size={13} /> : `0${idx + 1}`}
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="text-xs font-bold text-[#F4F4F5]">{step.agent}</p>
+                            <span className="font-mono text-[9px] text-[#A1A1AA]">{step.status}</span>
+                          </div>
+                          <p className="text-[11px] font-mono text-[#A1A1AA] truncate mt-0.5">
+                            {step.action}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Output Result or Trigger Button */}
+              {completed ? (
+                <div className="rounded-xl border border-[#10B981]/30 bg-[#10B981]/10 p-3.5 space-y-1.5 animate-fade-in">
+                  <div className="flex items-center justify-between text-xs font-bold text-[#10B981]">
+                    <span className="flex items-center gap-1.5">
+                      <CheckCircle2 size={14} />
+                      Deterministic Result Verified
+                    </span>
+                    <button
+                      type="button"
+                      onClick={runSimulation}
+                      className="inline-flex items-center gap-1 text-[10px] font-mono underline hover:text-[#FFFFFF]"
+                    >
+                      <RefreshCw size={10} /> Re-run
+                    </button>
+                  </div>
+                  <p className="text-xs text-[#F4F4F5] leading-relaxed">
+                    {selectedScenario.output}
+                  </p>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={runSimulation}
+                  disabled={isSimulating}
+                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#F4F4F5] py-3 text-xs font-bold text-[#090A0C] shadow-md transition hover:bg-[#FFFFFF] hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] disabled:opacity-50 active:scale-[0.99]"
+                >
+                  {isSimulating ? (
+                    <span className="flex items-center gap-2">
+                      <RefreshCw size={13} className="animate-spin" />
+                      Routing Data Through Agents...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      <Play size={13} fill="currentColor" />
+                      Run Live Agent Pipeline Simulator
+                    </span>
+                  )}
+                </button>
+              )}
+
+            </SpotlightCard>
           </motion.div>
+
         </div>
       </div>
     </section>

@@ -30,8 +30,11 @@ export interface Credential {
   title: string;
   issuer: string;
   date: string;
-  type: "hackathon" | "workshop" | "certificate";
+  type: "hackathon" | "workshop" | "certificate" | "summit";
   imageUrl: string;
+  location?: string;
+  role?: string;
+  description?: string;
 }
 
 export interface CapabilityGroup {
@@ -167,9 +170,57 @@ export const experiments: Experiment[] = [
   },
 ];
 
-// ─── Credentials ─────────────────────────────────────────────────────────────
+// ─── Credentials & Summit Experiences ──────────────────────────────────────
 
 export const credentials: Credential[] = [
+  {
+    id: "agentsnexus-arch",
+    title: "AgentsNexus: India's Premier Conference on Agentic AI",
+    issuer: "AgentsNexus Organizing Team & Community",
+    date: "Sep 2026",
+    type: "summit",
+    imageUrl: "/images/agentsnexus-team-arch.jpg",
+    location: "Bengaluru, India",
+    role: "Organizing Crew & AI Builder",
+    description:
+      "Core organizing team bringing together top AI researchers, founders, and autonomous agent builders from across India at the premier national Agentic AI summit.",
+  },
+  {
+    id: "btw-buildathon",
+    title: "Bengaluru Tech Week Buildathon 2026",
+    issuer: "Scaler School of Technology × BTW",
+    date: "Sep 2026",
+    type: "hackathon",
+    imageUrl: "/images/btw-buildathon-scaler.jpg",
+    location: "Bengaluru, India",
+    role: "Buildathon Hacker & Fellow",
+    description:
+      "Intensive 48-hour buildathon sprint at Scaler School of Technology developing edge AI prototypes, civic intelligence systems, and high-concurrency architectures.",
+  },
+  {
+    id: "agentsnexus-stage",
+    title: "AgentsNexus Main Stage & Builder Cohort",
+    issuer: "AgentsNexus Stage & Crew",
+    date: "Sep 2026",
+    type: "summit",
+    imageUrl: "/images/agentsnexus-stage-crew.jpg",
+    location: "Bengaluru, India",
+    role: "Stage Crew & Developer Advocate",
+    description:
+      "High-energy builder cohort celebration on the main conference stage with industry sponsors Qualcomm, Logitech, Coderabbit, and leading AI pioneers.",
+  },
+  {
+    id: "agentsnexus-monument",
+    title: "The Future Runs on AI Agents",
+    issuer: "AgentsNexus Flagship Summit",
+    date: "Sep 2026",
+    type: "summit",
+    imageUrl: "/images/agentsnexus-banner.jpg",
+    location: "Bengaluru, India",
+    role: "Summit Monument & Vision",
+    description:
+      "Flagship visual and keynote theme highlighting how multi-agent state machines and deterministic validation are transforming enterprise engineering.",
+  },
   {
     id: "murf-hackathon",
     title: "Murf.AI Hackathon",
@@ -177,6 +228,10 @@ export const credentials: Credential[] = [
     date: "26 Mar 2026",
     type: "hackathon",
     imageUrl: "/certificates/certificate-1.jpg",
+    location: "Bengaluru, India",
+    role: "Hackathon Builder",
+    description:
+      "Built an AI-first collaborative prototype with rapid speech synthesis and automated customer response workflows.",
   },
   {
     id: "google-flows",
@@ -185,6 +240,10 @@ export const credentials: Credential[] = [
     date: "06 Mar 2026",
     type: "workshop",
     imageUrl: "/certificates/certificate-2.jpg",
+    location: "Bengaluru, India",
+    role: "Workshop Participant",
+    description:
+      "Explored generative AI pipelines, prompt structuring, and practical workflow application design.",
   },
   {
     id: "base44",
@@ -193,6 +252,10 @@ export const credentials: Credential[] = [
     date: "18 Nov 2025",
     type: "workshop",
     imageUrl: "/certificates/certificate-3.jpg",
+    location: "Bengaluru, India",
+    role: "Frontend Engineer",
+    description:
+      "Designed modern UI components, interaction patterns, and performance-first web delivery techniques.",
   },
   {
     id: "autonomous-vehicle",
@@ -201,6 +264,10 @@ export const credentials: Credential[] = [
     date: "15 Nov 2025",
     type: "workshop",
     imageUrl: "/certificates/certificate-4.jpg",
+    location: "Bengaluru, India",
+    role: "Robotics Systems Student",
+    description:
+      "Robotics-led sessions focused on autonomous vehicle control loops and sensor-driven decision systems.",
   },
 ];
 
@@ -284,8 +351,8 @@ export const journeySteps: JourneyStep[] = [
   },
   {
     id: "j5",
-    label: "Now",
+    label: "Now · Summits & Production",
     description:
-      "Currently focused on AI automation and production-ready full-stack systems that solve real operational problems.",
+      "Co-organizing India's Premier Conference on Agentic AI (AgentsNexus), hacking at Bengaluru Tech Week Buildathons, and shipping resilient full-stack multi-agent systems.",
   },
 ];

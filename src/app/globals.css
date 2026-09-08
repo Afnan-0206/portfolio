@@ -10,19 +10,20 @@
 }
 
 :root {
-  --bg-primary:     #050817;
-  --bg-secondary:   #091126;
-  --bg-elevated:    #0C1530;
-  --bg-purple-muted:#211A33;
-  --border:         rgba(148, 163, 184, 0.20);
-  --border-subtle:  rgba(148, 163, 184, 0.10);
-  --text-primary:   #F8FAFC;
-  --text-secondary: #C7D2E2;
-  --text-muted:     #8FA2B8;
-  --accent-cyan:    #22D3EE;
-  --accent-cyan-deep:#0E7490;
-  --accent-violet:  #8B5CF6;
-  --font-mono:      'Geist Mono', 'Fira Code', monospace;
+  --bg-primary:      #08090B;
+  --bg-secondary:    #0F1014;
+  --bg-elevated:     #15171D;
+  --bg-card:         #111217;
+  --border:          rgba(255, 255, 255, 0.08);
+  --border-subtle:   rgba(255, 255, 255, 0.04);
+  --border-hover:    rgba(255, 255, 255, 0.18);
+  --text-primary:    #F4F4F5;
+  --text-secondary:  #A1A1AA;
+  --text-muted:      #71717A;
+  --accent-amber:    #F59E0B;
+  --accent-warm:     #E2B36E;
+  --accent-emerald:  #10B981;
+  --font-mono:       'Geist Mono', 'Fira Code', monospace;
 }
 
 html {
@@ -33,37 +34,44 @@ html {
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
+/* ── Dot Grid Background Texture ── */
+.dot-grid-bg {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.20);
+  background: rgba(255, 255, 255, 0.16);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.35);
+  background: rgba(255, 255, 255, 0.28);
 }
 
 /* ── Focus Visible ── */
 :focus-visible {
-  outline: 2px solid var(--accent-cyan);
+  outline: 2px solid rgba(226, 179, 110, 0.5);
   outline-offset: 3px;
   border-radius: 6px;
 }
 
 /* ── Selection ── */
 ::selection {
-  background: rgba(34, 211, 238, 0.25);
-  color: #F8FAFC;
+  background: rgba(226, 179, 110, 0.25);
+  color: #FFFFFF;
 }
 
 /* ── Typography utilities ── */
@@ -76,50 +84,117 @@ body {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
   opacity: 0.02;
 }
 
-/* ── Cinematic Glassmorphism ── */
-.bg-navy-glass {
-  background: rgba(9, 17, 38, 0.70);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+/* ── Scroll Progress Bar ── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #E2B36E, #FFFFFF);
+  z-index: 9998;
+  transform-origin: left;
+  will-change: width;
+  box-shadow: 0 0 10px rgba(226, 179, 110, 0.4);
+  transition: width 0.1s linear;
 }
 
-.bg-elevated-glass {
-  background: rgba(12, 21, 48, 0.80);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-/* ── Hover glows ── */
-.border-glow {
+/* ── Spotlight Card Magic ── */
+.spotlight-card {
   position: relative;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background-color: #111217;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-.border-glow::before {
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.spotlight-card::after {
   content: '';
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.25), transparent 50%, rgba(139, 92, 246, 0.25));
+  background: radial-gradient(
+    400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(226, 179, 110, 0.35),
+    transparent 40%
+  );
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: -1;
   pointer-events: none;
 }
 
-.border-glow:hover::before {
+.spotlight-card:hover::before,
+.spotlight-card:hover::after {
   opacity: 1;
 }
 
-.border-glow:hover {
-  border-color: rgba(34, 211, 238, 0.3);
-  box-shadow: 0 20px 50px -20px rgba(5, 8, 23, 0.9), 0 0 30px -10px rgba(34, 211, 238, 0.15);
+.spotlight-card:hover {
+  border-color: rgba(226, 179, 110, 0.25);
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.8), 0 0 30px -10px rgba(226, 179, 110, 0.08);
+}
+
+/* ── Metallic Shimmer Text ── */
+.text-metallic {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E4E4E7 40%, #A1A1AA 70%, #FFFFFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gold-metallic {
+  background: linear-gradient(135deg, #FFF1D0 0%, #E2B36E 50%, #C99342 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animated Border Laser Beam ── */
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+.animate-border-beam {
+  animation: border-beam 6s linear infinite;
+}
+
+/* ── Shimmer effect for badges ── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.06) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
 }
 
 /* ── Custom Prose for Case Studies ── */
@@ -147,4 +222,28 @@ body {
     transition-duration: 0.01ms !important;
   }
   html { scroll-behavior: auto; }
+}
+
+/* ── Fix autofill styles (Chrome/Safari) ── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: #F4F4F5;
+  -webkit-box-shadow: 0 0 0px 1000px #111217 inset;
+  box-shadow: 0 0 0px 1000px #111217 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ── Placeholder text ── */
+::placeholder {
+  color: #52525B;
+  opacity: 1;
+}
+
+/* ── Smooth image rendering ── */
+img {
+  image-rendering: -webkit-optimize-contrast;
 }

@@ -58,9 +58,9 @@ export default function Credentials() {
   };
 
   return (
-    <section id="credentials" className="relative px-6 py-28 sm:px-8 lg:px-12">
+    <section id="credentials" className="relative px-4 py-16 sm:px-8 sm:py-24 lg:py-28 lg:px-12">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10 sm:mb-14">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -74,11 +74,11 @@ export default function Credentials() {
                 IN THE FIELD &amp; RECOGNITION
               </span>
             </div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-[#F4F4F5] sm:text-4xl lg:text-5xl leading-[1.15]">
+            <h2 className="text-2xl font-extrabold tracking-tight text-[#F4F4F5] sm:text-4xl lg:text-5xl leading-[1.15]">
               Live Summits, Hackathons &amp;{" "}
               <span className="text-gold-metallic">Credentials.</span>
             </h2>
-            <p className="text-base sm:text-lg leading-relaxed text-[#A1A1AA]">
+            <p className="text-sm sm:text-base lg:text-lg leading-relaxed text-[#A1A1AA]">
               Hands-on builder moments from co-organizing India&apos;s Premier Agentic AI Conference (AgentsNexus), sprinting at the Bengaluru Tech Week Buildathon, and shipping verified software under intense hackathon deadlines.
             </p>
           </motion.div>
@@ -98,7 +98,7 @@ export default function Credentials() {
                   key={cat}
                   type="button"
                   onClick={() => setActiveCategory(cat)}
-                  className={`rounded-full px-4 py-2 text-xs font-semibold transition-all duration-200 ${
+                  className={`rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-semibold transition-all duration-200 ${
                     active
                       ? "bg-[#F4F4F5] text-[#090A0C] shadow-md font-bold"
                       : "border border-white/10 bg-[#141519] text-[#A1A1AA] hover:border-white/20 hover:text-[#F4F4F5]"
@@ -112,7 +112,7 @@ export default function Credentials() {
         </div>
 
         {/* Experiences Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <AnimatePresence mode="popLayout">
             {filtered.map((cred, i) => {
               const typeCfg = TYPE_CONFIG[cred.type] || TYPE_CONFIG.certificate;
@@ -130,7 +130,7 @@ export default function Credentials() {
                   <button
                     type="button"
                     onClick={() => setPreviewItem(cred)}
-                    className="relative block h-48 w-full overflow-hidden border-b border-white/5 bg-[#17181D]"
+                    className="relative block h-44 sm:h-48 w-full overflow-hidden border-b border-white/5 bg-[#17181D]"
                     aria-label={`View ${cred.title}`}
                   >
                     <Image
@@ -159,7 +159,7 @@ export default function Credentials() {
                   </button>
 
                   {/* Content */}
-                  <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
+                  <div className="p-4 sm:p-5 space-y-2.5 sm:space-y-3 flex-1 flex flex-col justify-between">
                     <div>
                       {cred.role && (
                         <p className="font-mono text-[10px] font-semibold text-[#E2B36E] uppercase tracking-wider mb-1">
@@ -198,17 +198,17 @@ export default function Credentials() {
         {/* Modal Lightbox Preview */}
         <AnimatePresence>
           {previewItem && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#090A0C]/90 backdrop-blur-md">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#090A0C]/90 backdrop-blur-md">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="relative w-full max-w-3xl rounded-2xl border border-white/15 bg-[#121316] p-6 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+                className="relative w-full max-w-3xl rounded-2xl border border-white/15 bg-[#121316] p-4 sm:p-6 shadow-2xl overflow-y-auto max-h-[92vh] flex flex-col"
               >
                 {/* Modal Header */}
-                <div className="flex items-start justify-between border-b border-white/5 pb-4 mb-4 gap-4">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1.5">
+                <div className="flex items-start justify-between border-b border-white/5 pb-3 mb-3 sm:pb-4 sm:mb-4 gap-3">
+                  <div className="min-w-0 pr-2">
+                    <div className="flex flex-wrap items-center gap-2 mb-1.5">
                       <span className={`inline-flex rounded-full border px-2.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider ${TYPE_CONFIG[previewItem.type]?.badgeClass || ""}`}>
                         {TYPE_CONFIG[previewItem.type]?.label || previewItem.type}
                       </span>
@@ -218,17 +218,17 @@ export default function Credentials() {
                         </span>
                       )}
                     </div>
-                    <h4 className="text-lg font-bold text-[#F4F4F5] sm:text-xl">
+                    <h4 className="text-base font-bold text-[#F4F4F5] sm:text-xl">
                       {previewItem.title}
                     </h4>
-                    <p className="text-xs text-[#A1A1AA] mt-0.5">
+                    <p className="text-xs text-[#A1A1AA] mt-0.5 break-words">
                       {previewItem.issuer} · {previewItem.date} {previewItem.location ? `· ${previewItem.location}` : ""}
                     </p>
                   </div>
                   <button
                     type="button"
                     onClick={closePreview}
-                    className="rounded-full p-2 text-[#A1A1AA] hover:bg-white/5 hover:text-[#FFFFFF] transition-colors"
+                    className="shrink-0 rounded-full p-2 text-[#A1A1AA] hover:bg-white/5 hover:text-[#FFFFFF] transition-colors"
                     aria-label="Close modal"
                   >
                     <X size={20} />
@@ -236,7 +236,7 @@ export default function Credentials() {
                 </div>
 
                 {/* Modal Image Box */}
-                <div className="relative flex-1 min-h-[320px] max-h-[480px] w-full overflow-hidden rounded-xl border border-white/10 bg-[#090A0C]">
+                <div className="relative flex-1 min-h-[200px] sm:min-h-[320px] max-h-[360px] sm:max-h-[480px] w-full overflow-hidden rounded-xl border border-white/10 bg-[#090A0C]">
                   <Image
                     src={previewItem.imageUrl}
                     alt={previewItem.title}
@@ -254,11 +254,11 @@ export default function Credentials() {
                 )}
 
                 {/* Modal Footer Controls */}
-                <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3">
+                <div className="mt-3 flex items-center justify-between border-t border-white/5 pt-2.5 sm:mt-4 sm:pt-3">
                   <button
                     type="button"
                     onClick={prevPreview}
-                    className="flex items-center gap-1.5 rounded-full border border-white/10 bg-[#17181D] px-4 py-1.5 text-xs font-medium text-[#A1A1AA] hover:text-[#FFFFFF] hover:border-white/20 transition"
+                    className="flex items-center gap-1.5 rounded-full border border-white/10 bg-[#17181D] px-3.5 py-1.5 sm:px-4 text-xs font-medium text-[#A1A1AA] hover:text-[#FFFFFF] hover:border-white/20 transition"
                   >
                     <ChevronLeft size={14} /> Previous
                   </button>
@@ -268,7 +268,7 @@ export default function Credentials() {
                   <button
                     type="button"
                     onClick={nextPreview}
-                    className="flex items-center gap-1.5 rounded-full border border-white/10 bg-[#17181D] px-4 py-1.5 text-xs font-medium text-[#A1A1AA] hover:text-[#FFFFFF] hover:border-white/20 transition"
+                    className="flex items-center gap-1.5 rounded-full border border-white/10 bg-[#17181D] px-3.5 py-1.5 sm:px-4 text-xs font-medium text-[#A1A1AA] hover:text-[#FFFFFF] hover:border-white/20 transition"
                   >
                     Next <ChevronRight size={14} />
                   </button>

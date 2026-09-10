@@ -101,10 +101,10 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative px-6 py-28 sm:px-8 lg:px-12">
+    <section id="contact" className="relative px-4 py-16 sm:px-8 sm:py-24 lg:py-28 lg:px-12">
       <div className="mx-auto max-w-7xl">
         
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-start">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] items-start">
           
           {/* Left Column: Direct Outreach Info */}
           <motion.div
@@ -112,7 +112,7 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8"
           >
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#141519] px-3.5 py-1.5 backdrop-blur-md">
@@ -122,29 +122,29 @@ export default function ContactSection() {
                 </span>
               </div>
 
-              <h2 className="text-3xl font-extrabold tracking-tight text-[#F4F4F5] sm:text-4xl lg:text-5xl leading-[1.15]">
+              <h2 className="text-2xl font-extrabold tracking-tight text-[#F4F4F5] sm:text-4xl lg:text-5xl leading-[1.15]">
                 Let&apos;s build something{" "}
                 <span className="text-[#E2B36E]">exceptional.</span>
               </h2>
 
-              <p className="text-base sm:text-lg leading-relaxed text-[#A1A1AA]">
+              <p className="text-sm sm:text-base lg:text-lg leading-relaxed text-[#A1A1AA]">
                 Whether you have an autonomous multi-agent pipeline in mind, need a full-stack platform built, or have an engineering role to discuss—I&apos;d love to connect.
               </p>
             </div>
 
             {/* Email Copy Card */}
-            <div className="rounded-2xl border border-white/10 bg-[#121316] p-6 shadow-card">
+            <div className="rounded-2xl border border-white/10 bg-[#121316] p-4 sm:p-6 shadow-card">
               <p className="font-mono text-xs font-semibold uppercase tracking-wider text-[#71717A] mb-2">
                 Direct Email
               </p>
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <span className="font-mono text-base font-semibold text-[#F4F4F5] selection:bg-white/20">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <span className="font-mono text-sm sm:text-base font-semibold text-[#F4F4F5] break-all selection:bg-white/20">
                   brafnan26@gmail.com
                 </span>
                 <button
                   type="button"
                   onClick={copyEmail}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#17181D] px-4 py-2 text-xs font-semibold text-[#F4F4F5] transition hover:border-white/25 hover:bg-[#1D1E24]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-[#17181D] px-4 py-2 text-xs font-semibold text-[#F4F4F5] transition hover:border-white/25 hover:bg-[#1D1E24]"
                   aria-label="Copy email address"
                 >
                   {copied ? (
@@ -163,37 +163,37 @@ export default function ContactSection() {
             </div>
 
             {/* Quick Action Links */}
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               <a
                 href="mailto:brafnan26@gmail.com"
-                className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-[#121316] p-3 text-xs font-semibold text-[#A1A1AA] transition hover:border-white/20 hover:text-[#F4F4F5]"
+                className="flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl border border-white/10 bg-[#121316] p-2.5 sm:p-3 text-[11px] sm:text-xs font-semibold text-[#A1A1AA] transition hover:border-white/20 hover:text-[#F4F4F5]"
               >
                 <Mail size={14} />
-                Send Email
+                <span>Email</span>
               </a>
               <a
                 href="https://www.linkedin.com/in/afnan-391912363"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-[#121316] p-3 text-xs font-semibold text-[#A1A1AA] transition hover:border-white/20 hover:text-[#F4F4F5]"
+                className="flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl border border-white/10 bg-[#121316] p-2.5 sm:p-3 text-[11px] sm:text-xs font-semibold text-[#A1A1AA] transition hover:border-white/20 hover:text-[#F4F4F5]"
               >
                 <LinkedinIcon size={14} />
-                LinkedIn
+                <span>LinkedIn</span>
               </a>
               <a
                 href="https://github.com/Afnan-0206"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-[#121316] p-3 text-xs font-semibold text-[#A1A1AA] transition hover:border-white/20 hover:text-[#F4F4F5]"
+                className="flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl border border-white/10 bg-[#121316] p-2.5 sm:p-3 text-[11px] sm:text-xs font-semibold text-[#A1A1AA] transition hover:border-white/20 hover:text-[#F4F4F5]"
               >
                 <GithubIcon size={14} />
-                GitHub
+                <span>GitHub</span>
               </a>
             </div>
 
             {/* Location & Status Pill */}
-            <div className="flex items-center gap-3 rounded-xl border border-white/5 bg-[#141519]/70 px-4 py-3 text-xs text-[#A1A1AA]">
-              <MapPin size={15} className="text-[#E2B36E] flex-shrink-0" />
+            <div className="flex items-start sm:items-center gap-3 rounded-xl border border-white/5 bg-[#141519]/70 p-3 sm:px-4 sm:py-3 text-xs text-[#A1A1AA] leading-relaxed">
+              <MapPin size={15} className="text-[#E2B36E] shrink-0 mt-0.5 sm:mt-0" />
               <span>Bengaluru, India · Open for internships &amp; select builds · Typically responds within 24h</span>
             </div>
           </motion.div>
@@ -204,10 +204,10 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="rounded-2xl border border-white/10 bg-[#121316] p-6 sm:p-8 shadow-card"
+            className="rounded-2xl border border-white/10 bg-[#121316] p-4 sm:p-8 shadow-card"
           >
-            <h3 className="text-xl font-bold text-[#F4F4F5] mb-2">Send a Message</h3>
-            <p className="text-xs text-[#A1A1AA] mb-6">Fill in the fields below and I will get back to you directly.</p>
+            <h3 className="text-lg sm:text-xl font-bold text-[#F4F4F5] mb-1 sm:mb-2">Send a Message</h3>
+            <p className="text-xs text-[#A1A1AA] mb-5 sm:mb-6">Fill in the fields below and I will get back to you directly.</p>
 
             <AnimatePresence mode="wait">
               {status === "success" ? (

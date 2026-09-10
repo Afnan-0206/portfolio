@@ -57,11 +57,11 @@ export default function Footer() {
       <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-48 w-[600px] rounded-full bg-[#E2B36E]/4 blur-[80px]" aria-hidden="true" />
 
       {/* ── CTA Strip ── */}
-      <div className="relative px-6 py-10 lg:px-8 border-b border-white/5">
-        <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="relative px-4 py-8 sm:px-6 sm:py-10 lg:px-8 border-b border-white/5">
+        <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6">
           <div className="text-center sm:text-left space-y-1">
-            <p className="text-sm font-mono text-[#E2B36E] uppercase tracking-widest">Open to opportunities</p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F4F4F5] leading-tight">
+            <p className="text-xs sm:text-sm font-mono text-[#E2B36E] uppercase tracking-widest">Open to opportunities</p>
+            <h2 className="text-xl sm:text-3xl font-extrabold text-[#F4F4F5] leading-tight">
               Let&apos;s build something{" "}
               <span className="bg-gradient-to-r from-[#FFF1D0] via-[#E2B36E] to-[#C99342] bg-clip-text text-transparent">
                 that matters.
@@ -77,7 +77,7 @@ export default function Footer() {
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }
             }}
-            className="group inline-flex items-center gap-2 rounded-full bg-[#F4F4F5] px-6 py-3 text-sm font-bold text-[#090A0C] shadow-lg transition hover:bg-[#FFFFFF] hover:shadow-[0_0_30px_rgba(226,179,110,0.3)] flex-shrink-0"
+            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#F4F4F5] px-6 py-3 text-sm font-bold text-[#090A0C] shadow-lg transition hover:bg-[#FFFFFF] hover:shadow-[0_0_30px_rgba(226,179,110,0.3)] shrink-0"
           >
             Start a Conversation
             <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -86,14 +86,14 @@ export default function Footer() {
       </div>
 
       {/* ── Main Footer Body ── */}
-      <div className="relative px-6 pt-14 pb-10 lg:px-8">
+      <div className="relative px-4 pt-10 pb-8 sm:px-6 sm:pt-14 sm:pb-10 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 sm:grid-cols-[1.4fr_auto_auto]">
+          <div className="grid gap-8 sm:gap-12 grid-cols-1 sm:grid-cols-[1.4fr_auto_auto]">
 
             {/* Brand */}
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5">
               <div className="flex items-center gap-3">
-                <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full border border-white/15 bg-[#18191E] shadow-sm">
+                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-white/15 bg-[#18191E] shadow-sm">
                   <Image
                     src="/images/afnan-avatar.png"
                     alt="Afnan B.R."
@@ -130,7 +130,7 @@ export default function Footer() {
             {/* Nav links */}
             <div className="space-y-3">
               <p className="font-mono text-[10px] tracking-widest text-[#71717A] uppercase">Navigation</p>
-              <ul className="space-y-2.5" role="list">
+              <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2.5" role="list">
                 {NAV_LINKS.map(({ label, href }) => (
                   <li key={label}>
                     <a
@@ -176,10 +176,10 @@ export default function Footer() {
                 </a>
                 <a
                   href="mailto:brafnan26@gmail.com"
-                  className="inline-flex items-center gap-2 text-sm text-[#A1A1AA] transition hover:text-[#FFFFFF]"
+                  className="inline-flex items-center gap-2 text-sm text-[#A1A1AA] transition hover:text-[#FFFFFF] break-all"
                   aria-label="Email"
                 >
-                  <Mail size={14} aria-hidden="true" />
+                  <Mail size={14} aria-hidden="true" className="shrink-0" />
                   brafnan26@gmail.com
                 </a>
               </nav>
@@ -187,7 +187,7 @@ export default function Footer() {
           </div>
 
           {/* Tech Stack strip */}
-          <div className="mt-12 mb-8 flex flex-wrap items-center gap-2">
+          <div className="mt-8 sm:mt-12 mb-6 sm:mb-8 flex flex-wrap items-center gap-2">
             <div className="flex items-center gap-1.5 mr-2">
               <Cpu size={13} className="text-[#E2B36E]" aria-hidden="true" />
               <span className="font-mono text-[10px] tracking-widest text-[#71717A] uppercase">Stack</span>
@@ -203,9 +203,9 @@ export default function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex flex-col items-start gap-3 border-t border-white/5 pt-8 sm:flex-row sm:items-center sm:justify-between text-xs text-[#52525B]">
+          <div className="flex flex-col items-start gap-3 border-t border-white/5 pt-6 sm:pt-8 sm:flex-row sm:items-center sm:justify-between text-xs text-[#52525B]">
             <div className="flex items-center gap-2">
-              <Zap size={12} className="text-[#E2B36E]" aria-hidden="true" />
+              <Zap size={12} className="text-[#E2B36E] shrink-0" aria-hidden="true" />
               <span>
                 Designed &amp; engineered by Afnan B.R. —{" "}
                 <span className="text-[#71717A]">every pixel, every agent, every API.</span>

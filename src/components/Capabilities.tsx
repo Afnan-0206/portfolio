@@ -50,7 +50,7 @@ export default function Capabilities() {
   const [selectedCap, setSelectedCap] = useState<string>("ai-systems");
 
   return (
-    <section id="capabilities" className="relative px-6 py-28 sm:px-8 lg:px-12">
+    <section id="capabilities" className="relative px-4 py-16 sm:px-8 sm:py-24 lg:py-28 lg:px-12">
       <div className="mx-auto max-w-7xl">
         
         {/* Header */}
@@ -59,7 +59,7 @@ export default function Capabilities() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-16 max-w-3xl space-y-4"
+          className="mb-10 sm:mb-16 max-w-3xl space-y-3 sm:space-y-4"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#141519] px-3.5 py-1.5 backdrop-blur-md">
             <Layers size={13} className="text-[#E2B36E]" />
@@ -67,19 +67,19 @@ export default function Capabilities() {
               TECHNICAL ARCHITECTURE
             </span>
           </div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-[#F4F4F5] sm:text-4xl lg:text-5xl">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#F4F4F5]">
             The full stack,{" "}
             <span className="text-gold-metallic">
               from data to deployment.
             </span>
           </h2>
-          <p className="text-base sm:text-lg leading-relaxed text-[#A1A1AA]">
+          <p className="text-sm sm:text-base lg:text-lg leading-relaxed text-[#A1A1AA]">
             Production software requires mastery across every layer: deterministic business rules, autonomous LLM state machines, relational schema guarantees, and edge interfaces.
           </p>
         </motion.div>
 
         {/* 4-Card Interactive Capability Matrix */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-6 sm:mb-8">
           {capabilities.map((group, i) => {
             const meta = CAP_META[group.id] || {
               icon: Terminal,
@@ -100,7 +100,7 @@ export default function Capabilities() {
                 className="cursor-pointer"
               >
                 <SpotlightCard
-                  className={`p-6 border transition-all duration-300 flex flex-col justify-between h-full ${
+                  className={`p-4 sm:p-6 border transition-all duration-300 flex flex-col justify-between h-full ${
                     isSelected
                       ? "border-[#E2B36E] bg-[#16171D] shadow-warm-glow"
                       : "border-white/10 bg-[#111217] hover:border-white/20"
@@ -108,13 +108,13 @@ export default function Capabilities() {
                 >
                   <div>
                     {/* Header */}
-                    <div className="mb-5 flex items-center gap-3 border-b border-white/5 pb-4">
-                      <div className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border ${
+                    <div className="mb-4 sm:mb-5 flex items-center gap-3 border-b border-white/5 pb-3 sm:pb-4">
+                      <div className={`flex h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 items-center justify-center rounded-xl border ${
                         isSelected
                           ? "border-[#E2B36E] bg-[#E2B36E] text-[#090A0C]"
                           : "border-white/10 bg-[#16171D] text-[#E2B36E]"
                       }`}>
-                        <Icon size={18} />
+                        <Icon size={17} />
                       </div>
                       <div>
                         <h3 className="text-sm font-bold text-[#F4F4F5] leading-snug">
@@ -125,7 +125,7 @@ export default function Capabilities() {
                     </div>
 
                     {/* Items */}
-                    <ul className="space-y-2 mb-6" role="list">
+                    <ul className="space-y-2 mb-5 sm:mb-6" role="list">
                       {group.items.map((item) => (
                         <li
                           key={item}
@@ -158,17 +158,17 @@ export default function Capabilities() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
             >
-              <SpotlightCard className="p-6 bg-[#111217] border border-white/10">
-                <div className="flex items-center justify-between border-b border-white/5 pb-3 mb-4">
+              <SpotlightCard className="p-4 sm:p-6 bg-[#111217] border border-white/10">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 border-b border-white/5 pb-3 mb-4">
                   <div className="flex items-center gap-2">
-                    <Terminal size={14} className="text-[#E2B36E]" />
-                    <span className="font-mono text-xs font-bold text-[#F4F4F5] uppercase">
+                    <Terminal size={14} className="text-[#E2B36E] flex-shrink-0" />
+                    <span className="font-mono text-xs font-bold text-[#F4F4F5] uppercase truncate">
                       Code Architecture Example · {capabilities.find((c) => c.id === selectedCap)?.title}
                     </span>
                   </div>
-                  <span className="font-mono text-[10px] text-[#10B981]">Synthesizing Real Implementation</span>
+                  <span className="font-mono text-[10px] text-[#10B981] flex-shrink-0">Synthesizing Real Implementation</span>
                 </div>
-                <pre className="font-mono text-xs text-[#E4E4E7] overflow-x-auto p-4 rounded-xl bg-[#0B0C0F] border border-white/5 leading-relaxed">
+                <pre className="font-mono text-[11px] sm:text-xs text-[#E4E4E7] overflow-x-auto p-3.5 sm:p-4 rounded-xl bg-[#0B0C0F] border border-white/5 leading-relaxed max-w-full">
                   <code>{CAP_META[selectedCap].codeSnippet}</code>
                 </pre>
               </SpotlightCard>

@@ -72,6 +72,17 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handler);
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [menuOpen]);
+
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
     if (href.startsWith("/#")) {
@@ -87,9 +98,9 @@ export default function Navbar() {
   return (
     <>
       {/* Floating Island Navigation Dock */}
-      <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none" role="banner">
+      <header className="fixed top-3 sm:top-4 inset-x-0 z-50 flex justify-center px-3 sm:px-4 pointer-events-none" role="banner">
         <nav
-          className={`pointer-events-auto flex items-center justify-between gap-4 rounded-full border border-white/10 bg-[#121316]/85 px-4 py-2.5 backdrop-blur-xl shadow-2xl transition-all duration-300 w-full max-w-5xl ${
+          className={`pointer-events-auto flex items-center justify-between gap-2 sm:gap-4 rounded-full border border-white/10 bg-[#121316]/85 px-3 py-2 sm:px-4 sm:py-2.5 backdrop-blur-xl shadow-2xl transition-all duration-300 w-full max-w-5xl ${
             scrolled ? "border-white/15 bg-[#121316]/95 shadow-[0_12px_40px_rgba(0,0,0,0.8)]" : ""
           }`}
           aria-label="Main navigation"
@@ -98,10 +109,10 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="group flex items-center gap-3"
+            className="group flex items-center gap-2 sm:gap-3 flex-shrink-0"
             aria-label="Afnan B.R. — back to top"
           >
-            <div className="relative h-8 w-8 flex-shrink-0 overflow-hidden rounded-full border border-white/15 bg-[#18191E] group-hover:border-[#E2B36E]/60 transition-colors shadow-sm">
+            <div className="relative h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 overflow-hidden rounded-full border border-white/15 bg-[#18191E] group-hover:border-[#E2B36E]/60 transition-colors shadow-sm">
               <Image
                 src="/images/afnan-avatar.png"
                 alt="Afnan B.R."
@@ -188,7 +199,7 @@ export default function Navbar() {
                   handleNavClick("/#contact");
                 }
               }}
-              className="rounded-full bg-[#F4F4F5] px-4 py-1.5 text-xs font-bold text-[#090A0C] shadow-sm transition hover:bg-[#FFFFFF] hover:shadow-warm-glow"
+              className="rounded-full bg-[#F4F4F5] px-3.5 py-1.5 sm:px-4 text-[11px] sm:text-xs font-bold text-[#090A0C] shadow-sm transition hover:bg-[#FFFFFF] hover:shadow-warm-glow flex-shrink-0"
             >
               Let&apos;s Talk
             </a>
@@ -199,7 +210,7 @@ export default function Navbar() {
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
-              className="rounded-full p-2 text-[#A1A1AA] transition hover:bg-white/5 hover:text-[#F4F4F5] lg:hidden"
+              className="rounded-full p-2 text-[#A1A1AA] transition hover:bg-white/5 hover:text-[#F4F4F5] lg:hidden flex-shrink-0"
             >
               {menuOpen ? <X size={18} aria-hidden="true" /> : <Menu size={18} aria-hidden="true" />}
             </button>
@@ -207,52 +218,65 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu & Backdrop */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            ref={menuRef}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-4 top-20 z-40 rounded-2xl border border-white/10 bg-[#121316]/95 p-6 backdrop-blur-xl shadow-2xl lg:hidden max-w-md mx-auto"
-          >
-            <ul className="space-y-1" role="list">
-              {NAV_ITEMS.map(({ label, href }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    onClick={() => handleNavClick(href)}
-                    className="block rounded-xl px-4 py-2.5 text-sm font-semibold text-[#A1A1AA] transition hover:bg-white/5 hover:text-[#F4F4F5]"
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <>
+            {/* Dark backdrop overlay to capture outside taps on mobile */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMenuOpen(false)}
+              className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
+              aria-hidden="true"
+            />
 
-            <div className="mt-6 flex items-center gap-2 border-t border-white/5 pt-4">
-              <a
-                href="https://github.com/Afnan-0206"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 bg-[#17181D] py-2.5 text-xs font-semibold text-[#A1A1AA]"
-              >
-                <GithubIcon size={14} />
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/afnan-391912363"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 bg-[#17181D] py-2.5 text-xs font-semibold text-[#A1A1AA]"
-              >
-                <LinkedinIcon size={14} />
-                LinkedIn
-              </a>
-            </div>
-          </motion.div>
+            <motion.div
+              ref={menuRef}
+              initial={{ opacity: 0, y: -10, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-x-3 sm:inset-x-4 top-16 sm:top-20 z-50 rounded-2xl border border-white/10 bg-[#121316]/98 p-5 sm:p-6 backdrop-blur-xl shadow-2xl lg:hidden max-w-md mx-auto max-h-[calc(100vh-5rem)] overflow-y-auto"
+            >
+              <ul className="space-y-1" role="list">
+                {NAV_ITEMS.map(({ label, href }) => (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      onClick={() => handleNavClick(href)}
+                      className="block rounded-xl px-4 py-2.5 text-sm font-semibold text-[#A1A1AA] transition hover:bg-white/5 hover:text-[#F4F4F5] active:bg-white/10"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-5 sm:mt-6 flex items-center gap-2 border-t border-white/5 pt-4">
+                <a
+                  href="https://github.com/Afnan-0206"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 bg-[#17181D] py-2.5 text-xs font-semibold text-[#A1A1AA] hover:text-[#FFFFFF]"
+                >
+                  <GithubIcon size={14} />
+                  GitHub
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/afnan-391912363"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 bg-[#17181D] py-2.5 text-xs font-semibold text-[#A1A1AA] hover:text-[#FFFFFF]"
+                >
+                  <LinkedinIcon size={14} />
+                  LinkedIn
+                </a>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

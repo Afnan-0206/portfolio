@@ -51,7 +51,7 @@ function ScrollProgressBar() {
             exit={{ opacity: 0, scale: 0.8, y: 16 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-8 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-[#121316]/90 text-[#A1A1AA] shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-white/30 hover:bg-[#18191E] hover:text-[#FFFFFF]"
+            className="fixed bottom-5 right-4 sm:bottom-8 sm:right-6 z-50 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-white/15 bg-[#121316]/90 text-[#A1A1AA] shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-white/30 hover:bg-[#18191E] hover:text-[#FFFFFF]"
             aria-label="Back to top"
           >
             <ArrowUp size={16} aria-hidden="true" />
@@ -82,31 +82,31 @@ export default function CaseStudyShell({ projectId, children }: CaseStudyShellPr
 
       {/* Header / Nav */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[#090A0C]/90 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
           <Link
             href="/#work"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-[#A1A1AA] transition hover:text-[#FFFFFF]"
+            className="inline-flex items-center gap-1.5 sm:gap-2 text-xs font-semibold text-[#A1A1AA] transition hover:text-[#FFFFFF]"
           >
             <ArrowLeft size={14} aria-hidden="true" />
-            Back to Selected Work
+            <span><span className="hidden sm:inline">Back to Selected </span>Work</span>
           </Link>
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2 sm:gap-2.5">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F4F5] px-4 py-1.5 text-xs font-bold text-[#090A0C] shadow-sm transition hover:bg-[#FFFFFF]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F4F5] px-3 py-1.5 sm:px-4 text-xs font-bold text-[#090A0C] shadow-sm transition hover:bg-[#FFFFFF]"
               >
                 <ExternalLink size={11} aria-hidden="true" />
-                Live Demo
+                <span className="hidden xs:inline">Live </span>Demo
               </a>
             )}
             <a
               href={project.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#17181D] px-4 py-1.5 text-xs font-semibold text-[#F4F4F5] transition hover:border-white/20 hover:bg-[#1D1E24]"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#17181D] px-3 py-1.5 sm:px-4 text-xs font-semibold text-[#F4F4F5] transition hover:border-white/20 hover:bg-[#1D1E24]"
             >
               <GithubIcon size={11} />
               GitHub
@@ -116,22 +116,22 @@ export default function CaseStudyShell({ projectId, children }: CaseStudyShellPr
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 mx-auto max-w-4xl px-6 py-20">
+      <main className="relative z-10 mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-20">
 
         {/* Hero */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-16 space-y-4"
+          className="mb-12 sm:mb-16 space-y-3 sm:space-y-4"
         >
           <p className="font-mono text-xs font-bold tracking-widest text-[#E2B36E] uppercase">
             {project.category}
           </p>
-          <h1 className="text-4xl font-extrabold tracking-tight text-[#F4F4F5] sm:text-5xl leading-tight">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#F4F4F5] leading-tight">
             {project.title}
           </h1>
-          <p className="max-w-3xl text-lg leading-relaxed text-[#A1A1AA]">
+          <p className="max-w-3xl text-sm sm:text-base lg:text-lg leading-relaxed text-[#A1A1AA]">
             {project.shortDesc}
           </p>
 
@@ -139,7 +139,7 @@ export default function CaseStudyShell({ projectId, children }: CaseStudyShellPr
             {project.tags.map((t) => (
               <span
                 key={t}
-                className="rounded-full border border-white/8 bg-[#121316] px-3.5 py-1.5 font-mono text-xs text-[#A1A1AA]"
+                className="rounded-full border border-white/8 bg-[#121316] px-3 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-xs text-[#A1A1AA]"
               >
                 {t}
               </span>
@@ -148,14 +148,14 @@ export default function CaseStudyShell({ projectId, children }: CaseStudyShellPr
         </motion.div>
 
         {/* Divider */}
-        <div className="mb-16 h-px w-full bg-white/5" aria-hidden="true" />
+        <div className="mb-12 sm:mb-16 h-px w-full bg-white/5" aria-hidden="true" />
 
         {/* Dynamic Inner Case Study Page Content */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="prose-custom space-y-16"
+          className="prose-custom space-y-12 sm:space-y-16"
         >
           {children}
         </motion.div>
@@ -163,13 +163,13 @@ export default function CaseStudyShell({ projectId, children }: CaseStudyShellPr
 
       {/* Prev / Next navigation */}
       <nav
-        className="relative z-10 border-t border-white/10 px-6 py-16"
+        className="relative z-10 border-t border-white/10 px-4 py-12 sm:px-6 sm:py-16"
         aria-label="Case study navigation"
       >
-        <div className="mx-auto flex max-w-4xl items-center justify-between gap-6">
+        <div className="mx-auto flex max-w-4xl flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6">
           <Link
             href={`/work/${prev.slug}`}
-            className="group flex max-w-[45%] flex-col gap-2 rounded-2xl border border-white/10 bg-[#121316] p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:-translate-y-0.5"
+            className="group flex w-full sm:max-w-[45%] flex-col gap-1.5 sm:gap-2 rounded-2xl border border-white/10 bg-[#121316] p-4 sm:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:-translate-y-0.5"
           >
             <span className="flex items-center gap-1 font-mono text-[10px] text-[#71717A] uppercase font-bold">
               <ArrowLeft size={11} aria-hidden="true" /> Previous
@@ -181,7 +181,7 @@ export default function CaseStudyShell({ projectId, children }: CaseStudyShellPr
 
           <Link
             href={`/work/${next.slug}`}
-            className="group flex max-w-[45%] flex-col items-end gap-2 rounded-2xl border border-white/10 bg-[#121316] p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:-translate-y-0.5"
+            className="group flex w-full sm:max-w-[45%] flex-col items-start sm:items-end gap-1.5 sm:gap-2 rounded-2xl border border-white/10 bg-[#121316] p-4 sm:p-5 shadow-sm transition-all duration-300 hover:border-white/20 hover:-translate-y-0.5"
           >
             <span className="flex items-center gap-1 font-mono text-[10px] text-[#71717A] uppercase font-bold">
               Next <ArrowRight size={11} aria-hidden="true" />

@@ -148,27 +148,27 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[94vh] flex-col justify-center px-6 pt-36 pb-24 sm:px-8 lg:px-12 dot-grid-bg"
+      className="relative flex min-h-[94vh] flex-col justify-center px-4 pt-28 pb-16 sm:px-8 sm:pt-36 sm:pb-24 lg:px-12 dot-grid-bg"
       aria-label="Introduction"
     >
       <div className="relative mx-auto w-full max-w-7xl">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="grid items-center gap-10 lg:gap-14 lg:grid-cols-[1.1fr_0.9fr]">
 
           {/* ── Left column: High-Impact Typography & Action ── */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
 
             {/* Live Status Pill */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45 }}
-              className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-[#121317]/90 px-4 py-1.5 backdrop-blur-md shadow-sm"
+              className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-[#121317]/90 px-3.5 py-1.5 sm:px-4 backdrop-blur-md shadow-sm"
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#10B981] opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[#10B981]" />
               </span>
-              <span className="text-xs font-mono font-semibold tracking-wider text-[#A1A1AA] uppercase">
+              <span className="text-[11px] sm:text-xs font-mono font-semibold tracking-wider text-[#A1A1AA] uppercase">
                 AI Product Builder · Bengaluru, India
               </span>
             </motion.div>
@@ -178,9 +178,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.08 }}
-              className="space-y-4"
+              className="space-y-3 sm:space-y-4"
             >
-              <h1 className="max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl text-[#F4F4F5]">
+              <h1 className="max-w-3xl text-3xl font-extrabold leading-[1.15] tracking-tight sm:text-5xl lg:text-6xl text-[#F4F4F5]">
                 I build{" "}
                 <span className="text-gold-metallic">
                   autonomous AI systems
@@ -188,7 +188,7 @@ export default function Hero() {
                 and full-stack products that turn messy workflows into software.
               </h1>
 
-              <p className="max-w-2xl text-lg leading-relaxed text-[#A1A1AA]">
+              <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-[#A1A1AA]">
                 I&apos;m <span className="text-[#F4F4F5] font-semibold">Afnan B.R.</span>, an engineer translating chaotic human communications—from informal WhatsApp requests to complex DevOps triage—into production-grade multi-agent state machines, relational backends, and snappy user interfaces.
               </p>
             </motion.div>
@@ -198,32 +198,34 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.16 }}
-              className="flex flex-wrap items-center gap-3.5"
+              className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3"
             >
               <button
                 type="button"
                 onClick={scrollToWork}
-                className="inline-flex items-center gap-2 rounded-full bg-[#F4F4F5] px-7 py-3.5 text-xs font-bold text-[#090A0C] shadow-lg transition-all duration-200 hover:bg-[#FFFFFF] hover:shadow-[0_0_24px_rgba(255,255,255,0.3)] active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#F4F4F5] px-6 py-3.5 text-xs font-bold text-[#090A0C] shadow-lg transition-all duration-200 hover:bg-[#FFFFFF] hover:shadow-[0_0_24px_rgba(255,255,255,0.3)] active:scale-[0.98]"
               >
                 Explore Selected Work
                 <ArrowDown size={14} />
               </button>
 
-              <button
-                type="button"
-                onClick={scrollToContact}
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#141519] px-6 py-3.5 text-xs font-semibold text-[#F4F4F5] transition hover:border-white/30 hover:bg-[#1A1B22]"
-              >
-                Let&apos;s Talk
-              </button>
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <button
+                  type="button"
+                  onClick={scrollToContact}
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-[#141519] px-5 sm:px-6 py-3.5 text-xs font-semibold text-[#F4F4F5] transition hover:border-white/30 hover:bg-[#1A1B22]"
+                >
+                  Let&apos;s Talk
+                </button>
 
-              <Link
-                href="/network"
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-transparent px-5 py-3.5 text-xs font-semibold text-[#A1A1AA] transition hover:border-white/25 hover:text-[#F4F4F5]"
-              >
-                <span>Founders Directory</span>
-                <ArrowUpRight size={13} />
-              </Link>
+                <Link
+                  href="/network"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 rounded-full border border-white/10 bg-transparent px-4 sm:px-5 py-3.5 text-xs font-semibold text-[#A1A1AA] transition hover:border-white/25 hover:text-[#F4F4F5]"
+                >
+                  <span>Directory</span>
+                  <ArrowUpRight size={13} />
+                </Link>
+              </div>
             </motion.div>
 
             {/* Stats Spotlight Grid */}
@@ -231,17 +233,17 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.25 }}
-              className="grid grid-cols-2 gap-3 sm:grid-cols-4 pt-3 border-t border-white/5"
+              className="grid grid-cols-2 gap-2.5 sm:gap-3 sm:grid-cols-4 pt-3 border-t border-white/5"
             >
               {STATS.map((stat) => (
                 <SpotlightCard
                   key={stat.label}
-                  className="p-3.5 bg-[#111217]"
+                  className="p-3 sm:p-3.5 bg-[#111217]"
                 >
-                  <p className="text-2xl font-extrabold text-[#F4F4F5]">
+                  <p className="text-xl sm:text-2xl font-extrabold text-[#F4F4F5]">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </p>
-                  <p className="mt-1 text-xs font-semibold text-[#E4E4E7]">
+                  <p className="mt-1 text-[11px] sm:text-xs font-semibold text-[#E4E4E7]">
                     {stat.label}
                   </p>
                   <p className="text-[10px] text-[#71717A]">
@@ -258,12 +260,12 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.55, delay: 0.15 }}
           >
-            <SpotlightCard className="p-6 sm:p-7 bg-[#111217] shadow-2xl border border-white/10">
+            <SpotlightCard className="p-4 sm:p-7 bg-[#111217] shadow-2xl border border-white/10">
               
               {/* Simulator Header */}
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/5 pb-4 mb-5">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/5 pb-3 sm:pb-4 mb-4 sm:mb-5">
                 <div className="flex items-center gap-2">
-                  <Terminal size={16} className="text-[#E2B36E]" />
+                  <Terminal size={15} className="text-[#E2B36E] flex-shrink-0" />
                   <span className="font-mono text-xs font-bold text-[#F4F4F5] tracking-wider uppercase">
                     LIVE MULTI-AGENT SIMULATOR
                   </span>
@@ -276,8 +278,8 @@ export default function Hero() {
               </div>
 
               {/* Scenario Switcher Tabs */}
-              <div className="space-y-1.5 mb-5">
-                <p className="text-[11px] font-mono uppercase text-[#71717A] tracking-wider">
+              <div className="space-y-1.5 mb-4 sm:mb-5">
+                <p className="text-[10px] sm:text-[11px] font-mono uppercase text-[#71717A] tracking-wider">
                   1. Select Real-World Input Scenario:
                 </p>
                 <div className="flex flex-wrap gap-1.5">
@@ -286,7 +288,7 @@ export default function Hero() {
                       key={s.id}
                       type="button"
                       onClick={() => handleScenarioChange(s)}
-                      className={`rounded-xl px-3 py-1.5 text-xs font-semibold transition-all ${
+                      className={`rounded-xl px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs font-semibold transition-all ${
                         selectedScenario.id === s.id
                           ? "bg-[#F4F4F5] text-[#090A0C] shadow-sm font-bold"
                           : "border border-white/10 bg-[#16171D] text-[#A1A1AA] hover:border-white/20 hover:text-[#F4F4F5]"
@@ -299,7 +301,7 @@ export default function Hero() {
               </div>
 
               {/* Input Message Card */}
-              <div className="rounded-xl border border-white/10 bg-[#15171D] p-3.5 mb-5 space-y-1.5">
+              <div className="rounded-xl border border-white/10 bg-[#15171D] p-3 sm:p-3.5 mb-4 sm:mb-5 space-y-1.5">
                 <div className="flex items-center justify-between text-[10px] font-mono text-[#71717A] uppercase">
                   <span>Raw Incoming Input</span>
                   <span className="text-[#E2B36E] font-semibold">{selectedScenario.title}</span>
@@ -310,8 +312,8 @@ export default function Hero() {
               </div>
 
               {/* Agent Nodes Progress Pipeline */}
-              <div className="space-y-2 mb-5">
-                <div className="flex items-center justify-between text-[11px] font-mono text-[#71717A] uppercase">
+              <div className="space-y-2 mb-4 sm:mb-5">
+                <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-[#71717A] uppercase">
                   <span>2. Sequential Reasoning Pipeline:</span>
                   <span className="text-xs text-[#E2B36E]">
                     {activeStepIdx >= 0 ? `Stage ${activeStepIdx + 1}/4` : "Ready to Execute"}
@@ -326,7 +328,7 @@ export default function Hero() {
                     return (
                       <div
                         key={step.agent}
-                        className={`flex items-start gap-3 rounded-xl border p-2.5 transition-all duration-300 ${
+                        className={`flex items-start gap-2.5 sm:gap-3 rounded-xl border p-2 sm:p-2.5 transition-all duration-300 ${
                           isActive
                             ? "border-[#E2B36E] bg-[#E2B36E]/10 shadow-[0_0_20px_rgba(226,179,110,0.15)]"
                             : isDone
@@ -349,9 +351,9 @@ export default function Hero() {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-2">
                             <p className="text-xs font-bold text-[#F4F4F5]">{step.agent}</p>
-                            <span className="font-mono text-[9px] text-[#A1A1AA]">{step.status}</span>
+                            <span className="font-mono text-[9px] text-[#A1A1AA] flex-shrink-0">{step.status}</span>
                           </div>
-                          <p className="text-[11px] font-mono text-[#A1A1AA] truncate mt-0.5">
+                          <p className="text-[10px] sm:text-[11px] font-mono text-[#A1A1AA] line-clamp-2 mt-0.5 leading-snug break-words">
                             {step.action}
                           </p>
                         </div>

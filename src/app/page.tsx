@@ -47,9 +47,9 @@ export default function Home() {
         <Hero />
 
         {/* Transitional statement */}
-        <div className="relative px-6 py-16 sm:px-8 lg:px-12 border-y border-white/5 bg-[#090A0C]/60 backdrop-blur-xs">
+        <div className="relative px-4 py-12 sm:px-8 sm:py-16 lg:px-12 border-y border-white/5 bg-[#090A0C]/60 backdrop-blur-xs">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xl font-medium leading-relaxed text-[#A1A1AA] sm:text-2xl">
+            <p className="text-base sm:text-xl md:text-2xl font-medium leading-relaxed text-[#A1A1AA]">
               I care about more than making interfaces look pretty. I build the{" "}
               <span className="text-[#F4F4F5]">workflow behind them</span>—data pipelines,
               deterministic validation, multi-agent reasoning, and resilient user software.

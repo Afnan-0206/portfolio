@@ -14,14 +14,14 @@ function GithubIcon({ size = 12 }: { size?: number }) {
 
 export default function MoreBuilds() {
   return (
-    <section className="relative px-6 pt-4 pb-28 sm:px-8 lg:px-12">
+    <section className="relative px-4 pt-4 pb-16 sm:px-8 sm:pb-24 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-10"
+          className="mb-8 sm:mb-10"
         >
           <p className="font-mono text-xs font-semibold tracking-widest text-[#E2B36E] uppercase">
             ADDITIONAL BUILDS &amp; EXPERIMENTS
@@ -29,7 +29,7 @@ export default function MoreBuilds() {
           <p className="mt-2 text-sm text-[#A1A1AA]">Technical tools, utility libraries, and focused explorations.</p>
         </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-3">
           {experiments.map((exp, i) => (
             <motion.article
               key={exp.id}
@@ -37,7 +37,7 @@ export default function MoreBuilds() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.06 }}
-              className="group relative rounded-2xl border border-white/10 bg-[#121316] p-6 backdrop-blur-sm shadow-card transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:shadow-card-hover flex flex-col justify-between"
+              className="group relative rounded-2xl border border-white/10 bg-[#121316] p-5 sm:p-6 backdrop-blur-sm shadow-card transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:shadow-card-hover flex flex-col justify-between"
               aria-label={exp.title}
             >
               <div>

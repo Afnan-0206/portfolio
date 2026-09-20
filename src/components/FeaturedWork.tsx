@@ -127,14 +127,14 @@ function BizPilotInteractiveShowcase() {
 // ── Sri Vinayaka PG Live Widget ──────────────────────────────────────────
 function SriVinayakaLiveWidget() {
   return (
-    <div className="rounded-xl border border-white/10 bg-[#16171D] p-3.5 sm:p-5 space-y-3 sm:space-y-4">
-      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 sm:pb-3">
-        <div className="flex items-center gap-2">
-          <Users size={14} className="text-[#E2B36E]" />
-          <span className="text-xs font-bold text-[#F4F4F5]">Live Resident Roster</span>
+    <div className="rounded-xl border border-white/10 bg-[#16171D] p-3 sm:p-5 space-y-3 sm:space-y-4">
+      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 sm:pb-3 gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <Users size={14} className="text-[#E2B36E] flex-shrink-0" />
+          <span className="text-xs font-bold text-[#F4F4F5] truncate">Live Resident Roster</span>
         </div>
-        <span className="rounded-full bg-[#10B981]/20 text-[#10B981] px-2 py-0.5 text-[9px] font-mono font-bold">
-          PostgreSQL RLS Active
+        <span className="rounded-full bg-[#10B981]/20 text-[#10B981] px-2 py-0.5 text-[9px] font-mono font-bold flex-shrink-0">
+          PostgreSQL RLS
         </span>
       </div>
 
@@ -150,18 +150,18 @@ function SriVinayakaLiveWidget() {
       </div>
 
       {/* Mini ledger status */}
-      <div className="grid grid-cols-3 gap-1.5 sm:gap-2 text-center text-[9px] sm:text-[10px] font-mono pt-1">
-        <div className="rounded-lg border border-white/5 bg-[#111217] p-1.5 sm:p-2">
+      <div className="grid grid-cols-3 gap-1 sm:gap-2 text-center text-[9px] sm:text-[10px] font-mono pt-1">
+        <div className="rounded-lg border border-white/5 bg-[#111217] p-1.5 sm:p-2 min-w-0">
           <p className="text-[#10B981] font-bold">42 Paid</p>
-          <p className="text-[#71717A] truncate">Rent Up-to-date</p>
+          <p className="text-[#71717A] text-[8px] sm:text-[10px] truncate">Up-to-date</p>
         </div>
-        <div className="rounded-lg border border-white/5 bg-[#111217] p-1.5 sm:p-2">
+        <div className="rounded-lg border border-white/5 bg-[#111217] p-1.5 sm:p-2 min-w-0">
           <p className="text-[#F59E0B] font-bold">2 Due</p>
-          <p className="text-[#71717A] truncate">Due in 48h</p>
+          <p className="text-[#71717A] text-[8px] sm:text-[10px] truncate">Due in 48h</p>
         </div>
-        <div className="rounded-lg border border-white/5 bg-[#111217] p-1.5 sm:p-2">
+        <div className="rounded-lg border border-white/5 bg-[#111217] p-1.5 sm:p-2 min-w-0">
           <p className="text-[#E4E4E7] font-bold">₹3.74L</p>
-          <p className="text-[#71717A] truncate">Monthly Vol</p>
+          <p className="text-[#71717A] text-[8px] sm:text-[10px] truncate">Monthly Vol</p>
         </div>
       </div>
     </div>
@@ -171,18 +171,18 @@ function SriVinayakaLiveWidget() {
 // ── AutoFix Consensus Widget ──────────────────────────────────────────────
 function AutoFixConsensusWidget() {
   return (
-    <div className="rounded-xl border border-white/10 bg-[#16171D] p-3.5 sm:p-5 space-y-3 sm:space-y-4">
-      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 sm:pb-3">
-        <div className="flex items-center gap-2">
-          <Zap size={14} className="text-[#10B981]" />
-          <span className="text-xs font-bold text-[#F4F4F5]">Consensus State Machine</span>
+    <div className="rounded-xl border border-white/10 bg-[#16171D] p-3 sm:p-5 space-y-3 sm:space-y-4">
+      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 sm:pb-3 gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <Zap size={14} className="text-[#10B981] flex-shrink-0" />
+          <span className="text-xs font-bold text-[#F4F4F5] truncate">Consensus State Machine</span>
         </div>
-        <span className="text-[10px] font-mono text-[#71717A]">6 Agents Active</span>
+        <span className="text-[10px] font-mono text-[#71717A] flex-shrink-0">6 Agents Active</span>
       </div>
 
-      <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
+      <div className="grid grid-cols-2 min-[420px]:grid-cols-3 sm:grid-cols-3 gap-1.5 sm:gap-2">
         {["Manager", "Researcher", "Analyst", "Tester", "Writer", "Action"].map((agent, i) => (
-          <div key={agent} className="rounded-lg border border-white/5 bg-[#111217] p-1.5 sm:p-2 text-center">
+          <div key={agent} className="rounded-lg border border-white/5 bg-[#111217] p-1.5 sm:p-2 text-center min-w-0">
             <span className="font-mono text-[9px] text-[#71717A]">0{i + 1}</span>
             <p className="text-[11px] sm:text-xs font-bold text-[#E4E4E7] truncate">{agent}</p>
           </div>
@@ -191,9 +191,9 @@ function AutoFixConsensusWidget() {
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[9px] sm:text-[10px] font-mono text-[#71717A] border-t border-white/5 pt-2">
         <span className="text-[#10B981] flex items-center gap-1">
-          <CheckCircle2 size={12} /> Auto-Regression Test Passing
+          <CheckCircle2 size={12} /> Auto-Regression Passing
         </span>
-        <span>Fix PR dispatched in 2.8s</span>
+        <span>Fix PR in 2.8s</span>
       </div>
     </div>
   );

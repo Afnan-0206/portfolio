@@ -16,7 +16,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#090A0C] font-sans noise text-[#F4F4F5]">
+    <div className="relative min-h-screen overflow-x-clip bg-[#090A0C] font-sans noise text-[#F4F4F5] max-w-[100vw]">
       
       {/* Scroll progress bar + back to top */}
       <ScrollProgress />
@@ -28,13 +28,14 @@ export default function Home() {
           alt="Atmospheric background texture"
           fill
           priority
+          quality={70}
           className="object-cover object-[center_35%] md:object-center opacity-25 grayscale-[30%] brightness-[0.7] contrast-[1.05]"
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 1920px"
         />
         {/* Deep obsidian gradient overlays: fades completely into #08090B at bottom */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#08090B]/30 via-[#08090B]/60 to-[#08090B]" />
         {/* Subtle warm accent light */}
-        <div className="absolute top-1/4 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#E2B36E]/4 blur-[160px]" />
+        <div className="absolute top-1/4 left-1/2 h-[380px] w-[380px] sm:h-[600px] sm:w-[600px] -translate-x-1/2 rounded-full bg-[#E2B36E]/4 blur-[100px] sm:blur-[160px] pointer-events-none" />
       </div>
 
       {/* Navigation */}

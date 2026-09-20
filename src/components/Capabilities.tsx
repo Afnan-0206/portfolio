@@ -157,20 +157,23 @@ export default function Capabilities() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
+              className="w-full min-w-0 max-w-full overflow-hidden"
             >
-              <SpotlightCard className="p-4 sm:p-6 bg-[#111217] border border-white/10">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 border-b border-white/5 pb-3 mb-4">
-                  <div className="flex items-center gap-2">
+              <SpotlightCard className="w-full min-w-0 max-w-full overflow-hidden p-3.5 sm:p-6 bg-[#111217] border border-white/10">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 border-b border-white/5 pb-3 mb-3 sm:mb-4 min-w-0">
+                  <div className="flex items-center gap-2 min-w-0 overflow-hidden">
                     <Terminal size={14} className="text-[#E2B36E] flex-shrink-0" />
-                    <span className="font-mono text-xs font-bold text-[#F4F4F5] uppercase truncate">
-                      Code Architecture Example · {capabilities.find((c) => c.id === selectedCap)?.title}
+                    <span className="font-mono text-[11px] sm:text-xs font-bold text-[#F4F4F5] uppercase truncate">
+                      Code Example · {capabilities.find((c) => c.id === selectedCap)?.title}
                     </span>
                   </div>
-                  <span className="font-mono text-[10px] text-[#10B981] flex-shrink-0">Synthesizing Real Implementation</span>
+                  <span className="font-mono text-[9px] sm:text-[10px] text-[#10B981] flex-shrink-0">Deterministic Pipeline Logic</span>
                 </div>
-                <pre className="font-mono text-[11px] sm:text-xs text-[#E4E4E7] overflow-x-auto p-3.5 sm:p-4 rounded-xl bg-[#0B0C0F] border border-white/5 leading-relaxed max-w-full">
-                  <code>{CAP_META[selectedCap].codeSnippet}</code>
-                </pre>
+                <div className="w-full min-w-0 overflow-x-auto rounded-xl bg-[#0B0C0F] border border-white/5 p-3 sm:p-4">
+                  <pre className="font-mono text-[11px] sm:text-xs text-[#E4E4E7] leading-relaxed whitespace-pre inline-block min-w-full">
+                    <code>{CAP_META[selectedCap].codeSnippet}</code>
+                  </pre>
+                </div>
               </SpotlightCard>
             </motion.div>
           )}

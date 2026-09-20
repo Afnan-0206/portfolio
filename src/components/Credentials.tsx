@@ -137,6 +137,7 @@ export default function Credentials() {
                       src={cred.imageUrl}
                       alt={cred.title}
                       fill
+                      quality={75}
                       className="object-cover transition duration-700 ease-out group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       loading="lazy"
@@ -203,12 +204,12 @@ export default function Credentials() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="relative w-full max-w-3xl rounded-2xl border border-white/15 bg-[#121316] p-4 sm:p-6 shadow-2xl overflow-y-auto max-h-[92vh] flex flex-col"
+                className="relative w-full max-w-3xl rounded-2xl border border-white/15 bg-[#121316] p-3.5 sm:p-6 shadow-2xl overflow-y-auto max-h-[88vh] flex flex-col my-auto"
               >
                 {/* Modal Header */}
-                <div className="flex items-start justify-between border-b border-white/5 pb-3 mb-3 sm:pb-4 sm:mb-4 gap-3">
+                <div className="flex items-start justify-between border-b border-white/5 pb-2.5 mb-2.5 sm:pb-4 sm:mb-4 gap-3">
                   <div className="min-w-0 pr-2">
-                    <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
                       <span className={`inline-flex rounded-full border px-2.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider ${TYPE_CONFIG[previewItem.type]?.badgeClass || ""}`}>
                         {TYPE_CONFIG[previewItem.type]?.label || previewItem.type}
                       </span>
@@ -218,10 +219,10 @@ export default function Credentials() {
                         </span>
                       )}
                     </div>
-                    <h4 className="text-base font-bold text-[#F4F4F5] sm:text-xl">
+                    <h4 className="text-sm font-bold text-[#F4F4F5] sm:text-xl truncate sm:whitespace-normal">
                       {previewItem.title}
                     </h4>
-                    <p className="text-xs text-[#A1A1AA] mt-0.5 break-words">
+                    <p className="text-[11px] sm:text-xs text-[#A1A1AA] mt-0.5 break-words">
                       {previewItem.issuer} · {previewItem.date} {previewItem.location ? `· ${previewItem.location}` : ""}
                     </p>
                   </div>
@@ -231,18 +232,19 @@ export default function Credentials() {
                     className="shrink-0 rounded-full p-2 text-[#A1A1AA] hover:bg-white/5 hover:text-[#FFFFFF] transition-colors"
                     aria-label="Close modal"
                   >
-                    <X size={20} />
+                    <X size={18} />
                   </button>
                 </div>
 
                 {/* Modal Image Box */}
-                <div className="relative flex-1 min-h-[200px] sm:min-h-[320px] max-h-[360px] sm:max-h-[480px] w-full overflow-hidden rounded-xl border border-white/10 bg-[#090A0C]">
+                <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/10 bg-[#090A0C]">
                   <Image
                     src={previewItem.imageUrl}
                     alt={previewItem.title}
                     fill
                     className="object-contain"
                     sizes="(max-width: 1024px) 100vw, 800px"
+                    quality={85}
                     priority
                   />
                 </div>

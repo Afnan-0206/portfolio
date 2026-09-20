@@ -122,12 +122,12 @@ export default function Navbar() {
                 priority
               />
             </div>
-            <div className="flex flex-col">
-              <span className="text-xs font-bold tracking-tight text-[#F4F4F5] group-hover:text-[#FFFFFF]">
+            <div className="flex flex-col min-w-0">
+              <span className="text-xs font-bold tracking-tight text-[#F4F4F5] group-hover:text-[#FFFFFF] truncate">
                 Afnan B.R.
               </span>
               <div className="flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] flex-shrink-0" />
                 <span className="text-[10px] font-mono text-[#71717A] tracking-wider uppercase">
                   Available
                 </span>
@@ -171,7 +171,7 @@ export default function Navbar() {
           </ul>
 
           {/* Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <a
               href="https://github.com/Afnan-0206"
               target="_blank"
@@ -199,7 +199,7 @@ export default function Navbar() {
                   handleNavClick("/#contact");
                 }
               }}
-              className="rounded-full bg-[#F4F4F5] px-3.5 py-1.5 sm:px-4 text-[11px] sm:text-xs font-bold text-[#090A0C] shadow-sm transition hover:bg-[#FFFFFF] hover:shadow-warm-glow flex-shrink-0"
+              className="rounded-full bg-[#F4F4F5] px-3 py-1.5 sm:px-4 text-[11px] sm:text-xs font-bold text-[#090A0C] shadow-sm transition hover:bg-[#FFFFFF] hover:shadow-warm-glow flex-shrink-0"
             >
               Let&apos;s Talk
             </a>

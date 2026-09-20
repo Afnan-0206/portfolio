@@ -244,7 +244,7 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                           onBlur={() => handleBlur("name")}
                           placeholder="Your name"
                           autoComplete="name"
-                          className={`w-full rounded-xl border bg-[#050817]/80 px-4 py-3 text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
+                          className={`w-full rounded-xl border bg-[#050817]/80 px-4 py-3 text-base sm:text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
                             touched.name && validation.name
                               ? "border-red-500/50 focus:border-red-500/70"
                               : "border-white/10 focus:border-[#22D3EE]/50"
@@ -263,7 +263,7 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                           onBlur={() => handleBlur("email")}
                           placeholder="hello@example.com"
                           autoComplete="email"
-                          className={`w-full rounded-xl border bg-[#050817]/80 px-4 py-3 text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
+                          className={`w-full rounded-xl border bg-[#050817]/80 px-4 py-3 text-base sm:text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
                             touched.email && validation.email
                               ? "border-red-500/50 focus:border-red-500/70"
                               : "border-white/10 focus:border-[#22D3EE]/50"
@@ -287,7 +287,7 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                             ? `Inquiry about ${workshopTitle}`
                             : "Project, collaboration or question"
                         }
-                        className={`w-full rounded-xl border bg-[#050817]/80 px-4 py-3 text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
+                        className={`w-full rounded-xl border bg-[#050817]/80 px-4 py-3 text-base sm:text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
                           touched.subject && validation.subject
                             ? "border-red-500/50 focus:border-red-500/70"
                             : "border-white/10 focus:border-[#22D3EE]/50"
@@ -306,7 +306,7 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                         onBlur={() => handleBlur("message")}
                         rows={5}
                         placeholder="Tell me about your idea, timeline, or available budget."
-                        className={`w-full resize-none rounded-xl border bg-[#050817]/80 px-4 py-3 text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
+                        className={`w-full resize-none rounded-xl border bg-[#050817]/80 px-4 py-3 text-base sm:text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
                           touched.message && validation.message
                             ? "border-red-500/50 focus:border-red-500/70"
                             : "border-white/10 focus:border-[#22D3EE]/50"

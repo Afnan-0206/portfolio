@@ -233,20 +233,20 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.25 }}
-              className="grid grid-cols-2 gap-2.5 sm:gap-3 sm:grid-cols-4 pt-3 border-t border-white/5"
+              className="grid grid-cols-2 gap-2 sm:gap-3 sm:grid-cols-4 pt-3 border-t border-white/5"
             >
               {STATS.map((stat) => (
                 <SpotlightCard
                   key={stat.label}
-                  className="p-3 sm:p-3.5 bg-[#111217]"
+                  className="p-2.5 sm:p-3.5 bg-[#111217]"
                 >
-                  <p className="text-xl sm:text-2xl font-extrabold text-[#F4F4F5]">
+                  <p className="text-lg sm:text-2xl font-extrabold text-[#F4F4F5]">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </p>
-                  <p className="mt-1 text-[11px] sm:text-xs font-semibold text-[#E4E4E7]">
+                  <p className="mt-0.5 sm:mt-1 text-[11px] sm:text-xs font-semibold text-[#E4E4E7] leading-tight">
                     {stat.label}
                   </p>
-                  <p className="text-[10px] text-[#71717A]">
+                  <p className="text-[9px] sm:text-[10px] text-[#71717A] truncate">
                     {stat.detail}
                   </p>
                 </SpotlightCard>
@@ -259,26 +259,27 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.55, delay: 0.15 }}
+            className="w-full min-w-0"
           >
-            <SpotlightCard className="p-4 sm:p-7 bg-[#111217] shadow-2xl border border-white/10">
+            <SpotlightCard className="p-3.5 sm:p-7 bg-[#111217] shadow-2xl border border-white/10 w-full min-w-0">
               
               {/* Simulator Header */}
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/5 pb-3 sm:pb-4 mb-4 sm:mb-5">
-                <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/5 pb-3 sm:pb-4 mb-3 sm:mb-5">
+                <div className="flex items-center gap-2 min-w-0">
                   <Terminal size={15} className="text-[#E2B36E] flex-shrink-0" />
-                  <span className="font-mono text-xs font-bold text-[#F4F4F5] tracking-wider uppercase">
+                  <span className="font-mono text-[11px] sm:text-xs font-bold text-[#F4F4F5] tracking-wider uppercase truncate">
                     LIVE MULTI-AGENT SIMULATOR
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-[#16171D] px-2.5 py-1 text-[10px] font-mono text-[#10B981]">
+                <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-[#16171D] px-2.5 py-1 text-[10px] font-mono text-[#10B981] flex-shrink-0">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse" />
                   <span>Interactive Engine</span>
                 </div>
               </div>
 
               {/* Scenario Switcher Tabs */}
-              <div className="space-y-1.5 mb-4 sm:mb-5">
+              <div className="space-y-1.5 mb-3 sm:mb-5">
                 <p className="text-[10px] sm:text-[11px] font-mono uppercase text-[#71717A] tracking-wider">
                   1. Select Real-World Input Scenario:
                 </p>
@@ -301,12 +302,12 @@ export default function Hero() {
               </div>
 
               {/* Input Message Card */}
-              <div className="rounded-xl border border-white/10 bg-[#15171D] p-3 sm:p-3.5 mb-4 sm:mb-5 space-y-1.5">
-                <div className="flex items-center justify-between text-[10px] font-mono text-[#71717A] uppercase">
-                  <span>Raw Incoming Input</span>
-                  <span className="text-[#E2B36E] font-semibold">{selectedScenario.title}</span>
+              <div className="rounded-xl border border-white/10 bg-[#15171D] p-3 sm:p-3.5 mb-3 sm:mb-5 space-y-1.5">
+                <div className="flex items-center justify-between text-[10px] font-mono text-[#71717A] uppercase gap-2">
+                  <span className="flex-shrink-0">Raw Input</span>
+                  <span className="text-[#E2B36E] font-semibold truncate">{selectedScenario.title}</span>
                 </div>
-                <p className="text-xs text-[#E4E4E7] font-mono italic leading-relaxed">
+                <p className="text-xs text-[#E4E4E7] font-mono italic leading-relaxed break-words">
                   {selectedScenario.input}
                 </p>
               </div>
@@ -328,7 +329,7 @@ export default function Hero() {
                     return (
                       <div
                         key={step.agent}
-                        className={`flex items-start gap-2.5 sm:gap-3 rounded-xl border p-2 sm:p-2.5 transition-all duration-300 ${
+                        className={`flex items-start gap-2.5 sm:gap-3 rounded-xl border p-2 sm:p-2.5 transition-all duration-300 min-w-0 ${
                           isActive
                             ? "border-[#E2B36E] bg-[#E2B36E]/10 shadow-[0_0_20px_rgba(226,179,110,0.15)]"
                             : isDone
@@ -349,9 +350,9 @@ export default function Hero() {
                         </div>
 
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between gap-2">
-                            <p className="text-xs font-bold text-[#F4F4F5]">{step.agent}</p>
-                            <span className="font-mono text-[9px] text-[#A1A1AA] flex-shrink-0">{step.status}</span>
+                          <div className="flex flex-wrap sm:flex-nowrap items-baseline justify-between gap-1 sm:gap-2">
+                            <p className="text-xs font-bold text-[#F4F4F5] truncate">{step.agent}</p>
+                            <span className="font-mono text-[9px] text-[#E2B36E] sm:text-[#A1A1AA] flex-shrink-0">{step.status}</span>
                           </div>
                           <p className="text-[10px] sm:text-[11px] font-mono text-[#A1A1AA] line-clamp-2 mt-0.5 leading-snug break-words">
                             {step.action}

@@ -246,7 +246,7 @@ export default function ContactSection() {
                       value={form.name}
                       onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
                       onBlur={() => setTouched((prev) => ({ ...prev, name: true }))}
-                      className={`w-full rounded-xl border bg-[#17181D] px-4 py-3 text-sm text-[#F4F4F5] transition focus:outline-none ${
+                      className={`w-full rounded-xl border bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] transition focus:outline-none ${
                         touched.name && validation.name
                           ? "border-[#EF4444]/60 focus:border-[#EF4444]"
                           : "border-white/10 focus:border-white/30"
@@ -268,7 +268,7 @@ export default function ContactSection() {
                       value={form.email}
                       onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
                       onBlur={() => setTouched((prev) => ({ ...prev, email: true }))}
-                      className={`w-full rounded-xl border bg-[#17181D] px-4 py-3 text-sm text-[#F4F4F5] transition focus:outline-none ${
+                      className={`w-full rounded-xl border bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] transition focus:outline-none ${
                         touched.email && validation.email
                           ? "border-[#EF4444]/60 focus:border-[#EF4444]"
                           : "border-white/10 focus:border-white/30"
@@ -289,7 +289,7 @@ export default function ContactSection() {
                       placeholder="e.g. AI Workflow Collaboration / Internship"
                       value={form.subject}
                       onChange={(e) => setForm((prev) => ({ ...prev, subject: e.target.value }))}
-                      className="w-full rounded-xl border border-white/10 bg-[#17181D] px-4 py-3 text-sm text-[#F4F4F5] transition focus:border-white/30 focus:outline-none"
+                      className="w-full rounded-xl border border-white/10 bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] transition focus:border-white/30 focus:outline-none"
                     />
                   </div>
 
@@ -304,7 +304,7 @@ export default function ContactSection() {
                       value={form.message}
                       onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))}
                       onBlur={() => setTouched((prev) => ({ ...prev, message: true }))}
-                      className={`w-full rounded-xl border bg-[#17181D] px-4 py-3 text-sm text-[#F4F4F5] transition focus:outline-none resize-none ${
+                      className={`w-full rounded-xl border bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] transition focus:outline-none resize-none ${
                         touched.message && validation.message
                           ? "border-[#EF4444]/60 focus:border-[#EF4444]"
                           : "border-white/10 focus:border-white/30"

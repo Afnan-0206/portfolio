@@ -316,9 +316,21 @@ export default function ContactSection() {
                   </div>
 
                   {status === "error" && (
-                    <div className="flex items-center gap-2 rounded-xl border border-[#EF4444]/30 bg-[#EF4444]/10 p-3 text-xs text-[#EF4444]">
-                      <AlertCircle size={15} />
-                      <span>{errorMessage}</span>
+                    <div className="flex flex-col gap-2 rounded-xl border border-[#EF4444]/30 bg-[#EF4444]/10 p-3.5 text-xs text-[#EF4444]">
+                      <div className="flex items-center gap-2">
+                        <AlertCircle size={16} className="shrink-0" />
+                        <span>{errorMessage}</span>
+                      </div>
+                      <a
+                        href={`mailto:brafnan26@gmail.com?subject=${encodeURIComponent(
+                          form.subject.trim() || `Inquiry from ${form.name.trim() || "Portfolio"}`
+                        )}&body=${encodeURIComponent(
+                          `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\n\nMessage:\n${form.message.trim()}`
+                        )}`}
+                        className="mt-1 inline-flex items-center gap-1.5 font-medium text-[#E2B36E] hover:underline"
+                      >
+                        Click here to open pre-filled in your email client &rarr;
+                      </a>
                     </div>
                   )}
 

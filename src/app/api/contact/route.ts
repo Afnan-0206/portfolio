@@ -24,8 +24,21 @@ export async function POST(request: NextRequest) {
 
     const recipientEmail = process.env.GMAIL_USER || process.env.CONTACT_EMAIL || "brafnan26@gmail.com";
     const appPassword = process.env.GMAIL_APP_PASSWORD?.replace(/\s+/g, "");
+    const web3FormsKey = process.env.WEB3FORMS_ACCESS_KEY;
+    const resendApiKey = process.env.RESEND_API_KEY;
 
-    // 1. Permanent Primary Method: Direct Google SMTP via Nodemailer
+    const formattedSubject = `[Portfolio] ${subject.trim()} — from ${name.trim()}`;
+    const inquiryType = workshop || "General Inquiry";
+    const sanitizedMessage = message.trim().replace(/\n/g, "<br/>");
+
+    // Pre-formatted mailto URL in case direct API delivery cannot be reached
+    const mailtoUrl = `mailto:${recipientEmail}?subject=${encodeURIComponent(
+      formattedSubject
+    )}&body=${encodeURIComponent(
+      `Name: ${name.trim()}\nEmail: ${email.trim()}\nCategory: ${inquiryType}\n\nMessage:\n${message.trim()}`
+    )}`;
+
+    // Option 1: Direct Google SMTP via Nodemailer (if GMAIL_APP_PASSWORD configured)
     if (appPassword) {
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -34,10 +47,6 @@ export async function POST(request: NextRequest) {
           pass: appPassword,
         },
       });
-
-      const formattedSubject = `[Portfolio] ${subject.trim()} — from ${name.trim()}`;
-      const inquiryType = workshop || "General Inquiry";
-      const sanitizedMessage = message.trim().replace(/\n/g, "<br/>");
 
       const htmlContent = `
         <!DOCTYPE html>
@@ -91,7 +100,7 @@ export async function POST(request: NextRequest) {
                 </div>
               </div>
               <div class="footer">
-                Delivered permanently via Portfolio Direct Gmail SMTP • Destination: ${recipientEmail}
+                Delivered via Portfolio Gmail SMTP • Destination: ${recipientEmail}
               </div>
             </div>
           </body>
@@ -113,45 +122,80 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 2. Fallback relay if GMAIL_APP_PASSWORD has not been configured yet
-    const fallbackResponse = await fetch(`https://formsubmit.co/ajax/${recipientEmail}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Referer: request.headers.get("referer") || "https://afnan-portfolio.vercel.app",
-      },
-      body: JSON.stringify({
-        name: name.trim(),
-        email: email.trim(),
-        _subject: `Portfolio Inquiry: ${subject.trim()} (from ${name.trim()})`,
-        _replyto: email.trim(),
-        subject: subject.trim(),
-        message: message.trim(),
-        inquiry_type: workshop || "General Inquiry",
-        _template: "table",
-        _captcha: "false",
-      }),
-    });
+    // Option 2: Web3Forms (Zero Google password required - just a free access key)
+    if (web3FormsKey) {
+      const web3Res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: web3FormsKey,
+          name: name.trim(),
+          email: email.trim(),
+          subject: formattedSubject,
+          message: message.trim(),
+          from_name: "Portfolio Contact Form",
+        }),
+      });
 
-    const data = await fallbackResponse.json().catch(() => null);
-
-    if (!fallbackResponse.ok && data?.success === "false" && !data?.message?.includes("Activation")) {
-      throw new Error(data?.message || "Failed to deliver message.");
+      const web3Data = await web3Res.json().catch(() => null);
+      if (web3Res.ok && web3Data?.success) {
+        return NextResponse.json(
+          { success: true, message: "Message delivered via Web3Forms." },
+          { status: 200 }
+        );
+      }
+      throw new Error(web3Data?.message || "Failed to deliver message via Web3Forms.");
     }
 
+    // Option 3: Resend API (if RESEND_API_KEY configured)
+    if (resendApiKey) {
+      const resendRes = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${resendApiKey}`,
+        },
+        body: JSON.stringify({
+          from: "Portfolio Contact <onboarding@resend.dev>",
+          to: recipientEmail,
+          reply_to: email.trim(),
+          subject: formattedSubject,
+          text: `From: ${name.trim()} (${email.trim()})\nCategory: ${inquiryType}\nSubject: ${subject.trim()}\n\nMessage:\n${message.trim()}`,
+        }),
+      });
+
+      const resendData = await resendRes.json().catch(() => null);
+      if (resendRes.ok) {
+        return NextResponse.json(
+          { success: true, message: "Message sent successfully via Resend." },
+          { status: 200 }
+        );
+      }
+      throw new Error(resendData?.message || "Failed to deliver message via Resend.");
+    }
+
+    // Option 4: No email service keys configured yet
     return NextResponse.json(
-      { success: true, message: "Message sent successfully." },
-      { status: 200 }
+      {
+        error:
+          "Email service is not yet configured. Please use the direct email button below or configure GMAIL_APP_PASSWORD or WEB3FORMS_ACCESS_KEY.",
+        mailtoUrl,
+      },
+      { status: 503 }
     );
   } catch (error) {
     console.error("Contact form error:", error);
+    const recipientEmail = process.env.GMAIL_USER || process.env.CONTACT_EMAIL || "brafnan26@gmail.com";
     return NextResponse.json(
       {
         error:
           error instanceof Error
             ? error.message
             : "An unexpected error occurred while sending your message.",
+        mailtoUrl: `mailto:${recipientEmail}`,
       },
       { status: 500 }
     );

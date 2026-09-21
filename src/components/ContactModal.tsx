@@ -324,11 +324,23 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                           initial={{ opacity: 0, y: -8 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -8 }}
-                          className="flex items-start gap-3 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300"
+                          className="flex flex-col gap-2 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300"
                           role="alert"
                         >
-                          <XCircle size={16} className="mt-0.5 flex-shrink-0" aria-hidden="true" />
-                          {error}
+                          <div className="flex items-start gap-3">
+                            <XCircle size={16} className="mt-0.5 flex-shrink-0" aria-hidden="true" />
+                            <span>{error}</span>
+                          </div>
+                          <a
+                            href={`mailto:brafnan26@gmail.com?subject=${encodeURIComponent(
+                              form.subject.trim() || `Inquiry from ${form.name.trim() || "Portfolio"}`
+                            )}&body=${encodeURIComponent(
+                              `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\n\nMessage:\n${form.message.trim()}`
+                            )}`}
+                            className="ml-7 inline-flex items-center gap-1.5 font-medium text-[#22D3EE] hover:underline text-xs"
+                          >
+                            Click here to open pre-filled in your email app &rarr;
+                          </a>
                         </motion.div>
                       )}
                     </AnimatePresence>

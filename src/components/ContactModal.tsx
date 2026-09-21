@@ -1,8 +1,8 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { CheckCircle, XCircle, X, Send } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { CheckCircle, X, Send, Mail } from "lucide-react";
 
 interface ContactModalProps {
   open: boolean;
@@ -27,9 +27,7 @@ const initialState: FormState = {
 export default function ContactModal({ open, onClose, workshopTitle }: ContactModalProps) {
   const [form, setForm] = useState<FormState>(initialState);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const validation = useMemo(() => {
     const errors: Record<string, string> = {};
@@ -61,12 +59,10 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
   const resetForm = () => {
     setForm(initialState);
     setTouched({});
-    setError(null);
   };
 
   const handleClose = () => {
     setSuccess(false);
-    setError(null);
     resetForm();
     onClose();
   };
@@ -91,7 +87,9 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const [mailLinks, setMailLinks] = useState({ gmailUrl: "", mailtoUrl: "" });
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setTouched({ name: true, email: true, subject: true, message: true });
 
@@ -99,41 +97,28 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
       return;
     }
 
-    setLoading(true);
-    setError(null);
+    const targetEmail = "brafnan26@gmail.com";
+    const subjectText = form.subject.trim() || `Inquiry: ${workshopTitle || "Portfolio"}`;
+    const bodyText = `Hi Afnan,\n\n${form.message.trim()}\n\n---\nSender Name: ${form.name.trim()}\nSender Email: ${form.email.trim()}${
+      workshopTitle ? `\nTopic: ${workshopTitle}` : ""
+    }`;
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: form.name.trim(),
-          email: form.email.trim(),
-          subject: form.subject.trim(),
-          message: form.message.trim(),
-          workshop: workshopTitle || "General inquiry",
-        }),
-      });
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+      targetEmail
+    )}&su=${encodeURIComponent(subjectText)}&body=${encodeURIComponent(bodyText)}`;
+    const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(
+      subjectText
+    )}&body=${encodeURIComponent(bodyText)}`;
 
-      if (!response.ok) {
-        const body = await response.json().catch(() => null);
-        const errorMessage = body?.error || "Unable to send message right now.";
-        throw new Error(errorMessage);
-      }
+    setMailLinks({ gmailUrl, mailtoUrl });
 
-      setSuccess(true);
-      resetForm();
-    } catch (submissionError) {
-      setError(
-        submissionError instanceof Error
-          ? submissionError.message
-          : "Something went wrong, please try again."
-      );
-    } finally {
-      setLoading(false);
+    // Open Gmail directly in a new tab
+    const newWindow = window.open(gmailUrl, "_blank", "noopener,noreferrer");
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === "undefined") {
+      window.location.href = mailtoUrl;
     }
+
+    setSuccess(true);
   };
 
   return (
@@ -204,24 +189,41 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -12 }}
-                    className="flex flex-col items-center gap-5 py-12 text-center"
+                    className="flex flex-col items-center gap-4 py-8 text-center"
                     role="status"
                   >
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#34D399]/30 bg-[#34D399]/10">
-                      <CheckCircle size={32} className="text-[#34D399]" aria-hidden="true" />
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[#34D399]/30 bg-[#34D399]/10">
+                      <CheckCircle size={30} className="text-[#34D399]" aria-hidden="true" />
                     </div>
                     <div>
-                      <p className="text-lg font-bold text-[#F8FAFC]">Message sent!</p>
-                      <p className="mt-1.5 text-sm text-[#8FA2B8]">
-                        I&apos;ll review it and get back to you within one business day.
+                      <p className="text-lg font-bold text-[#F8FAFC]">Gmail Compose Ready!</p>
+                      <p className="mt-1.5 text-xs text-[#8FA2B8] max-w-sm mx-auto leading-relaxed">
+                        Your message draft has been generated with all fields filled in. Click <strong className="text-white">Send</strong> in Gmail to deliver it directly to Afnan.
                       </p>
+                    </div>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2 w-full max-w-xs">
+                      <a
+                        href={mailLinks.gmailUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#22D3EE] to-[#8B5CF6] px-5 py-2.5 text-xs font-bold text-[#050817] transition hover:opacity-90"
+                      >
+                        <Mail size={14} />
+                        <span>Re-open Gmail</span>
+                      </a>
+                      <a
+                        href={mailLinks.mailtoUrl}
+                        className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-xs font-semibold text-[#F8FAFC] transition hover:bg-white/10"
+                      >
+                        <span>Default Mail App</span>
+                      </a>
                     </div>
                     <button
                       type="button"
                       onClick={handleClose}
-                      className="mt-2 rounded-full bg-gradient-to-r from-[#22D3EE] to-[#8B5CF6] px-7 py-3 text-sm font-bold text-[#050817] transition hover:opacity-90"
+                      className="mt-2 text-xs text-[#8FA2B8] hover:text-white transition underline"
                     >
-                      Close
+                      Close window
                     </button>
                   </motion.div>
                 ) : (
@@ -317,60 +319,27 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                       ) : null}
                     </label>
 
-                    {/* Error banner */}
-                    <AnimatePresence>
-                      {error && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -8 }}
-                          className="flex flex-col gap-2 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300"
-                          role="alert"
-                        >
-                          <div className="flex items-start gap-3">
-                            <XCircle size={16} className="mt-0.5 flex-shrink-0" aria-hidden="true" />
-                            <span>{error}</span>
-                          </div>
-                          <a
-                            href={`mailto:brafnan26@gmail.com?subject=${encodeURIComponent(
-                              form.subject.trim() || `Inquiry from ${form.name.trim() || "Portfolio"}`
-                            )}&body=${encodeURIComponent(
-                              `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\n\nMessage:\n${form.message.trim()}`
-                            )}`}
-                            className="ml-7 inline-flex items-center gap-1.5 font-medium text-[#22D3EE] hover:underline text-xs"
-                          >
-                            Click here to open pre-filled in your email app &rarr;
-                          </a>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-
                     {/* Actions */}
-                    <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center">
-                      <button
-                        type="submit"
-                        disabled={loading}
-                        className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#22D3EE] to-[#8B5CF6] px-7 py-3.5 text-sm font-bold text-[#050817] shadow-lg transition-all duration-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.4)] hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-                      >
-                        {loading ? (
-                          <>
-                            <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#050817] border-t-transparent" />
-                            Sending...
-                          </>
-                        ) : (
-                          <>
-                            <Send size={14} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-                            Send Message
-                          </>
-                        )}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={handleClose}
-                        className="inline-flex items-center justify-center rounded-full border border-white/10 bg-[#0C1530]/60 px-7 py-3.5 text-sm font-semibold text-[#C7D2E2] transition hover:border-[#22D3EE]/30 hover:text-[#F8FAFC]"
-                      >
-                        Cancel
-                      </button>
+                    <div className="flex flex-col gap-3 pt-1">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                        <button
+                          type="submit"
+                          className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#22D3EE] to-[#8B5CF6] px-7 py-3.5 text-sm font-bold text-[#050817] shadow-lg transition-all duration-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.4)] hover:opacity-90"
+                        >
+                          <Send size={14} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+                          Send via Gmail
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleClose}
+                          className="inline-flex items-center justify-center rounded-full border border-white/10 bg-[#0C1530]/60 px-7 py-3.5 text-sm font-semibold text-[#C7D2E2] transition hover:border-[#22D3EE]/30 hover:text-[#F8FAFC]"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                      <p className="text-[11px] text-[#8FA2B8]">
+                        Opens directly in Gmail compose with your message pre-filled to send to Afnan
+                      </p>
                     </div>
                   </motion.form>
                 )}

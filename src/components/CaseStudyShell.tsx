@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ExternalLink, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { featuredProjects } from "@/data/projects";
+import { featuredProjects, allProjects } from "@/data/projects";
 import { useEffect, useState } from "react";
 
 function GithubIcon({ size = 11 }: { size?: number }) {
@@ -68,12 +68,18 @@ interface CaseStudyShellProps {
 }
 
 export default function CaseStudyShell({ projectId, children }: CaseStudyShellProps) {
-  const idx     = featuredProjects.findIndex((p) => p.id === projectId);
-  const project = featuredProjects[idx];
-  const prev    = featuredProjects[idx > 0 ? idx - 1 : featuredProjects.length - 1];
-  const next    = featuredProjects[(idx + 1) % featuredProjects.length];
+  // If the project is in featuredProjects, navigate circularly within featuredProjects.
+  // Otherwise, use allProjects.
+  const isFeatured = featuredProjects.some((p) => p.id === projectId);
+  const activeList = isFeatured ? featuredProjects : allProjects;
+  const idx = activeList.findIndex((p) => p.id === projectId);
+  const project = activeList[idx] || allProjects.find((p) => p.id === projectId);
+  const prev = activeList[idx > 0 ? idx - 1 : activeList.length - 1];
+  const next = activeList[(idx + 1) % activeList.length];
 
   if (!project) return null;
+
+  const shortDescription = "shortDesc" in project ? project.shortDesc : project.description;
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[#090A0C] font-sans noise text-[#A1A1AA]">
@@ -125,14 +131,21 @@ export default function CaseStudyShell({ projectId, children }: CaseStudyShellPr
           transition={{ duration: 0.5 }}
           className="mb-12 sm:mb-16 space-y-3 sm:space-y-4"
         >
-          <p className="font-mono text-xs font-bold tracking-widest text-[#E2B36E] uppercase">
-            {project.category}
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-mono text-xs font-bold tracking-widest text-[#E2B36E] uppercase">
+              {project.category}
+            </span>
+            {"status" in project && project.status && (
+              <span className="rounded-full border border-white/10 bg-[#17181D] px-2.5 py-0.5 font-mono text-[10px] text-[#A1A1AA]">
+                {project.status}
+              </span>
+            )}
+          </div>
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#F4F4F5] leading-tight">
             {project.title}
           </h1>
           <p className="max-w-3xl text-sm sm:text-base lg:text-lg leading-relaxed text-[#A1A1AA]">
-            {project.shortDesc}
+            {shortDescription}
           </p>
 
           <div className="flex flex-wrap gap-1.5 pt-2">

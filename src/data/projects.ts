@@ -220,8 +220,8 @@ export const secondaryProjects: SecondaryProject[] = [
       "Runs 100% locally via Ollama (Qwen2.5) bound strictly to loopback. Features a deterministic evidence verifier that cross-checks citations verbatim against the raw agreement text, preventing hallucinated quotes, and classifies requests conservatively into INCLUDED, POTENTIAL SCOPE CHANGE, or NEEDS CLARIFICATION.",
     tags: ["Ollama", "Qwen2.5", "React", "Express", "Local-First", "Privacy"],
     repoUrl: "https://github.com/Afnan-0206/scopesentry-local",
-    liveUrl: "https://scopesentry.pages.dev",
-    status: "Local-First Tool",
+    liveUrl: "https://scopesentry.pages.dev/",
+    status: "Live Web Demo",
   },
   {
     id: "ask-olake",
@@ -236,7 +236,8 @@ export const secondaryProjects: SecondaryProject[] = [
       "Combines warm-index BM25 lexical retrieval, structured citation verification and renumbering, multi-provider model failover (GLM-4.7 Flash → Gemini 2.5 Flash Lite → DeepSeek), and explicit abstention when technical evidence is insufficient.",
     tags: ["BM25 Retrieval", "Express", "React", "OpenRouter", "Documentation Engine"],
     repoUrl: "https://github.com/Afnan-0206/ask-olake",
-    status: "Open Source Tool",
+    liveUrl: "https://ask-olake-six.vercel.app/",
+    status: "Live Web Tool",
   },
   {
     id: "sri-vinayaka-pg",

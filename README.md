@@ -74,8 +74,8 @@ Designed to highlight verifiable systems engineering, empirical LLM benchmarks, 
 
 ## 📦 Additional Builds & Focused Systems
 
-- **[ScopeSentry Local](https://github.com/Afnan-0206/scopesentry-local)**: Local-first AI assistant for freelancers that compares client requests against signed agreements, identifying potential scope changes with verbatim source citations via 100% loopback Ollama inference ([Live Demo](https://scopesentry.pages.dev)).
-- **[Ask OLake](https://github.com/Afnan-0206/ask-olake)**: Citation-first technical assistant for the OLake data lakehouse engine, combining BM25 lexical retrieval across 2,454 chunks, strict citation verification, and explicit abstention when evidence is insufficient.
+- **[ScopeSentry Local](https://github.com/Afnan-0206/scopesentry-local)**: Local-first AI assistant for freelancers that compares client requests against signed agreements, identifying potential scope changes with verbatim source citations via 100% loopback Ollama inference ([Live Demo](https://scopesentry.pages.dev/)).
+- **[Ask OLake](https://github.com/Afnan-0206/ask-olake)**: Citation-first technical assistant for the OLake data lakehouse engine, combining BM25 lexical retrieval across 2,454 chunks, strict citation verification, and explicit abstention when evidence is insufficient ([Live App](https://ask-olake-six.vercel.app/)).
 - **[Sri Vinayaka PG](https://github.com/Afnan-0206/Shri-Vinayaka-Pg)**: Dual-surface accommodation platform combining a public room showcase website with an admin operations dashboard for resident lifecycles, rent ledgers, and Supabase PostgreSQL Row-Level Security ([Live Portal](https://shri-vinayaka-pg.vercel.app)).
 
 ---

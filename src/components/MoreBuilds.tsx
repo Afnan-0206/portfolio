@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { experiments } from "@/data/projects";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { secondaryProjects } from "@/data/projects";
 
 function GithubIcon({ size = 12 }: { size?: number }) {
   return (
@@ -21,30 +22,52 @@ export default function MoreBuilds() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-8 sm:mb-10"
+          className="mb-8 sm:mb-10 max-w-3xl"
         >
           <p className="font-mono text-xs font-semibold tracking-widest text-[#E2B36E] uppercase">
-            ADDITIONAL BUILDS &amp; EXPERIMENTS
+            ADDITIONAL BUILDS &amp; FOCUSED SYSTEMS
           </p>
-          <p className="mt-2 text-sm text-[#A1A1AA]">Technical tools, utility libraries, and focused explorations.</p>
+          <p className="mt-2 text-sm sm:text-base text-[#A1A1AA]">
+            Local-first privacy tooling, citation retrieval engines, and full-stack operational platforms.
+          </p>
         </motion.div>
 
-        <div className="grid gap-4 sm:gap-6 sm:grid-cols-3">
-          {experiments.map((exp, i) => (
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {secondaryProjects.map((project, i) => (
             <motion.article
-              key={exp.id}
+              key={project.id}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.06 }}
               className="group relative rounded-2xl border border-white/10 bg-[#121316] p-5 sm:p-6 backdrop-blur-sm shadow-card transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:shadow-card-hover flex flex-col justify-between"
-              aria-label={exp.title}
+              aria-label={project.title}
             >
-              <div>
-                <h3 className="mb-2 text-base font-bold text-[#F4F4F5]">{exp.title}</h3>
-                <p className="mb-5 text-sm leading-relaxed text-[#A1A1AA]">{exp.description}</p>
-                <div className="mb-5 flex flex-wrap gap-1.5">
-                  {exp.tags.map((t) => (
+              <div className="space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-mono text-[9px] font-bold text-[#E2B36E] uppercase tracking-wider">
+                    {project.category}
+                  </span>
+                  {project.status && (
+                    <span className="rounded-full bg-white/5 border border-white/10 px-2 py-0.5 font-mono text-[9px] text-[#A1A1AA]">
+                      {project.status}
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="text-base sm:text-lg font-bold text-[#F4F4F5]">{project.title}</h3>
+
+                <p className="text-xs sm:text-sm leading-relaxed text-[#A1A1AA]">{project.description}</p>
+
+                <div className="border-t border-white/5 pt-3 space-y-1.5 text-xs text-[#71717A]">
+                  <div>
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#A1A1AA] block">Approach</span>
+                    <p className="text-[#D4D4D8] text-[11px] leading-relaxed mt-0.5">{project.approach}</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {project.tags.map((t) => (
                     <span
                       key={t}
                       className="rounded-full border border-white/5 bg-[#17181D] px-2.5 py-0.5 font-mono text-[10px] text-[#A1A1AA]"
@@ -55,17 +78,41 @@ export default function MoreBuilds() {
                 </div>
               </div>
 
-              <div className="border-t border-white/5 pt-4 mt-auto">
-                <a
-                  href={exp.repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-[#A1A1AA] hover:text-[#FFFFFF] transition"
-                >
-                  <GithubIcon size={12} />
-                  <span>View Repository</span>
-                  <ArrowUpRight size={12} />
-                </a>
+              <div className="border-t border-white/5 pt-4 mt-5 flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#A1A1AA] hover:text-[#FFFFFF] transition"
+                  >
+                    <GithubIcon size={12} />
+                    <span>Source</span>
+                    <ArrowUpRight size={12} />
+                  </a>
+
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#E2B36E] hover:text-[#FFF] transition ml-2"
+                    >
+                      <ExternalLink size={11} />
+                      <span>Live Demo</span>
+                    </a>
+                  )}
+                </div>
+
+                {project.caseStudyUrl && (
+                  <Link
+                    href={project.caseStudyUrl}
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#A1A1AA] hover:text-[#FFFFFF] transition"
+                  >
+                    <span>Case Study</span>
+                    <ArrowUpRight size={11} />
+                  </Link>
+                )}
               </div>
             </motion.article>
           ))}

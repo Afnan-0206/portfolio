@@ -3,51 +3,63 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { capabilities } from "@/data/projects";
-import { Cpu, Code2, Database, BarChart3, Layers, Terminal, ArrowRight } from "lucide-react";
+import { Cpu, Code2, Database, Layers, Terminal, ArrowRight } from "lucide-react";
 import SpotlightCard from "@/components/SpotlightCard";
 
 const CAP_META: Record<string, { icon: any; subtitle: string; codeSnippet: string }> = {
-  "ai-systems": {
+  "systems-infra": {
     icon: Cpu,
-    subtitle: "Autonomous & Multi-Agent Logic",
-    codeSnippet: `// Multi-agent state transition logic
+    subtitle: "C++20, Wasm & Systems Verification",
+    codeSnippet: `// C++20 Transaction Dependency Graph & Tarjan SCC Cycle Search
+auto sccs = tarjan_scc(dependency_graph);
+for (const auto& comp : sccs) {
+  if (comp.size() > 1 || comp.has_self_loop()) {
+    // Flag G0 (Write Cycles) or G1c (Circular Flow) isolation anomalies
+    return AnomalyVerdict::ViolationDetected("G0 Anti-Dependency Cycle", comp);
+  }
+}
+return AnomalyVerdict::ValidAcyclic();`,
+  },
+  "ai-systems": {
+    icon: Terminal,
+    subtitle: "Multi-Agent State Machines & Fallback",
+    codeSnippet: `// Multi-agent state transition with deterministic fallback
 const agentState = await pipeline.dispatch({
-  intake:    parsedWhatsAppJSON,
-  context:   await supabase.rpc('get_client_terms'),
-  fallback:  ruleBasedPricingEngine,
-  validate:  zodInvoiceSchema.strict()
+  intake:   parsedCustomerJSON,
+  context:  await catalog.resolvePricing(itemQuery),
+  fallback: deterministicRuleEngine, // zero downtime on LLM rate-limit
+  validate: zodDocumentSchema.strict(), // prevents hallucinated totals
 });`,
   },
-  "full-stack": {
+  "fullstack": {
     icon: Code2,
-    subtitle: "Modern Web & Distributed APIs",
-    codeSnippet: `// Next.js App Router + Server Actions
+    subtitle: "Modern Web, Next.js & Strict Types",
+    codeSnippet: `// Next.js App Router + TypeScript Strict Validation
 export async function POST(req: Request) {
   const session = await auth();
-  if (!session) return unauthorized();
-  return Response.json({ status: 200, edge: true });
+  if (!session) return new Response("Unauthorized", { status: 401 });
+  const payload = await req.json();
+  const parsed = schema.safeParse(payload);
+  if (!parsed.success) return Response.json(parsed.error, { status: 422 });
+  return Response.json({ status: 200, data: parsed.data });
 }`,
-  },
-  "data-ml": {
-    icon: BarChart3,
-    subtitle: "Predictive Models & Pipelines",
-    codeSnippet: `// LightGBM race prediction feature set
-features = ['grid_position', 'telemetry_delta', 'compound_deg']
-model = lgb.Booster(model_file='f1_predictor.txt')
-predicted_lap_time = model.predict(driver_features)`,
   },
   "databases-devops": {
     icon: Database,
-    subtitle: "Cloud DBs, RLS & Deployment",
-    codeSnippet: `-- PostgreSQL Row-Level Security Policy
-CREATE POLICY "Tenants only access own rooms"
-ON public.residents FOR SELECT
-USING (auth.uid() = admin_id AND active = true);`,
+    subtitle: "PostgreSQL, RLS & Cloud Infrastructure",
+    codeSnippet: `-- PostgreSQL Row-Level Security Policy & Audit Triggers
+CREATE POLICY "Admins manage property rooms"
+ON public.rooms FOR ALL
+USING (auth.uid() = admin_id AND active = true);
+
+CREATE TRIGGER room_audit_log
+AFTER INSERT OR UPDATE OR DELETE ON public.rooms
+FOR EACH ROW EXECUTE FUNCTION record_audit_trail();`,
   },
 };
 
 export default function Capabilities() {
-  const [selectedCap, setSelectedCap] = useState<string>("ai-systems");
+  const [selectedCap, setSelectedCap] = useState<string>("systems-infra");
 
   return (
     <section id="capabilities" className="relative px-4 py-16 sm:px-8 sm:py-24 lg:py-28 lg:px-12">
@@ -70,11 +82,11 @@ export default function Capabilities() {
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#F4F4F5]">
             The full stack,{" "}
             <span className="text-gold-metallic">
-              from data to deployment.
+              from systems to deployment.
             </span>
           </h2>
           <p className="text-sm sm:text-base lg:text-lg leading-relaxed text-[#A1A1AA]">
-            Production software requires mastery across every layer: deterministic business rules, autonomous LLM state machines, relational schema guarantees, and edge interfaces.
+            Production software requires rigor across every layer: C++20 graph algorithms, deterministic business fallback rules, autonomous multi-agent state machines, relational schema guarantees, and edge interfaces.
           </p>
         </motion.div>
 
@@ -164,10 +176,10 @@ export default function Capabilities() {
                   <div className="flex items-center gap-2 min-w-0 overflow-hidden">
                     <Terminal size={14} className="text-[#E2B36E] flex-shrink-0" />
                     <span className="font-mono text-[11px] sm:text-xs font-bold text-[#F4F4F5] uppercase truncate">
-                      Code Example · {capabilities.find((c) => c.id === selectedCap)?.title}
+                      Code Implementation · {capabilities.find((c) => c.id === selectedCap)?.title}
                     </span>
                   </div>
-                  <span className="font-mono text-[9px] sm:text-[10px] text-[#10B981] flex-shrink-0">Deterministic Pipeline Logic</span>
+                  <span className="font-mono text-[9px] sm:text-[10px] text-[#10B981] flex-shrink-0">Verified Engineering Artifact</span>
                 </div>
                 <div className="w-full min-w-0 overflow-x-auto rounded-xl bg-[#0B0C0F] border border-white/5 p-3 sm:p-4">
                   <pre className="font-mono text-[11px] sm:text-xs text-[#E4E4E7] leading-relaxed whitespace-pre inline-block min-w-full">

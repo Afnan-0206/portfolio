@@ -52,8 +52,8 @@ export default function Home() {
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-base sm:text-xl md:text-2xl font-medium leading-relaxed text-[#A1A1AA]">
               I care about more than making interfaces look pretty. I build the{" "}
-              <span className="text-[#F4F4F5]">workflow behind them</span>—data pipelines,
-              deterministic validation, multi-agent reasoning, and resilient user software.
+              <span className="text-[#F4F4F5]">systems and workflows behind them</span>—transactional
+              correctness, empirical LLM benchmarks, multi-agent reasoning, and resilient user software.
             </p>
           </div>
         </div>

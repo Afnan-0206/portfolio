@@ -183,13 +183,13 @@ export default function Hero() {
               <h1 className="max-w-3xl text-3xl font-extrabold leading-[1.15] tracking-tight sm:text-5xl lg:text-6xl text-[#F4F4F5]">
                 I build{" "}
                 <span className="text-gold-metallic">
-                  autonomous AI systems
+                  systems software, LLM infra
                 </span>{" "}
-                and full-stack products that turn messy workflows into software.
+                and reliable AI workflows.
               </h1>
 
               <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-[#A1A1AA]">
-                I&apos;m <span className="text-[#F4F4F5] font-semibold">Afnan B.R.</span>, an engineer translating chaotic human communications—from informal WhatsApp requests to complex DevOps triage—into production-grade multi-agent state machines, relational backends, and snappy user interfaces.
+                I&apos;m <span className="text-[#F4F4F5] font-semibold">Afnan B.R.</span>, an engineer and 2nd-year B.Tech CSE (AI/ML) student in Bengaluru building transactional isolation checkers, token-fair continuous-batching schedulers, autonomous DevOps agents, and full-stack software.
               </p>
             </motion.div>
 

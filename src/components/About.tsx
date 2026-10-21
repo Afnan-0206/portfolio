@@ -26,10 +26,10 @@ const PRINCIPLES = [
 ];
 
 const HIGHLIGHTS = [
-  { label: "Degree & Major", value: "B.Tech CSE (AI/ML)", icon: GraduationCap },
+  { label: "Degree & Major", value: "B.Tech CSE (AI/ML) · 2nd Year", icon: GraduationCap },
   { label: "Engineering Hub", value: "Bengaluru, India", icon: MapPin },
-  { label: "Core Focus", value: "Multi-Agent Pipelines & Full-Stack", icon: Cpu },
-  { label: "Availability", value: "Internships & Select Builds", icon: Briefcase },
+  { label: "Core Focus", value: "Systems, LLM Infra & Agentic AI", icon: Cpu },
+  { label: "Availability", value: "SDE & AI/ML Internships", icon: Briefcase },
 ];
 
 export default function About() {
@@ -54,19 +54,19 @@ export default function About() {
                 </span>
               </div>
               <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#F4F4F5] leading-[1.15]">
-                Bridging intelligent algorithms with{" "}
+                Bridging systems depth with{" "}
                 <span className="text-gold-metallic">
-                  production systems.
+                  production AI software.
                 </span>
               </h2>
             </div>
 
             <div className="space-y-3 sm:space-y-4 text-sm sm:text-base lg:text-lg leading-relaxed text-[#A1A1AA]">
               <p>
-                I&apos;m <span className="text-[#F4F4F5] font-semibold">Afnan B.R.</span>, an AI and full-stack software builder based in Bengaluru. I translate manual processes—from informal customer WhatsApp communications to multi-step developer triage—into resilient, automated software.
+                I&apos;m <span className="text-[#F4F4F5] font-semibold">Afnan B.R.</span>, a software engineer and 2nd-year B.Tech CSE student specializing in AI/ML based in Bengaluru. I build systems software, LLM inference infrastructure, and autonomous agentic workflows—focused on correctness, verification, and empirical measurement rather than toy prompts or generic AI wrappers.
               </p>
               <p>
-                Rather than treating AI as a superficial feature wrapper, I design end-to-end architectures: multi-agent state machines, deterministic fallback engines, PostgreSQL schemas with Row-Level Security, and snappy Next.js user interfaces.
+                From C++20 transactional isolation checkers and token-fair continuous-batching schedulers to autonomous DevOps incident command centers and database-backed platforms, I design systems around real engineering constraints.
               </p>
             </div>
 

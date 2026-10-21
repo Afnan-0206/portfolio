@@ -49,7 +49,7 @@ export default function BizPilotCaseStudy() {
         <h2 id="problem-heading" className="mb-4 text-xl font-semibold text-[#F8FAFC]">The problem</h2>
         <p className="text-base leading-8 text-[#94A3B8]">
           Small service businesses—caterers, tailors, repair shops—frequently receive requests
-          like <em className="text-[#94A3B8]">"mujhe 3 saree blouse chahiye, price kya hai?"</em> and
+          like <em className="text-[#94A3B8]">&ldquo;mujhe 3 saree blouse chahiye, price kya hai?&rdquo;</em> and
           manually calculate pricing, GST, prepare a quotation PDF, and write a reply—every time.
           This creates delays, inconsistencies and errors under volume.
         </p>

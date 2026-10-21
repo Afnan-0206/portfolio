@@ -20,6 +20,7 @@ export interface Project {
   repoUrl: string;
   liveUrl?: string;
   caseStudyUrl?: string;
+  image?: string;
   status: "Active Web Tool" | "Research Benchmark" | "Live Application" | "Production Portal" | "Local-First Tool" | "Open Source CLI";
   accentColor: string;
   featured: boolean;
@@ -86,6 +87,7 @@ export const featuredProjects: Project[] = [
     repoUrl: "https://github.com/Afnan-0206/IsoCheck",
     liveUrl: "https://isocheck.pages.dev/#/playground",
     caseStudyUrl: "/work/isocheck",
+    image: "/images/projects/isocheck.jpg",
     status: "Active Web Tool",
     accentColor: "#10B981",
     featured: true,
@@ -113,6 +115,7 @@ export const featuredProjects: Project[] = [
     repoUrl: "https://github.com/Afnan-0206/inferLoad",
     liveUrl: "https://inferload.onrender.com",
     caseStudyUrl: "/work/inferload",
+    image: "/images/projects/inferload.jpg",
     status: "Live Application",
     accentColor: "#22D3EE",
     featured: true,
@@ -139,6 +142,7 @@ export const featuredProjects: Project[] = [
     tags: ["Python", "Go", "Continuous Batching", "Scheduling Algorithms", "Bootstrap Statistics", "Systems Research"],
     repoUrl: "https://github.com/Afnan-0206/FairLane",
     caseStudyUrl: "/work/fairlane",
+    image: "/images/projects/fairlane.jpg",
     status: "Research Benchmark",
     accentColor: "#F59E0B",
     featured: true,
@@ -166,6 +170,7 @@ export const featuredProjects: Project[] = [
     repoUrl: "https://github.com/Afnan-0206/BizPilot",
     liveUrl: "https://biz-pilot.vercel.app",
     caseStudyUrl: "/work/bizpilot",
+    image: "/images/projects/bizpilot.jpg",
     status: "Live Application",
     accentColor: "#E2B36E",
     featured: true,
@@ -193,6 +198,7 @@ export const featuredProjects: Project[] = [
     repoUrl: "https://github.com/Afnan-0206/autofix-ai-incidents",
     liveUrl: "https://autofix-ten-zeta.vercel.app",
     caseStudyUrl: "/work/autofix-ai",
+    image: "/images/projects/autofix-ai.jpg",
     status: "Live Application",
     accentColor: "#34D399",
     featured: true,

@@ -81,10 +81,10 @@ export default function AutoFixCaseStudy() {
           <div className="rounded-xl border border-[#1E293B] bg-[#0B1018] p-4">
             <p className="mb-2 font-mono text-xs text-[#34D399]">Backend</p>
             <ul className="space-y-1 text-sm text-[#94A3B8]">
-              <li>Node.js + Express</li>
-              <li>Anthropic API (Claude)</li>
-              <li>Agent orchestration logic</li>
-              <li>Structured output parsing</li>
+              <li>Node.js + Express proxy</li>
+              <li>Multi-provider AI (Anthropic, Gemini, OpenAI, Groq)</li>
+              <li>Agent orchestration &amp; self-correction loop</li>
+              <li>Structured output parsing &amp; PR diff generator</li>
             </ul>
           </div>
         </div>
@@ -100,9 +100,10 @@ export default function AutoFixCaseStudy() {
             if no valid fix is found within the budget.
           </p>
           <p>
-            <strong className="text-[#F8FAFC]">No live deployment.</strong>{" "}
-            AutoFix AI requires API keys for the Anthropic service and is intended to run
-            locally or on a private server. There is no publicly accessible deployment.
+            <strong className="text-[#F8FAFC]">Multi-provider proxy &amp; rate limits.</strong>{" "}
+            AutoFix AI proxies across multiple LLM providers (Anthropic, Gemini, OpenAI, Groq).
+            When a primary model experiences latency spikes or quota exhaustion during an incident,
+            the dispatcher routes the investigation plan to secondary fallbacks to preserve uptime.
           </p>
         </div>
       </section>

@@ -47,6 +47,18 @@ module.exports = {
         "card":        "0 12px 40px -10px rgba(0,0,0,0.6)",
         "card-hover":  "0 20px 50px -10px rgba(0,0,0,0.8)",
         "warm-glow":   "0 0 30px -8px rgba(226,179,110,0.2)",
+        // Neobrutalism Hard Drop Shadows (0 blur)
+        "neo-sm":       "2px 2px 0px 0px #000000",
+        "neo":          "4px 4px 0px 0px #000000",
+        "neo-lg":       "6px 6px 0px 0px #000000",
+        "neo-xl":       "8px 8px 0px 0px #000000",
+        "neo-gold-sm":  "2px 2px 0px 0px #E2B36E",
+        "neo-gold":     "4px 4px 0px 0px #E2B36E",
+        "neo-gold-lg":  "6px 6px 0px 0px #E2B36E",
+        "neo-white-sm": "2px 2px 0px 0px #FFFFFF",
+        "neo-white":    "4px 4px 0px 0px #FFFFFF",
+        "neo-emerald":  "4px 4px 0px 0px #10B981",
+        "neo-amber":    "4px 4px 0px 0px #F59E0B",
       },
       animation: {
         "fade-in":    "fadeIn 0.5s ease-out",

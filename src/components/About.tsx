@@ -47,9 +47,9 @@ export default function About() {
             className="space-y-6 sm:space-y-8"
           >
             <div className="space-y-3 sm:space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#141519] px-3.5 py-1.5 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 rounded-full border-2 border-white/20 bg-[#141519] px-3.5 py-1.5 shadow-[3px_3px_0px_#000000] backdrop-blur-md">
                 <Compass size={13} className="text-[#E2B36E]" />
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#E2B36E] uppercase">
+                <span className="font-mono text-xs font-bold tracking-widest text-[#E2B36E] uppercase">
                   ENGINEERING PHILOSOPHY
                 </span>
               </div>
@@ -71,12 +71,12 @@ export default function About() {
             </div>
 
             {/* Engineer Profile Specification Box */}
-            <div className="rounded-2xl border border-white/10 bg-[#121316] p-4 sm:p-6 shadow-card space-y-3 sm:space-y-4">
-              <div className="flex items-center justify-between border-b border-white/5 pb-3">
+            <div className="rounded-2xl border-2 border-white/20 bg-[#121316] p-4 sm:p-6 shadow-[6px_6px_0px_#000000] space-y-3 sm:space-y-4">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
                 <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-wider text-[#E2B36E] uppercase">
                   ENGINEER PROFILE SPECIFICATION
                 </span>
-                <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#10B981]">
+                <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#10B981] font-bold">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
                   <span>Verified Data</span>
                 </div>
@@ -88,9 +88,9 @@ export default function About() {
                   return (
                     <div
                       key={fact.label}
-                      className="flex items-start gap-3 rounded-xl border border-white/5 bg-[#17181D] p-3 sm:p-3.5 transition-colors hover:border-white/15"
+                      className="flex items-start gap-3 rounded-xl border-2 border-white/10 bg-[#17181D] p-3 sm:p-3.5 shadow-[2px_2px_0px_#000000] transition-colors hover:border-[#E2B36E]/60 hover:shadow-[3px_3px_0px_#E2B36E]"
                     >
-                      <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-[#121316] text-[#E2B36E]">
+                      <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border-2 border-white/15 bg-[#121316] text-[#E2B36E] shadow-[2px_2px_0px_#000000]">
                         <Icon size={16} />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -108,7 +108,7 @@ export default function About() {
             </div>
 
             {/* Tenet Box */}
-            <div className="rounded-2xl border border-white/10 bg-[#17181D] p-4 sm:p-5">
+            <div className="rounded-2xl border-2 border-white/15 bg-[#17181D] p-4 sm:p-5 shadow-[4px_4px_0px_#000000]">
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={17} className="text-[#10B981]" />
                 <p className="text-sm font-bold text-[#F4F4F5]">Engineering Principle</p>
@@ -128,8 +128,8 @@ export default function About() {
             className="space-y-4"
           >
             {/* Real-World Builder Card */}
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#121316] p-3 sm:p-4 shadow-card group transition-all duration-300 hover:border-white/20">
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-white/5 bg-[#17181D]">
+            <div className="relative overflow-hidden rounded-2xl border-2 border-white/20 bg-[#121316] p-3 sm:p-4 shadow-[6px_6px_0px_#000000] group transition-all duration-300 hover:border-[#E2B36E] hover:shadow-[8px_8px_0px_#E2B36E]">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border-2 border-white/10 bg-[#17181D]">
                 <Image
                   src="/images/afnan-bengaluru-tech-week.jpg"
                   alt="Afnan B.R. at Bengaluru Tech Week"
@@ -141,7 +141,7 @@ export default function About() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#121316]/90 via-transparent to-transparent opacity-70" />
                 
                 <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-[#090A0C]/85 px-2.5 py-0.5 sm:px-3 sm:py-1 font-mono text-[9px] sm:text-[10px] font-bold text-[#E2B36E] uppercase backdrop-blur-md">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-white/20 bg-[#090A0C]/90 px-2.5 py-0.5 sm:px-3 sm:py-1 font-mono text-[9px] sm:text-[10px] font-bold text-[#E2B36E] uppercase backdrop-blur-md shadow-[2px_2px_0px_#000000]">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#E2B36E]" />
                     Bengaluru Tech Week
                   </span>
@@ -150,11 +150,11 @@ export default function About() {
                 <div className="absolute bottom-3 inset-x-3 flex items-end justify-between gap-3">
                   <div>
                     <p className="text-xs sm:text-sm font-bold text-[#F4F4F5] tracking-tight">Afnan B.R.</p>
-                    <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] font-mono mt-0.5">
+                    <p className="text-[10px] sm:text-[11px] text-[#A1A1AA] font-mono mt-0.5 font-bold">
                       AgentsNexus · Scaler Buildathon
                     </p>
                   </div>
-                  <div className="flex items-center gap-1 rounded-full bg-[#10B981]/15 border border-[#10B981]/30 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-mono font-semibold text-[#10B981] backdrop-blur-md">
+                  <div className="flex items-center gap-1 rounded-full bg-[#10B981]/20 border-2 border-[#10B981]/40 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-mono font-bold text-[#10B981] shadow-[2px_2px_0px_#000000] backdrop-blur-md">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse" />
                     <span>Active Builder</span>
                   </div>
@@ -168,10 +168,10 @@ export default function About() {
               return (
                 <div
                   key={p.id}
-                  className="rounded-2xl border border-white/10 bg-[#121316] p-4 sm:p-6 backdrop-blur-sm shadow-card transition-all duration-300 hover:border-white/20"
+                  className="rounded-2xl border-2 border-white/15 bg-[#121316] p-4 sm:p-6 shadow-[4px_4px_0px_#000000] transition-all duration-200 hover:border-[#E2B36E] hover:shadow-[6px_6px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5"
                 >
                   <div className="flex items-center gap-3 mb-2.5 sm:mb-3">
-                    <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl border border-white/10 bg-[#17181D] text-[#E2B36E] flex-shrink-0">
+                    <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl border-2 border-white/15 bg-[#17181D] text-[#E2B36E] shadow-[2px_2px_0px_#000000] flex-shrink-0">
                       <Icon size={17} />
                     </div>
                     <h3 className="text-sm sm:text-base font-bold text-[#F4F4F5]">{p.title}</h3>

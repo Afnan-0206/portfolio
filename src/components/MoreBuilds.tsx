@@ -40,7 +40,7 @@ export default function MoreBuilds() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.06 }}
-              className="group relative rounded-2xl border border-white/10 bg-[#121316] p-5 sm:p-6 backdrop-blur-sm shadow-card transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:shadow-card-hover flex flex-col justify-between"
+              className="group relative rounded-2xl border-2 border-white/15 bg-[#121316] p-5 sm:p-6 shadow-[4px_4px_0px_#000000] transition-all duration-200 hover:border-[#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_#E2B36E] flex flex-col justify-between"
               aria-label={project.title}
             >
               <div className="space-y-3">
@@ -49,7 +49,7 @@ export default function MoreBuilds() {
                     {project.category}
                   </span>
                   {project.status && (
-                    <span className="rounded-full bg-white/5 border border-white/10 px-2 py-0.5 font-mono text-[9px] text-[#A1A1AA]">
+                    <span className="rounded-full bg-white/5 border-2 border-white/15 px-2 py-0.5 font-mono text-[9px] text-[#A1A1AA] shadow-[2px_2px_0px_#000000] font-bold">
                       {project.status}
                     </span>
                   )}
@@ -59,9 +59,9 @@ export default function MoreBuilds() {
 
                 <p className="text-xs sm:text-sm leading-relaxed text-[#A1A1AA]">{project.description}</p>
 
-                <div className="border-t border-white/5 pt-3 space-y-1.5 text-xs text-[#71717A]">
+                <div className="border-t border-white/10 pt-3 space-y-1.5 text-xs text-[#71717A]">
                   <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#A1A1AA] block">Approach</span>
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#A1A1AA] block font-bold">Approach</span>
                     <p className="text-[#D4D4D8] text-[11px] leading-relaxed mt-0.5">{project.approach}</p>
                   </div>
                 </div>
@@ -70,7 +70,7 @@ export default function MoreBuilds() {
                   {project.tags.map((t) => (
                     <span
                       key={t}
-                      className="rounded-full border border-white/5 bg-[#17181D] px-2.5 py-0.5 font-mono text-[10px] text-[#A1A1AA]"
+                      className="rounded-lg border-2 border-white/10 bg-[#17181D] px-2.5 py-0.5 font-mono text-[10px] text-[#A1A1AA] shadow-[2px_2px_0px_#000000]"
                     >
                       {t}
                     </span>
@@ -78,13 +78,13 @@ export default function MoreBuilds() {
                 </div>
               </div>
 
-              <div className="border-t border-white/5 pt-4 mt-5 flex flex-wrap items-center justify-between gap-2">
+              <div className="border-t border-white/10 pt-4 mt-5 flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <a
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#A1A1AA] hover:text-[#FFFFFF] transition"
+                    className="inline-flex items-center gap-1.5 rounded-lg border-2 border-white/15 bg-[#17181D] px-2.5 py-1 text-xs font-bold text-[#A1A1AA] shadow-[2px_2px_0px_#000000] hover:border-white/30 hover:text-[#FFFFFF] hover:-translate-x-0.5 hover:-translate-y-0.5 transition"
                   >
                     <GithubIcon size={12} />
                     <span>Source</span>
@@ -96,7 +96,7 @@ export default function MoreBuilds() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#E2B36E] hover:text-[#FFF] transition ml-2"
+                      className="inline-flex items-center gap-1.5 rounded-lg border-2 border-black bg-[#E2B36E] px-2.5 py-1 text-xs font-extrabold text-[#090A0C] shadow-[2px_2px_0px_#FFFFFF] hover:bg-[#F0C485] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition ml-2"
                     >
                       <ExternalLink size={11} />
                       <span>Live Demo</span>
@@ -107,7 +107,7 @@ export default function MoreBuilds() {
                 {project.caseStudyUrl && (
                   <Link
                     href={project.caseStudyUrl}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#A1A1AA] hover:text-[#FFFFFF] transition"
+                    className="inline-flex items-center gap-1 rounded-lg border-2 border-[#E2B36E]/30 bg-[#17181D] px-2.5 py-1 text-xs font-bold text-[#E2B36E] shadow-[2px_2px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 transition"
                   >
                     <span>Case Study</span>
                     <ArrowUpRight size={11} />

@@ -66,7 +66,7 @@ export default function FeaturedWork() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative rounded-2xl border border-white/10 bg-[#0C0D10] shadow-[0_30px_70px_rgba(0,0,0,0.85)] overflow-hidden"
+          className="relative rounded-2xl border-2 border-white/20 bg-[#0C0D10] shadow-[8px_8px_0px_#000000] overflow-hidden"
         >
           {/* Subtle atmospheric ambient glow */}
           <div className="pointer-events-none absolute -top-32 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-[#E2B36E]/5 blur-[120px]" />
@@ -80,12 +80,12 @@ export default function FeaturedWork() {
           />
 
           {/* Quick interaction bar at bottom of stage */}
-          <div className="relative border-t border-white/5 bg-[#0A0B0E]/80 backdrop-blur-xs px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-3 text-xs text-[#71717A]">
+          <div className="relative border-t-2 border-white/10 bg-[#0A0B0E]/90 backdrop-blur-xs px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-3 text-xs text-[#71717A]">
             <div className="flex items-center gap-2 font-mono">
               <span className="inline-block size-2 rounded-full bg-[#10B981] animate-pulse" />
               <span>Scroll or drag vertically to rotate · Click card to open case study</span>
             </div>
-            <div className="flex items-center gap-4 text-[#A1A1AA] font-mono text-[11px]">
+            <div className="flex items-center gap-4 text-[#A1A1AA] font-mono text-[11px] font-bold">
               <span>5 Curated Flagship Systems</span>
               <span className="text-[#3F3F46]">|</span>
               <span className="text-[#E2B36E]">3D Perspective Drum</span>
@@ -95,9 +95,9 @@ export default function FeaturedWork() {
 
         {/* Technical Architecture & Specs Matrix (Preserves core metrics & direct actions) */}
         <div className="mt-12 sm:mt-16">
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-white/5 pb-4">
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
             <div>
-              <p className="font-mono text-[11px] font-semibold text-[#E2B36E] uppercase tracking-wider">
+              <p className="font-mono text-[11px] font-bold text-[#E2B36E] uppercase tracking-wider">
                 System Deep-Dive &amp; Benchmarks
               </p>
               <h3 className="text-lg sm:text-xl font-bold text-[#F4F4F5] mt-0.5">
@@ -106,16 +106,16 @@ export default function FeaturedWork() {
             </div>
 
             {/* Project Selector Pills */}
-            <div className="flex flex-wrap gap-1.5 p-1 rounded-xl border border-white/5 bg-[#121316]">
+            <div className="flex flex-wrap gap-1.5 p-1 rounded-xl border-2 border-white/15 bg-[#121316] shadow-[3px_3px_0px_#000000]">
               {featuredProjects.map((p) => (
                 <button
                   key={p.id}
                   type="button"
                   onClick={() => setSelectedProjectId(p.id)}
-                  className={`rounded-lg px-2.5 py-1 text-xs font-mono transition-all ${
+                  className={`rounded-lg px-2.5 py-1 text-xs font-mono font-bold transition-all border-2 ${
                     selectedProjectId === p.id
-                      ? "bg-[#E2B36E] text-[#090A0C] font-bold shadow-sm"
-                      : "text-[#A1A1AA] hover:text-[#FFFFFF]"
+                      ? "border-black bg-[#E2B36E] text-[#090A0C] shadow-[3px_3px_0px_#FFFFFF]"
+                      : "border-transparent text-[#A1A1AA] hover:text-[#FFFFFF] hover:border-white/20 hover:bg-white/5"
                   }`}
                 >
                   {p.title}
@@ -125,7 +125,7 @@ export default function FeaturedWork() {
           </div>
 
           {/* Active Project Spec Card */}
-          <div className="rounded-2xl border border-white/10 bg-[#121316] p-5 sm:p-7 backdrop-blur-sm shadow-card">
+          <div className="rounded-2xl border-2 border-white/15 bg-[#121316] p-5 sm:p-7 backdrop-blur-sm shadow-[6px_6px_0px_#000000]">
             <div className="grid gap-6 lg:grid-cols-12 items-start">
 
               {/* Left Column: Summary & Problem/Solution */}
@@ -134,7 +134,7 @@ export default function FeaturedWork() {
                   <span className="font-mono text-[10px] font-bold text-[#E2B36E] uppercase tracking-wider">
                     {activeProject.category}
                   </span>
-                  <span className="rounded-full bg-white/5 border border-white/10 px-2.5 py-0.5 text-[10px] font-mono text-[#A1A1AA]">
+                  <span className="rounded-full bg-white/5 border-2 border-white/15 px-2.5 py-0.5 text-[10px] font-mono text-[#A1A1AA] shadow-[2px_2px_0px_#000000] font-bold">
                     {activeProject.status}
                   </span>
                 </div>
@@ -148,13 +148,13 @@ export default function FeaturedWork() {
                   </p>
                 </div>
 
-                <div className="space-y-2 border-t border-white/5 pt-3 text-xs leading-relaxed">
+                <div className="space-y-2 border-t border-white/10 pt-3 text-xs leading-relaxed">
                   <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#71717A] block">Core Problem</span>
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#71717A] block font-bold">Core Problem</span>
                     <p className="text-[#D4D4D8] mt-0.5">{activeProject.problem}</p>
                   </div>
                   <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#71717A] block">Engineered Solution</span>
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#71717A] block font-bold">Engineered Solution</span>
                     <p className="text-[#D4D4D8] mt-0.5">{activeProject.solution}</p>
                   </div>
                 </div>
@@ -163,7 +163,7 @@ export default function FeaturedWork() {
                   {activeProject.tags.map((t) => (
                     <span
                       key={t}
-                      className="rounded-full border border-white/5 bg-[#17181D] px-2.5 py-0.5 font-mono text-[10px] text-[#A1A1AA]"
+                      className="rounded-lg border-2 border-white/10 bg-[#17181D] px-2.5 py-0.5 font-mono text-[10px] text-[#A1A1AA] shadow-[2px_2px_0px_#000000]"
                     >
                       {t}
                     </span>
@@ -172,9 +172,9 @@ export default function FeaturedWork() {
               </div>
 
               {/* Right Column: Key Metrics & Direct Action Links */}
-              <div className="space-y-4 lg:col-span-5 flex flex-col justify-between h-full bg-[#17181D]/60 p-4 sm:p-5 rounded-xl border border-white/5">
+              <div className="space-y-4 lg:col-span-5 flex flex-col justify-between h-full bg-[#17181D] p-4 sm:p-5 rounded-xl border-2 border-white/10 shadow-[4px_4px_0px_#000000]">
                 <div>
-                  <span className="font-mono text-[10px] font-semibold text-[#A1A1AA] uppercase tracking-wider block mb-3">
+                  <span className="font-mono text-[10px] font-bold text-[#A1A1AA] uppercase tracking-wider block mb-3">
                     Empirical Metrics &amp; Verification
                   </span>
                   <div className="space-y-2.5">
@@ -183,7 +183,7 @@ export default function FeaturedWork() {
                         key={idx}
                         className="flex items-center justify-between border-b border-white/5 pb-2 text-xs"
                       >
-                        <span className="text-[#71717A] font-mono text-[11px]">{metric.label}</span>
+                        <span className="text-[#71717A] font-mono text-[11px] font-semibold">{metric.label}</span>
                         <span className="font-mono font-bold text-[#F4F4F5] text-[11px] text-right">
                           {metric.value}
                         </span>
@@ -193,13 +193,13 @@ export default function FeaturedWork() {
                 </div>
 
                 {/* Direct Links */}
-                <div className="pt-4 border-t border-white/5 flex flex-wrap items-center gap-2">
+                <div className="pt-4 border-t border-white/10 flex flex-wrap items-center gap-2">
                   {activeProject.liveUrl && (
                     <a
                       href={activeProject.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F4F5] px-3.5 py-1.5 text-xs font-bold text-[#090A0C] transition hover:bg-[#FFFFFF]"
+                      className="inline-flex items-center gap-1.5 rounded-lg border-2 border-black bg-[#F4F4F5] px-3.5 py-1.5 text-xs font-extrabold text-[#090A0C] shadow-[3px_3px_0px_#E2B36E] transition hover:bg-[#FFFFFF] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
                     >
                       <ExternalLink size={12} />
                       <span>Live Deployment</span>
@@ -210,7 +210,7 @@ export default function FeaturedWork() {
                     href={activeProject.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#20222A] px-3.5 py-1.5 text-xs font-semibold text-[#F4F4F5] hover:bg-[#2A2C37] transition"
+                    className="inline-flex items-center gap-1.5 rounded-lg border-2 border-white/20 bg-[#20222A] px-3.5 py-1.5 text-xs font-bold text-[#F4F4F5] shadow-[3px_3px_0px_#000000] hover:border-white/40 hover:-translate-x-0.5 hover:-translate-y-0.5 transition"
                   >
                     <GithubIcon size={12} />
                     <span>Source</span>
@@ -219,9 +219,9 @@ export default function FeaturedWork() {
                   {activeProject.caseStudyUrl && (
                     <Link
                       href={activeProject.caseStudyUrl}
-                      className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-[#E2B36E] hover:text-[#FFF] transition"
+                      className="ml-auto inline-flex items-center gap-1.5 rounded-lg border-2 border-[#E2B36E]/40 bg-[#17181D] px-3 py-1.5 text-xs font-bold text-[#E2B36E] shadow-[3px_3px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 transition"
                     >
-                      <span>Read Full Case Study</span>
+                      <span>Read Case Study</span>
                       <ArrowUpRight size={13} />
                     </Link>
                   )}

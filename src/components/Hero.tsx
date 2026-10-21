@@ -162,13 +162,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45 }}
-              className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-[#121317]/90 px-3.5 py-1.5 sm:px-4 backdrop-blur-md shadow-sm"
+              className="inline-flex items-center gap-2.5 rounded-full border-2 border-white/20 bg-[#121317] px-3.5 py-1.5 sm:px-4 backdrop-blur-md shadow-[3px_3px_0px_#000000]"
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#10B981] opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[#10B981]" />
               </span>
-              <span className="text-[11px] sm:text-xs font-mono font-semibold tracking-wider text-[#A1A1AA] uppercase">
+              <span className="text-[11px] sm:text-xs font-mono font-bold tracking-wider text-[#A1A1AA] uppercase">
                 AI Product Builder · Bengaluru, India
               </span>
             </motion.div>
@@ -203,7 +203,7 @@ export default function Hero() {
               <button
                 type="button"
                 onClick={scrollToWork}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#F4F4F5] px-6 py-3.5 text-xs font-bold text-[#090A0C] shadow-lg transition-all duration-200 hover:bg-[#FFFFFF] hover:shadow-[0_0_24px_rgba(255,255,255,0.3)] active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-black bg-[#E2B36E] px-6 py-3.5 text-xs font-extrabold text-[#090A0C] shadow-[4px_4px_0px_#FFFFFF] transition-all duration-200 hover:bg-[#F0C485] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_#FFFFFF] active:translate-x-1 active:translate-y-1 active:shadow-none"
               >
                 Explore Selected Work
                 <ArrowDown size={14} />
@@ -213,14 +213,14 @@ export default function Hero() {
                 <button
                   type="button"
                   onClick={scrollToContact}
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-[#141519] px-5 sm:px-6 py-3.5 text-xs font-semibold text-[#F4F4F5] transition hover:border-white/30 hover:bg-[#1A1B22]"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/25 bg-[#141519] px-5 sm:px-6 py-3.5 text-xs font-bold text-[#F4F4F5] shadow-[4px_4px_0px_#000000] transition hover:border-[#E2B36E] hover:text-[#E2B36E] hover:shadow-[4px_4px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
                 >
                   Let&apos;s Talk
                 </button>
 
                 <Link
                   href="/network"
-                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 rounded-full border border-white/10 bg-transparent px-4 sm:px-5 py-3.5 text-xs font-semibold text-[#A1A1AA] transition hover:border-white/25 hover:text-[#F4F4F5]"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 rounded-xl border-2 border-white/15 bg-transparent px-4 sm:px-5 py-3.5 text-xs font-bold text-[#A1A1AA] shadow-[3px_3px_0px_#000000] transition hover:border-white/40 hover:text-[#F4F4F5] hover:-translate-x-0.5 hover:-translate-y-0.5"
                 >
                   <span>Directory</span>
                   <ArrowUpRight size={13} />
@@ -233,20 +233,20 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.25 }}
-              className="grid grid-cols-2 gap-2 sm:gap-3 sm:grid-cols-4 pt-3 border-t border-white/5"
+              className="grid grid-cols-2 gap-2.5 sm:gap-3 sm:grid-cols-4 pt-4 border-t border-white/10"
             >
               {STATS.map((stat) => (
                 <SpotlightCard
                   key={stat.label}
-                  className="p-2.5 sm:p-3.5 bg-[#111217]"
+                  className="p-2.5 sm:p-3.5 bg-[#111217] border-2 border-white/15 shadow-[4px_4px_0px_#000000] hover:border-[#E2B36E]/60 hover:shadow-[5px_5px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all"
                 >
                   <p className="text-lg sm:text-2xl font-extrabold text-[#F4F4F5]">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </p>
-                  <p className="mt-0.5 sm:mt-1 text-[11px] sm:text-xs font-semibold text-[#E4E4E7] leading-tight">
+                  <p className="mt-0.5 sm:mt-1 text-[11px] sm:text-xs font-bold text-[#E4E4E7] leading-tight">
                     {stat.label}
                   </p>
-                  <p className="text-[9px] sm:text-[10px] text-[#71717A] truncate">
+                  <p className="text-[9px] sm:text-[10px] text-[#71717A] truncate font-mono">
                     {stat.detail}
                   </p>
                 </SpotlightCard>
@@ -261,7 +261,7 @@ export default function Hero() {
             transition={{ duration: 0.55, delay: 0.15 }}
             className="w-full min-w-0"
           >
-            <SpotlightCard className="p-3.5 sm:p-7 bg-[#111217] shadow-2xl border border-white/10 w-full min-w-0">
+            <SpotlightCard className="p-3.5 sm:p-7 bg-[#111217] shadow-[8px_8px_0px_#000000] border-2 border-white/20 w-full min-w-0">
               
               {/* Simulator Header */}
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/5 pb-3 sm:pb-4 mb-3 sm:mb-5">
@@ -272,7 +272,7 @@ export default function Hero() {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-[#16171D] px-2.5 py-1 text-[10px] font-mono text-[#10B981] flex-shrink-0">
+                <div className="flex items-center gap-1.5 rounded-full border-2 border-white/15 bg-[#16171D] px-2.5 py-1 text-[10px] font-mono text-[#10B981] shadow-[2px_2px_0px_#000000] flex-shrink-0">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse" />
                   <span>Interactive Engine</span>
                 </div>
@@ -280,7 +280,7 @@ export default function Hero() {
 
               {/* Scenario Switcher Tabs */}
               <div className="space-y-1.5 mb-3 sm:mb-5">
-                <p className="text-[10px] sm:text-[11px] font-mono uppercase text-[#71717A] tracking-wider">
+                <p className="text-[10px] sm:text-[11px] font-mono uppercase text-[#71717A] tracking-wider font-bold">
                   1. Select Real-World Input Scenario:
                 </p>
                 <div className="flex flex-wrap gap-1.5">
@@ -289,10 +289,10 @@ export default function Hero() {
                       key={s.id}
                       type="button"
                       onClick={() => handleScenarioChange(s)}
-                      className={`rounded-xl px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs font-semibold transition-all ${
+                      className={`rounded-xl px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs font-bold transition-all border-2 ${
                         selectedScenario.id === s.id
-                          ? "bg-[#F4F4F5] text-[#090A0C] shadow-sm font-bold"
-                          : "border border-white/10 bg-[#16171D] text-[#A1A1AA] hover:border-white/20 hover:text-[#F4F4F5]"
+                          ? "border-black bg-[#F4F4F5] text-[#090A0C] shadow-[3px_3px_0px_#E2B36E]"
+                          : "border-white/15 bg-[#16171D] text-[#A1A1AA] shadow-[2px_2px_0px_#000000] hover:border-white/35 hover:text-[#F4F4F5] hover:-translate-x-0.5 hover:-translate-y-0.5"
                       }`}
                     >
                       {s.badge}
@@ -302,10 +302,10 @@ export default function Hero() {
               </div>
 
               {/* Input Message Card */}
-              <div className="rounded-xl border border-white/10 bg-[#15171D] p-3 sm:p-3.5 mb-3 sm:mb-5 space-y-1.5">
+              <div className="rounded-xl border-2 border-white/15 bg-[#15171D] p-3 sm:p-3.5 mb-3 sm:mb-5 space-y-1.5 shadow-[3px_3px_0px_#000000]">
                 <div className="flex items-center justify-between text-[10px] font-mono text-[#71717A] uppercase gap-2">
-                  <span className="flex-shrink-0">Raw Input</span>
-                  <span className="text-[#E2B36E] font-semibold truncate">{selectedScenario.title}</span>
+                  <span className="flex-shrink-0 font-bold">Raw Input</span>
+                  <span className="text-[#E2B36E] font-bold truncate">{selectedScenario.title}</span>
                 </div>
                 <p className="text-xs text-[#E4E4E7] font-mono italic leading-relaxed break-words">
                   {selectedScenario.input}
@@ -314,7 +314,7 @@ export default function Hero() {
 
               {/* Agent Nodes Progress Pipeline */}
               <div className="space-y-2 mb-4 sm:mb-5">
-                <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-[#71717A] uppercase">
+                <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-[#71717A] uppercase font-bold">
                   <span>2. Sequential Reasoning Pipeline:</span>
                   <span className="text-xs text-[#E2B36E]">
                     {activeStepIdx >= 0 ? `Stage ${activeStepIdx + 1}/4` : "Ready to Execute"}
@@ -329,21 +329,21 @@ export default function Hero() {
                     return (
                       <div
                         key={step.agent}
-                        className={`flex items-start gap-2.5 sm:gap-3 rounded-xl border p-2 sm:p-2.5 transition-all duration-300 min-w-0 ${
+                        className={`flex items-start gap-2.5 sm:gap-3 rounded-xl border-2 p-2 sm:p-2.5 transition-all duration-200 min-w-0 ${
                           isActive
-                            ? "border-[#E2B36E] bg-[#E2B36E]/10 shadow-[0_0_20px_rgba(226,179,110,0.15)]"
+                            ? "border-[#E2B36E] bg-[#E2B36E]/15 shadow-[4px_4px_0px_#E2B36E]"
                             : isDone
-                            ? "border-[#10B981]/30 bg-[#10B981]/5"
-                            : "border-white/5 bg-[#15171D]/60 opacity-60"
+                            ? "border-[#10B981]/50 bg-[#10B981]/10 shadow-[3px_3px_0px_#000000]"
+                            : "border-white/10 bg-[#15171D]/60 shadow-[2px_2px_0px_#000000] opacity-60"
                         }`}
                       >
                         <div
-                          className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg font-mono text-[10px] font-bold ${
+                          className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg font-mono text-[10px] font-bold border-2 ${
                             isActive
-                              ? "bg-[#E2B36E] text-[#090A0C]"
+                              ? "border-black bg-[#E2B36E] text-[#090A0C]"
                               : isDone
-                              ? "bg-[#10B981] text-[#090A0C]"
-                              : "border border-white/10 bg-[#111217] text-[#71717A]"
+                              ? "border-black bg-[#10B981] text-[#090A0C]"
+                              : "border-white/10 bg-[#111217] text-[#71717A]"
                           }`}
                         >
                           {isDone ? <CheckCircle2 size={13} /> : `0${idx + 1}`}
@@ -352,7 +352,7 @@ export default function Hero() {
                         <div className="flex-1 min-w-0">
                           <div className="flex flex-wrap sm:flex-nowrap items-baseline justify-between gap-1 sm:gap-2">
                             <p className="text-xs font-bold text-[#F4F4F5] truncate">{step.agent}</p>
-                            <span className="font-mono text-[9px] text-[#E2B36E] sm:text-[#A1A1AA] flex-shrink-0">{step.status}</span>
+                            <span className="font-mono text-[9px] text-[#E2B36E] sm:text-[#A1A1AA] flex-shrink-0 font-bold">{step.status}</span>
                           </div>
                           <p className="text-[10px] sm:text-[11px] font-mono text-[#A1A1AA] line-clamp-2 mt-0.5 leading-snug break-words">
                             {step.action}
@@ -366,7 +366,7 @@ export default function Hero() {
 
               {/* Output Result or Trigger Button */}
               {completed ? (
-                <div className="rounded-xl border border-[#10B981]/30 bg-[#10B981]/10 p-3.5 space-y-1.5 animate-fade-in">
+                <div className="rounded-xl border-2 border-[#10B981] bg-[#10B981]/15 p-3.5 space-y-1.5 shadow-[4px_4px_0px_#000000] animate-fade-in">
                   <div className="flex items-center justify-between text-xs font-bold text-[#10B981]">
                     <span className="flex items-center gap-1.5">
                       <CheckCircle2 size={14} />
@@ -375,7 +375,7 @@ export default function Hero() {
                     <button
                       type="button"
                       onClick={runSimulation}
-                      className="inline-flex items-center gap-1 text-[10px] font-mono underline hover:text-[#FFFFFF]"
+                      className="inline-flex items-center gap-1 text-[10px] font-mono underline hover:text-[#FFFFFF] font-bold"
                     >
                       <RefreshCw size={10} /> Re-run
                     </button>
@@ -389,7 +389,7 @@ export default function Hero() {
                   type="button"
                   onClick={runSimulation}
                   disabled={isSimulating}
-                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#F4F4F5] py-3 text-xs font-bold text-[#090A0C] shadow-md transition hover:bg-[#FFFFFF] hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] disabled:opacity-50 active:scale-[0.99]"
+                  className="w-full flex items-center justify-center gap-2 rounded-xl border-2 border-black bg-[#F4F4F5] py-3 text-xs font-extrabold text-[#090A0C] shadow-[4px_4px_0px_#E2B36E] transition hover:bg-[#FFFFFF] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_#E2B36E] active:translate-x-1 active:translate-y-1 active:shadow-none disabled:opacity-50"
                 >
                   {isSimulating ? (
                     <span className="flex items-center gap-2">

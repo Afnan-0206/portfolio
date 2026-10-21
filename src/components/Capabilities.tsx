@@ -73,9 +73,9 @@ export default function Capabilities() {
           transition={{ duration: 0.5 }}
           className="mb-10 sm:mb-16 max-w-3xl space-y-3 sm:space-y-4"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#141519] px-3.5 py-1.5 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 rounded-full border-2 border-white/20 bg-[#141519] px-3.5 py-1.5 shadow-[3px_3px_0px_#000000] backdrop-blur-md">
             <Layers size={13} className="text-[#E2B36E]" />
-            <span className="font-mono text-xs font-semibold tracking-widest text-[#E2B36E] uppercase">
+            <span className="font-mono text-xs font-bold tracking-widest text-[#E2B36E] uppercase">
               TECHNICAL ARCHITECTURE
             </span>
           </div>
@@ -112,19 +112,19 @@ export default function Capabilities() {
                 className="cursor-pointer"
               >
                 <SpotlightCard
-                  className={`p-4 sm:p-6 border transition-all duration-300 flex flex-col justify-between h-full ${
+                  className={`p-4 sm:p-6 border-2 transition-all duration-200 flex flex-col justify-between h-full ${
                     isSelected
-                      ? "border-[#E2B36E] bg-[#16171D] shadow-warm-glow"
-                      : "border-white/10 bg-[#111217] hover:border-white/20"
+                      ? "border-[#E2B36E] bg-[#16171D] shadow-[6px_6px_0px_#E2B36E]"
+                      : "border-white/15 bg-[#111217] shadow-[4px_4px_0px_#000000] hover:border-white/30 hover:shadow-[5px_5px_0px_#000000]"
                   }`}
                 >
                   <div>
                     {/* Header */}
-                    <div className="mb-4 sm:mb-5 flex items-center gap-3 border-b border-white/5 pb-3 sm:pb-4">
-                      <div className={`flex h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 items-center justify-center rounded-xl border ${
+                    <div className="mb-4 sm:mb-5 flex items-center gap-3 border-b border-white/10 pb-3 sm:pb-4">
+                      <div className={`flex h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 items-center justify-center rounded-xl border-2 shadow-[2px_2px_0px_#000000] ${
                         isSelected
-                          ? "border-[#E2B36E] bg-[#E2B36E] text-[#090A0C]"
-                          : "border-white/10 bg-[#16171D] text-[#E2B36E]"
+                          ? "border-black bg-[#E2B36E] text-[#090A0C]"
+                          : "border-white/15 bg-[#16171D] text-[#E2B36E]"
                       }`}>
                         <Icon size={17} />
                       </div>
@@ -132,7 +132,7 @@ export default function Capabilities() {
                         <h3 className="text-sm font-bold text-[#F4F4F5] leading-snug">
                           {group.title}
                         </h3>
-                        <p className="font-mono text-[10px] text-[#71717A]">{meta.subtitle}</p>
+                        <p className="font-mono text-[10px] text-[#71717A] font-semibold">{meta.subtitle}</p>
                       </div>
                     </div>
 
@@ -150,7 +150,7 @@ export default function Capabilities() {
                     </ul>
                   </div>
 
-                  <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-[#71717A]">
+                  <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-[#71717A] font-bold">
                     <span>Click to inspect code</span>
                     <ArrowRight size={12} className={isSelected ? "text-[#E2B36E]" : ""} />
                   </div>
@@ -171,17 +171,17 @@ export default function Capabilities() {
               transition={{ duration: 0.3 }}
               className="w-full min-w-0 max-w-full overflow-hidden"
             >
-              <SpotlightCard className="w-full min-w-0 max-w-full overflow-hidden p-3.5 sm:p-6 bg-[#111217] border border-white/10">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 border-b border-white/5 pb-3 mb-3 sm:mb-4 min-w-0">
+              <SpotlightCard className="w-full min-w-0 max-w-full overflow-hidden p-3.5 sm:p-6 bg-[#111217] border-2 border-white/20 shadow-[8px_8px_0px_#000000] rounded-2xl">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 border-b border-white/10 pb-3 mb-3 sm:mb-4 min-w-0">
                   <div className="flex items-center gap-2 min-w-0 overflow-hidden">
                     <Terminal size={14} className="text-[#E2B36E] flex-shrink-0" />
                     <span className="font-mono text-[11px] sm:text-xs font-bold text-[#F4F4F5] uppercase truncate">
                       Code Implementation · {capabilities.find((c) => c.id === selectedCap)?.title}
                     </span>
                   </div>
-                  <span className="font-mono text-[9px] sm:text-[10px] text-[#10B981] flex-shrink-0">Verified Engineering Artifact</span>
+                  <span className="font-mono text-[9px] sm:text-[10px] text-[#10B981] font-bold flex-shrink-0">Verified Engineering Artifact</span>
                 </div>
-                <div className="w-full min-w-0 overflow-x-auto rounded-xl bg-[#0B0C0F] border border-white/5 p-3 sm:p-4">
+                <div className="w-full min-w-0 overflow-x-auto rounded-xl bg-[#0B0C0F] border-2 border-black p-3 sm:p-4 shadow-[3px_3px_0px_#000000]">
                   <pre className="font-mono text-[11px] sm:text-xs text-[#E4E4E7] leading-relaxed whitespace-pre inline-block min-w-full">
                     <code>{CAP_META[selectedCap].codeSnippet}</code>
                   </pre>

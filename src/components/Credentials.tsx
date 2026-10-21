@@ -68,9 +68,9 @@ export default function Credentials() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl space-y-4"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#141519] px-3.5 py-1.5 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-full border-2 border-white/20 bg-[#141519] px-3.5 py-1.5 shadow-[3px_3px_0px_#000000] backdrop-blur-md">
               <Award size={13} className="text-[#E2B36E]" />
-              <span className="font-mono text-xs font-semibold tracking-widest text-[#E2B36E] uppercase">
+              <span className="font-mono text-xs font-bold tracking-widest text-[#E2B36E] uppercase">
                 IN THE FIELD &amp; RECOGNITION
               </span>
             </div>
@@ -98,10 +98,10 @@ export default function Credentials() {
                   key={cat}
                   type="button"
                   onClick={() => setActiveCategory(cat)}
-                  className={`rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-semibold transition-all duration-200 ${
+                  className={`rounded-xl px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-bold transition-all duration-150 border-2 ${
                     active
-                      ? "bg-[#F4F4F5] text-[#090A0C] shadow-md font-bold"
-                      : "border border-white/10 bg-[#141519] text-[#A1A1AA] hover:border-white/20 hover:text-[#F4F4F5]"
+                      ? "border-black bg-[#E2B36E] text-[#090A0C] shadow-[3px_3px_0px_#FFFFFF]"
+                      : "border-white/15 bg-[#141519] text-[#A1A1AA] shadow-[2px_2px_0px_#000000] hover:border-white/30 hover:text-[#F4F4F5] hover:-translate-x-0.5 hover:-translate-y-0.5"
                   }`}
                 >
                   {cat === "All" ? "All Experiences" : `${cat}s`}
@@ -124,13 +124,13 @@ export default function Credentials() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: i * 0.05 }}
-                  className="group relative rounded-2xl border border-white/10 bg-[#121316] overflow-hidden shadow-card backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:shadow-card-hover hover:-translate-y-1 flex flex-col justify-between"
+                  className="group relative rounded-2xl border-2 border-white/15 bg-[#121316] overflow-hidden shadow-[4px_4px_0px_#000000] backdrop-blur-sm transition-all duration-200 hover:border-[#E2B36E] hover:shadow-[6px_6px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 flex flex-col justify-between"
                 >
                   {/* Thumbnail */}
                   <button
                     type="button"
                     onClick={() => setPreviewItem(cred)}
-                    className="relative block h-44 sm:h-48 w-full overflow-hidden border-b border-white/5 bg-[#17181D]"
+                    className="relative block h-44 sm:h-48 w-full overflow-hidden border-b-2 border-white/10 bg-[#17181D]"
                     aria-label={`View ${cred.title}`}
                   >
                     <Image
@@ -146,13 +146,13 @@ export default function Credentials() {
                     
                     {/* Badge */}
                     <div className="absolute top-3 left-3">
-                      <span className={`inline-flex rounded-full border px-2.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider backdrop-blur-md ${typeCfg.badgeClass}`}>
+                      <span className={`inline-flex rounded-full border-2 px-2.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider backdrop-blur-md shadow-[2px_2px_0px_#000000] ${typeCfg.badgeClass}`}>
                         {typeCfg.label}
                       </span>
                     </div>
 
                     {cred.location && (
-                      <div className="absolute bottom-2.5 right-3 flex items-center gap-1 rounded-full bg-[#090A0C]/80 px-2 py-0.5 text-[10px] font-mono text-[#A1A1AA] backdrop-blur-md">
+                      <div className="absolute bottom-2.5 right-3 flex items-center gap-1 rounded-full border-2 border-white/20 bg-[#090A0C]/90 px-2 py-0.5 text-[10px] font-mono text-[#A1A1AA] backdrop-blur-md shadow-[2px_2px_0px_#000000] font-bold">
                         <MapPin size={10} className="text-[#E2B36E]" />
                         <span>{cred.location.split(",")[0]}</span>
                       </div>
@@ -163,7 +163,7 @@ export default function Credentials() {
                   <div className="p-4 sm:p-5 space-y-2.5 sm:space-y-3 flex-1 flex flex-col justify-between">
                     <div>
                       {cred.role && (
-                        <p className="font-mono text-[10px] font-semibold text-[#E2B36E] uppercase tracking-wider mb-1">
+                        <p className="font-mono text-[10px] font-bold text-[#E2B36E] uppercase tracking-wider mb-1">
                           {cred.role}
                         </p>
                       )}
@@ -172,7 +172,7 @@ export default function Credentials() {
                       </h3>
                       <div className="space-y-0.5 text-xs text-[#71717A] mt-2 font-medium">
                         <p>{cred.issuer}</p>
-                        <p className="text-[11px] text-[#A1A1AA]">{cred.date}</p>
+                        <p className="text-[11px] text-[#A1A1AA] font-mono">{cred.date}</p>
                       </div>
                       {cred.description && (
                         <p className="mt-2.5 text-xs leading-relaxed text-[#A1A1AA] line-clamp-2">
@@ -184,7 +184,7 @@ export default function Credentials() {
                     <button
                       type="button"
                       onClick={() => setPreviewItem(cred)}
-                      className="pt-3 border-t border-white/5 inline-flex items-center gap-1.5 text-xs font-semibold text-[#A1A1AA] hover:text-[#FFFFFF] transition"
+                      className="pt-3 border-t border-white/10 inline-flex items-center gap-1.5 text-xs font-bold text-[#A1A1AA] hover:text-[#E2B36E] transition"
                     >
                       <ExternalLink size={12} aria-hidden="true" />
                       View High-Res Photo

@@ -151,7 +151,7 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
           {/* Backdrop */}
           <motion.button
             type="button"
-            className="absolute inset-0 bg-[#050817]/80 backdrop-blur-[18px]"
+            className="absolute inset-0 bg-[#090A0C]/85 backdrop-blur-md"
             onClick={handleClose}
             aria-label="Close contact form"
             initial={{ opacity: 0 }}
@@ -160,39 +160,39 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
           />
 
           <motion.div
-            className="relative z-10 w-full max-w-2xl rounded-[2rem] border border-white/10 bg-[#091126] shadow-2xl shadow-cyan-500/10 backdrop-blur-3xl overflow-hidden"
+            className="relative z-10 w-full max-w-2xl rounded-3xl border-2 border-white/20 bg-[#090A0C] shadow-[12px_12px_0px_#000000] overflow-hidden"
             initial={{ y: 24, opacity: 0, scale: 0.95 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 24, opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.28, ease: "easeOut" }}
           >
             {/* Top accent line */}
-            <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#22D3EE]/60 to-transparent" aria-hidden="true" />
+            <div className="h-1.5 w-full bg-gradient-to-r from-[#E2B36E] via-[#F4F4F5] to-[#E2B36E]" aria-hidden="true" />
 
             <div className="p-6 sm:p-10">
               {/* Header */}
               <div className="flex items-start justify-between gap-4 mb-8">
                 <div>
-                  <p className="font-mono text-xs font-semibold tracking-widest text-[#22D3EE] uppercase">
+                  <p className="font-mono text-xs font-bold tracking-widest text-[#E2B36E] uppercase">
                     Contact form
                   </p>
                   <h2
                     id="contact-modal-title"
-                    className="mt-3 text-2xl font-bold text-[#F8FAFC] sm:text-3xl"
+                    className="mt-3 text-2xl font-extrabold text-[#F4F4F5] sm:text-3xl"
                   >
                     Send a message
                   </h2>
-                  <p className="mt-2 text-sm leading-6 text-[#8FA2B8]">
+                  <p className="mt-2 text-sm leading-6 text-[#A1A1AA]">
                     Reach out with details and I&apos;ll get back to you within one business day.
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="flex-shrink-0 rounded-full border border-white/10 bg-white/5 p-2 text-[#8FA2B8] transition hover:border-[#22D3EE]/40 hover:text-[#F8FAFC]"
+                  className="flex-shrink-0 rounded-xl border-2 border-white/20 bg-[#121316] p-2.5 text-[#F4F4F5] shadow-[2px_2px_0px_#000000] transition-all hover:border-[#E2B36E] hover:shadow-[3px_3px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
                   aria-label="Close contact form"
                 >
-                  <X size={16} aria-hidden="true" />
+                  <X size={16} className="stroke-[2.5]" aria-hidden="true" />
                 </button>
               </div>
 
@@ -207,21 +207,21 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                     className="flex flex-col items-center gap-5 py-12 text-center"
                     role="status"
                   >
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#34D399]/30 bg-[#34D399]/10">
-                      <CheckCircle size={32} className="text-[#34D399]" aria-hidden="true" />
+                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-[#10B981]/40 bg-[#10B981]/10 shadow-[4px_4px_0px_#000000]">
+                      <CheckCircle size={32} className="text-[#10B981]" aria-hidden="true" />
                     </div>
                     <div>
-                      <p className="text-lg font-bold text-[#F8FAFC]">Message sent!</p>
-                      <p className="mt-1.5 text-sm text-[#8FA2B8]">
+                      <p className="text-xl font-extrabold text-[#F4F4F5]">Message sent successfully!</p>
+                      <p className="mt-1.5 text-sm text-[#A1A1AA]">
                         I&apos;ll review it and get back to you within one business day.
                       </p>
                     </div>
                     <button
                       type="button"
                       onClick={handleClose}
-                      className="mt-2 rounded-full bg-gradient-to-r from-[#22D3EE] to-[#8B5CF6] px-7 py-3 text-sm font-bold text-[#050817] transition hover:opacity-90"
+                      className="mt-2 rounded-xl border-2 border-black bg-[#E2B36E] px-7 py-3 text-sm font-extrabold text-[#090A0C] shadow-[3px_3px_0px_#FFFFFF] hover:bg-[#F0C485] hover:shadow-[4px_4px_0px_#FFFFFF] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
                     >
-                      Close
+                      Close Window
                     </button>
                   </motion.div>
                 ) : (
@@ -235,8 +235,8 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                     noValidate
                   >
                     <div className="grid gap-5 sm:grid-cols-2">
-                      <label className="flex flex-col gap-1.5 text-sm text-[#C7D2E2]">
-                        <span className="font-medium">Full Name</span>
+                      <label className="flex flex-col gap-1.5 text-sm text-[#F4F4F5]">
+                        <span className="font-bold font-mono text-xs text-[#E4E4E7] uppercase tracking-wider">Full Name</span>
                         <input
                           type="text"
                           value={form.name}
@@ -244,18 +244,18 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                           onBlur={() => handleBlur("name")}
                           placeholder="Your name"
                           autoComplete="name"
-                          className={`w-full rounded-xl border bg-[#050817]/80 px-4 py-3 text-base sm:text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
+                          className={`w-full rounded-xl border-2 bg-[#121316] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] placeholder-[#52525B] outline-none shadow-[2px_2px_0px_#000000] transition-all focus:border-[#E2B36E] focus:shadow-[4px_4px_0px_#E2B36E] ${
                             touched.name && validation.name
-                              ? "border-red-500/50 focus:border-red-500/70"
-                              : "border-white/10 focus:border-[#22D3EE]/50"
+                              ? "border-red-500 focus:border-red-500"
+                              : "border-white/15 focus:border-[#E2B36E]"
                           }`}
                         />
                         {touched.name && validation.name ? (
-                          <p className="text-xs text-red-400">{validation.name}</p>
+                          <p className="text-xs font-mono text-red-400 font-semibold">{validation.name}</p>
                         ) : null}
                       </label>
-                      <label className="flex flex-col gap-1.5 text-sm text-[#C7D2E2]">
-                        <span className="font-medium">Email Address</span>
+                      <label className="flex flex-col gap-1.5 text-sm text-[#F4F4F5]">
+                        <span className="font-bold font-mono text-xs text-[#E4E4E7] uppercase tracking-wider">Email Address</span>
                         <input
                           type="email"
                           value={form.email}
@@ -263,20 +263,20 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                           onBlur={() => handleBlur("email")}
                           placeholder="hello@example.com"
                           autoComplete="email"
-                          className={`w-full rounded-xl border bg-[#050817]/80 px-4 py-3 text-base sm:text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
+                          className={`w-full rounded-xl border-2 bg-[#121316] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] placeholder-[#52525B] outline-none shadow-[2px_2px_0px_#000000] transition-all focus:border-[#E2B36E] focus:shadow-[4px_4px_0px_#E2B36E] ${
                             touched.email && validation.email
-                              ? "border-red-500/50 focus:border-red-500/70"
-                              : "border-white/10 focus:border-[#22D3EE]/50"
+                              ? "border-red-500 focus:border-red-500"
+                              : "border-white/15 focus:border-[#E2B36E]"
                           }`}
                         />
                         {touched.email && validation.email ? (
-                          <p className="text-xs text-red-400">{validation.email}</p>
+                          <p className="text-xs font-mono text-red-400 font-semibold">{validation.email}</p>
                         ) : null}
                       </label>
                     </div>
 
-                    <label className="flex flex-col gap-1.5 text-sm text-[#C7D2E2]">
-                      <span className="font-medium">Subject</span>
+                    <label className="flex flex-col gap-1.5 text-sm text-[#F4F4F5]">
+                      <span className="font-bold font-mono text-xs text-[#E4E4E7] uppercase tracking-wider">Subject</span>
                       <input
                         type="text"
                         value={form.subject}
@@ -287,33 +287,33 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                             ? `Inquiry about ${workshopTitle}`
                             : "Project, collaboration or question"
                         }
-                        className={`w-full rounded-xl border bg-[#050817]/80 px-4 py-3 text-base sm:text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
+                        className={`w-full rounded-xl border-2 bg-[#121316] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] placeholder-[#52525B] outline-none shadow-[2px_2px_0px_#000000] transition-all focus:border-[#E2B36E] focus:shadow-[4px_4px_0px_#E2B36E] ${
                           touched.subject && validation.subject
-                            ? "border-red-500/50 focus:border-red-500/70"
-                            : "border-white/10 focus:border-[#22D3EE]/50"
+                            ? "border-red-500 focus:border-red-500"
+                            : "border-white/15 focus:border-[#E2B36E]"
                         }`}
                       />
                       {touched.subject && validation.subject ? (
-                        <p className="text-xs text-red-400">{validation.subject}</p>
+                        <p className="text-xs font-mono text-red-400 font-semibold">{validation.subject}</p>
                       ) : null}
                     </label>
 
-                    <label className="flex flex-col gap-1.5 text-sm text-[#C7D2E2]">
-                      <span className="font-medium">Message</span>
+                    <label className="flex flex-col gap-1.5 text-sm text-[#F4F4F5]">
+                      <span className="font-bold font-mono text-xs text-[#E4E4E7] uppercase tracking-wider">Message</span>
                       <textarea
                         value={form.message}
                         onChange={(event) => handleChange("message", event.target.value)}
                         onBlur={() => handleBlur("message")}
                         rows={5}
                         placeholder="Tell me about your idea, timeline, or available budget."
-                        className={`w-full resize-none rounded-xl border bg-[#050817]/80 px-4 py-3 text-base sm:text-sm text-[#F8FAFC] placeholder-[#4A5568] outline-none transition focus:ring-2 focus:ring-[#22D3EE]/20 ${
+                        className={`w-full resize-none rounded-xl border-2 bg-[#121316] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] placeholder-[#52525B] outline-none shadow-[2px_2px_0px_#000000] transition-all focus:border-[#E2B36E] focus:shadow-[4px_4px_0px_#E2B36E] ${
                           touched.message && validation.message
-                            ? "border-red-500/50 focus:border-red-500/70"
-                            : "border-white/10 focus:border-[#22D3EE]/50"
+                            ? "border-red-500 focus:border-red-500"
+                            : "border-white/15 focus:border-[#E2B36E]"
                         }`}
                       />
                       {touched.message && validation.message ? (
-                        <p className="text-xs text-red-400">{validation.message}</p>
+                        <p className="text-xs font-mono text-red-400 font-semibold">{validation.message}</p>
                       ) : null}
                     </label>
 
@@ -324,11 +324,11 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                           initial={{ opacity: 0, y: -8 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -8 }}
-                          className="flex flex-col gap-2 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300"
+                          className="flex flex-col gap-2 rounded-xl border-2 border-red-500/40 bg-red-500/10 p-4 text-sm text-red-300 shadow-[3px_3px_0px_#000000]"
                           role="alert"
                         >
                           <div className="flex items-start gap-3">
-                            <XCircle size={16} className="mt-0.5 flex-shrink-0" aria-hidden="true" />
+                            <XCircle size={16} className="mt-0.5 flex-shrink-0 text-red-400" aria-hidden="true" />
                             <span>{error}</span>
                           </div>
                           <a
@@ -337,7 +337,7 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                             )}&body=${encodeURIComponent(
                               `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\n\nMessage:\n${form.message.trim()}`
                             )}`}
-                            className="ml-7 inline-flex items-center gap-1.5 font-medium text-[#22D3EE] hover:underline text-xs"
+                            className="ml-7 inline-flex items-center gap-1.5 font-bold text-[#E2B36E] hover:underline text-xs"
                           >
                             Click here to open pre-filled in your email app &rarr;
                           </a>
@@ -350,16 +350,16 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                       <button
                         type="submit"
                         disabled={loading}
-                        className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#22D3EE] to-[#8B5CF6] px-7 py-3.5 text-sm font-bold text-[#050817] shadow-lg transition-all duration-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.4)] hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="group inline-flex items-center justify-center gap-2 rounded-xl border-2 border-black bg-[#E2B36E] px-7 py-3.5 text-sm font-extrabold text-[#090A0C] shadow-[4px_4px_0px_#FFFFFF] transition-all hover:bg-[#F0C485] hover:shadow-[6px_6px_0px_#FFFFFF] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         {loading ? (
                           <>
-                            <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#050817] border-t-transparent" />
+                            <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#090A0C] border-t-transparent" />
                             Sending...
                           </>
                         ) : (
                           <>
-                            <Send size={14} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+                            <Send size={15} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 stroke-[2.5]" aria-hidden="true" />
                             Send Message
                           </>
                         )}
@@ -367,7 +367,7 @@ export default function ContactModal({ open, onClose, workshopTitle }: ContactMo
                       <button
                         type="button"
                         onClick={handleClose}
-                        className="inline-flex items-center justify-center rounded-full border border-white/10 bg-[#0C1530]/60 px-7 py-3.5 text-sm font-semibold text-[#C7D2E2] transition hover:border-[#22D3EE]/30 hover:text-[#F8FAFC]"
+                        className="inline-flex items-center justify-center rounded-xl border-2 border-white/15 bg-[#17181D] px-7 py-3.5 text-sm font-bold text-[#F4F4F5] shadow-[3px_3px_0px_#000000] transition-all hover:border-[#E2B36E] hover:shadow-[3px_3px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
                       >
                         Cancel
                       </button>

@@ -32,9 +32,9 @@ export default function NetworkingSection() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl space-y-3 sm:space-y-4"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#141519] px-3.5 py-1.5 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-xl border-2 border-white/15 bg-[#141519] px-4 py-1.5 shadow-[3px_3px_0px_#000000] backdrop-blur-md">
               <Users2 size={13} className="text-[#E2B36E]" />
-              <span className="font-mono text-xs font-semibold tracking-widest text-[#E2B36E] uppercase">
+              <span className="font-mono text-xs font-bold tracking-widest text-[#E2B36E] uppercase">
                 NETWORK &amp; COLLABORATORS
               </span>
             </div>
@@ -64,12 +64,12 @@ export default function NetworkingSection() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: i * 0.05 }}
-                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  whileHover={{ y: -3, transition: { duration: 0.15 } }}
                 >
-                  <SpotlightCard className="p-4 sm:p-6 bg-[#111217] border border-white/10 flex flex-col justify-between h-full">
+                  <SpotlightCard className="p-4 sm:p-6 bg-[#111217] border-2 border-white/15 rounded-2xl shadow-[5px_5px_0px_#000000] hover:border-[#E2B36E] hover:shadow-[7px_7px_0px_#E2B36E] transition-all flex flex-col justify-between h-full">
                     <div>
                       {/* Photo Frame Container */}
-                      <div className="relative mb-4 sm:mb-5 overflow-hidden rounded-xl border border-white/10 bg-[#16171D] aspect-[4/3] flex items-center justify-center group/photo">
+                      <div className="relative mb-4 sm:mb-5 overflow-hidden rounded-xl border-2 border-white/15 bg-[#16171D] aspect-[4/3] flex items-center justify-center group/photo shadow-[3px_3px_0px_#000000]">
                         {livePhoto ? (
                           <>
                             <Image
@@ -85,20 +85,20 @@ export default function NetworkingSection() {
                         ) : (
                           /* Blank wireframe state with instant upload test */
                           <div className="flex flex-col items-center justify-center p-4 sm:p-5 text-center space-y-2">
-                            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-white/10 bg-[#111217] text-[#71717A] group-hover:border-[#E2B36E]/40 group-hover:text-[#E2B36E] transition-colors">
-                              <User size={20} strokeWidth={1.5} />
+                            <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl border-2 border-white/15 bg-[#111217] text-[#71717A] group-hover:border-[#E2B36E] group-hover:text-[#E2B36E] shadow-[2px_2px_0px_#000000] transition-colors">
+                              <User size={20} strokeWidth={2} />
                             </div>
                             <div className="space-y-0.5">
-                              <p className="font-mono text-[10px] sm:text-[11px] font-semibold text-[#A1A1AA] uppercase tracking-wider">
+                              <p className="font-mono text-[10px] sm:text-[11px] font-bold text-[#F4F4F5] uppercase tracking-wider">
                                 Photo Slot
                               </p>
-                              <p className="text-[9px] sm:text-[10px] text-[#71717A]">
+                              <p className="text-[9px] sm:text-[10px] text-[#A1A1AA] font-mono">
                                 Drop image in <code className="text-[#E2B36E]">/public/network/</code>
                               </p>
                             </div>
 
                             {/* In-Browser Test Upload Trigger */}
-                            <label className="mt-1 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#141519] px-2.5 py-1 text-[9px] sm:text-[10px] font-mono text-[#E2B36E] hover:bg-[#1E1F27] cursor-pointer transition">
+                            <label className="mt-1 inline-flex items-center gap-1.5 rounded-lg border-2 border-[#E2B36E]/40 bg-[#141519] px-3 py-1 text-[9px] sm:text-[10px] font-mono font-bold text-[#E2B36E] shadow-[2px_2px_0px_#000000] hover:bg-[#1E1F27] hover:border-[#E2B36E] hover:shadow-[3px_3px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none cursor-pointer transition-all">
                               <UploadCloud size={11} />
                               <span>Test Upload</span>
                               <input
@@ -114,14 +114,14 @@ export default function NetworkingSection() {
 
                       {/* Info */}
                       <div className="space-y-1 mb-3">
-                        <h3 className="text-base sm:text-lg font-bold text-[#F4F4F5] tracking-tight">
+                        <h3 className="text-base sm:text-lg font-extrabold text-[#F4F4F5] tracking-tight">
                           {person.name}
                         </h3>
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-[#A1A1AA]">
-                          <span className="font-medium text-[#E4E4E7]">{person.role}</span>
+                          <span className="font-bold text-[#E4E4E7]">{person.role}</span>
                           <span>·</span>
-                          <span className="flex items-center gap-1 text-[#71717A]">
-                            <Building2 size={12} />
+                          <span className="flex items-center gap-1 text-[#A1A1AA] font-mono">
+                            <Building2 size={12} className="text-[#E2B36E]" />
                             {person.company}
                           </span>
                         </div>
@@ -134,13 +134,13 @@ export default function NetworkingSection() {
                     </div>
 
                     {/* Tags & Action */}
-                    <div className="border-t border-white/5 pt-3 sm:pt-4 mt-auto">
+                    <div className="border-t-2 border-white/10 pt-3 sm:pt-4 mt-auto">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="flex flex-wrap gap-1.5">
                           {person.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="rounded-full border border-white/5 bg-[#16171D] px-2.5 py-0.5 font-mono text-[9px] sm:text-[10px] text-[#A1A1AA]"
+                              className="rounded-lg border-2 border-white/10 bg-[#16171D] px-2.5 py-0.5 font-mono text-[9px] sm:text-[10px] font-bold text-[#D4D4D8] shadow-[2px_2px_0px_#000000]"
                             >
                               {tag}
                             </span>
@@ -149,10 +149,10 @@ export default function NetworkingSection() {
 
                         <Link
                           href="/network"
-                          className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-[#E2B36E] transition hover:text-[#FFFFFF] ml-auto sm:ml-0"
+                          className="inline-flex items-center gap-1.5 rounded-lg border-2 border-white/15 bg-[#17181D] px-3 py-1 font-mono text-xs font-bold text-[#E2B36E] shadow-[2px_2px_0px_#000000] hover:border-[#E2B36E] hover:text-[#FFFFFF] hover:shadow-[3px_3px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all ml-auto sm:ml-0"
                         >
                           <span>Profile</span>
-                          <ArrowUpRight size={13} />
+                          <ArrowUpRight size={13} strokeWidth={2.5} />
                         </Link>
                       </div>
                     </div>
@@ -170,9 +170,9 @@ export default function NetworkingSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <SpotlightCard className="mt-8 sm:mt-12 p-5 sm:p-8 bg-[#111217] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6 text-center sm:text-left">
+          <SpotlightCard className="mt-8 sm:mt-12 p-5 sm:p-8 bg-[#111217] border-2 border-white/15 rounded-2xl shadow-[6px_6px_0px_#000000] flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6 text-center sm:text-left">
             <div className="space-y-1">
-              <h4 className="text-base font-bold text-[#F4F4F5]">Looking to connect or collaborate?</h4>
+              <h4 className="text-base sm:text-lg font-extrabold text-[#F4F4F5]">Looking to connect or collaborate?</h4>
               <p className="text-xs sm:text-sm text-[#A1A1AA]">
                 I actively collaborate with technical founders and builders on AI workflows, agents, and full-stack software.
               </p>
@@ -181,14 +181,14 @@ export default function NetworkingSection() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
               <Link
                 href="/network"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-[#16171D] px-5 py-2.5 text-xs font-semibold text-[#F4F4F5] transition hover:border-white/30 hover:bg-[#1C1E26]"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-[#16171D] px-5 py-2.5 text-xs font-bold text-[#F4F4F5] shadow-[3px_3px_0px_#000000] transition-all hover:border-[#E2B36E] hover:text-[#FFFFFF] hover:shadow-[4px_4px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
               >
                 View Full Directory
-                <ArrowUpRight size={14} />
+                <ArrowUpRight size={14} strokeWidth={2.5} />
               </Link>
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#F4F4F5] px-5 py-2.5 text-xs font-bold text-[#090A0C] shadow-md transition hover:bg-[#FFFFFF]"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-black bg-[#E2B36E] px-5 py-2.5 text-xs font-extrabold text-[#090A0C] shadow-[3px_3px_0px_#FFFFFF] transition-all hover:bg-[#F0C485] hover:shadow-[4px_4px_0px_#FFFFFF] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
               >
                 Get In Touch
               </a>

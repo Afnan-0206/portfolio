@@ -115,9 +115,9 @@ export default function ContactSection() {
             className="space-y-6 sm:space-y-8"
           >
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#141519] px-3.5 py-1.5 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 rounded-full border-2 border-white/20 bg-[#141519] px-3.5 py-1.5 shadow-[3px_3px_0px_#000000] backdrop-blur-md">
                 <span className="h-2 w-2 rounded-full bg-[#10B981]" />
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#E2B36E] uppercase">
+                <span className="font-mono text-xs font-bold tracking-widest text-[#E2B36E] uppercase">
                   GET IN TOUCH
                 </span>
               </div>
@@ -133,8 +133,8 @@ export default function ContactSection() {
             </div>
 
             {/* Email Copy Card */}
-            <div className="rounded-2xl border border-white/10 bg-[#121316] p-4 sm:p-6 shadow-card">
-              <p className="font-mono text-xs font-semibold uppercase tracking-wider text-[#71717A] mb-2">
+            <div className="rounded-2xl border-2 border-white/15 bg-[#121316] p-4 sm:p-6 shadow-[5px_5px_0px_#000000]">
+              <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#71717A] mb-2">
                 Direct Email
               </p>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -144,7 +144,7 @@ export default function ContactSection() {
                 <button
                   type="button"
                   onClick={copyEmail}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-[#17181D] px-4 py-2 text-xs font-semibold text-[#F4F4F5] transition hover:border-white/25 hover:bg-[#1D1E24]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-[#17181D] px-4 py-2 text-xs font-bold text-[#F4F4F5] shadow-[2px_2px_0px_#000000] transition hover:border-[#E2B36E] hover:shadow-[3px_3px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
                   aria-label="Copy email address"
                 >
                   {copied ? (
@@ -166,7 +166,7 @@ export default function ContactSection() {
             <div className="grid grid-cols-3 gap-2 sm:gap-3">
               <a
                 href="mailto:brafnan26@gmail.com"
-                className="flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl border border-white/10 bg-[#121316] p-2.5 sm:p-3 text-[11px] sm:text-xs font-semibold text-[#A1A1AA] transition hover:border-white/20 hover:text-[#F4F4F5]"
+                className="flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl border-2 border-white/15 bg-[#121316] p-2.5 sm:p-3 text-[11px] sm:text-xs font-bold text-[#A1A1AA] shadow-[3px_3px_0px_#000000] transition hover:border-[#E2B36E] hover:text-[#F4F4F5] hover:shadow-[4px_4px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5"
               >
                 <Mail size={14} />
                 <span>Email</span>
@@ -175,7 +175,7 @@ export default function ContactSection() {
                 href="https://www.linkedin.com/in/afnan-391912363"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl border border-white/10 bg-[#121316] p-2.5 sm:p-3 text-[11px] sm:text-xs font-semibold text-[#A1A1AA] transition hover:border-white/20 hover:text-[#F4F4F5]"
+                className="flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl border-2 border-white/15 bg-[#121316] p-2.5 sm:p-3 text-[11px] sm:text-xs font-bold text-[#A1A1AA] shadow-[3px_3px_0px_#000000] transition hover:border-[#E2B36E] hover:text-[#F4F4F5] hover:shadow-[4px_4px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5"
               >
                 <LinkedinIcon size={14} />
                 <span>LinkedIn</span>
@@ -184,7 +184,7 @@ export default function ContactSection() {
                 href="https://github.com/Afnan-0206"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl border border-white/10 bg-[#121316] p-2.5 sm:p-3 text-[11px] sm:text-xs font-semibold text-[#A1A1AA] transition hover:border-white/20 hover:text-[#F4F4F5]"
+                className="flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl border-2 border-white/15 bg-[#121316] p-2.5 sm:p-3 text-[11px] sm:text-xs font-bold text-[#A1A1AA] shadow-[3px_3px_0px_#000000] transition hover:border-[#E2B36E] hover:text-[#F4F4F5] hover:shadow-[4px_4px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5"
               >
                 <GithubIcon size={14} />
                 <span>GitHub</span>
@@ -192,7 +192,7 @@ export default function ContactSection() {
             </div>
 
             {/* Location & Status Pill */}
-            <div className="flex items-start sm:items-center gap-3 rounded-xl border border-white/5 bg-[#141519]/70 p-3 sm:px-4 sm:py-3 text-xs text-[#A1A1AA] leading-relaxed">
+            <div className="flex items-start sm:items-center gap-3 rounded-xl border-2 border-white/10 bg-[#141519] p-3 sm:px-4 sm:py-3 text-xs text-[#A1A1AA] leading-relaxed shadow-[3px_3px_0px_#000000]">
               <MapPin size={15} className="text-[#E2B36E] shrink-0 mt-0.5 sm:mt-0" />
               <span>Bengaluru, India · Open for internships &amp; select builds · Typically responds within 24h</span>
             </div>
@@ -204,7 +204,7 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="rounded-2xl border border-white/10 bg-[#121316] p-4 sm:p-8 shadow-card"
+            className="rounded-2xl border-2 border-white/20 bg-[#121316] p-4 sm:p-8 shadow-[8px_8px_0px_#000000]"
           >
             <h3 className="text-lg sm:text-xl font-bold text-[#F4F4F5] mb-1 sm:mb-2">Send a Message</h3>
             <p className="text-xs text-[#A1A1AA] mb-5 sm:mb-6">Fill in the fields below and I will get back to you directly.</p>
@@ -216,9 +216,9 @@ export default function ContactSection() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="rounded-xl border border-[#10B981]/30 bg-[#10B981]/10 p-8 text-center space-y-3"
+                  className="rounded-xl border-2 border-[#10B981] bg-[#10B981]/10 p-8 text-center space-y-3 shadow-[4px_4px_0px_#000000]"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#10B981]/20 text-[#10B981] mx-auto">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#10B981]/20 text-[#10B981] mx-auto border-2 border-[#10B981]">
                     <CheckCircle2 size={28} />
                   </div>
                   <h4 className="text-lg font-bold text-[#F4F4F5]">Message Received</h4>
@@ -228,7 +228,7 @@ export default function ContactSection() {
                   <button
                     type="button"
                     onClick={() => setStatus("idle")}
-                    className="mt-4 inline-flex items-center rounded-full border border-white/10 bg-[#17181D] px-5 py-2 text-xs font-semibold text-[#F4F4F5] hover:bg-[#1D1E24]"
+                    className="mt-4 inline-flex items-center rounded-xl border-2 border-white/20 bg-[#17181D] px-5 py-2 text-xs font-bold text-[#F4F4F5] shadow-[2px_2px_0px_#000000] hover:border-white/40"
                   >
                     Send another note
                   </button>
@@ -236,7 +236,7 @@ export default function ContactSection() {
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="space-y-4">
                   <div>
-                    <label htmlFor="contact-name" className="block font-mono text-xs text-[#71717A] mb-1.5 uppercase">
+                    <label htmlFor="contact-name" className="block font-mono text-xs text-[#71717A] mb-1.5 uppercase font-bold">
                       Name <span className="text-[#E2B36E]">*</span>
                     </label>
                     <input
@@ -246,19 +246,19 @@ export default function ContactSection() {
                       value={form.name}
                       onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
                       onBlur={() => setTouched((prev) => ({ ...prev, name: true }))}
-                      className={`w-full rounded-xl border bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] transition focus:outline-none ${
+                      className={`w-full rounded-xl border-2 bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] shadow-[2px_2px_0px_#000000] transition focus:outline-none ${
                         touched.name && validation.name
-                          ? "border-[#EF4444]/60 focus:border-[#EF4444]"
-                          : "border-white/10 focus:border-white/30"
+                          ? "border-[#EF4444] focus:border-[#EF4444] focus:shadow-[3px_3px_0px_#EF4444]"
+                          : "border-white/15 focus:border-[#E2B36E] focus:shadow-[3px_3px_0px_#E2B36E]"
                       }`}
                     />
                     {touched.name && validation.name && (
-                      <p className="mt-1 text-xs text-[#EF4444]">{validation.name}</p>
+                      <p className="mt-1 text-xs text-[#EF4444] font-semibold">{validation.name}</p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="contact-email" className="block font-mono text-xs text-[#71717A] mb-1.5 uppercase">
+                    <label htmlFor="contact-email" className="block font-mono text-xs text-[#71717A] mb-1.5 uppercase font-bold">
                       Email <span className="text-[#E2B36E]">*</span>
                     </label>
                     <input
@@ -268,19 +268,19 @@ export default function ContactSection() {
                       value={form.email}
                       onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
                       onBlur={() => setTouched((prev) => ({ ...prev, email: true }))}
-                      className={`w-full rounded-xl border bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] transition focus:outline-none ${
+                      className={`w-full rounded-xl border-2 bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] shadow-[2px_2px_0px_#000000] transition focus:outline-none ${
                         touched.email && validation.email
-                          ? "border-[#EF4444]/60 focus:border-[#EF4444]"
-                          : "border-white/10 focus:border-white/30"
+                          ? "border-[#EF4444] focus:border-[#EF4444] focus:shadow-[3px_3px_0px_#EF4444]"
+                          : "border-white/15 focus:border-[#E2B36E] focus:shadow-[3px_3px_0px_#E2B36E]"
                       }`}
                     />
                     {touched.email && validation.email && (
-                      <p className="mt-1 text-xs text-[#EF4444]">{validation.email}</p>
+                      <p className="mt-1 text-xs text-[#EF4444] font-semibold">{validation.email}</p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="contact-subject" className="block font-mono text-xs text-[#71717A] mb-1.5 uppercase">
+                    <label htmlFor="contact-subject" className="block font-mono text-xs text-[#71717A] mb-1.5 uppercase font-bold">
                       Subject (Optional)
                     </label>
                     <input
@@ -289,12 +289,12 @@ export default function ContactSection() {
                       placeholder="e.g. AI Workflow Collaboration / Internship"
                       value={form.subject}
                       onChange={(e) => setForm((prev) => ({ ...prev, subject: e.target.value }))}
-                      className="w-full rounded-xl border border-white/10 bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] transition focus:border-white/30 focus:outline-none"
+                      className="w-full rounded-xl border-2 border-white/15 bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] shadow-[2px_2px_0px_#000000] transition focus:border-[#E2B36E] focus:shadow-[3px_3px_0px_#E2B36E] focus:outline-none"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="contact-message" className="block font-mono text-xs text-[#71717A] mb-1.5 uppercase">
+                    <label htmlFor="contact-message" className="block font-mono text-xs text-[#71717A] mb-1.5 uppercase font-bold">
                       Message <span className="text-[#E2B36E]">*</span>
                     </label>
                     <textarea
@@ -304,22 +304,22 @@ export default function ContactSection() {
                       value={form.message}
                       onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))}
                       onBlur={() => setTouched((prev) => ({ ...prev, message: true }))}
-                      className={`w-full rounded-xl border bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] transition focus:outline-none resize-none ${
+                      className={`w-full rounded-xl border-2 bg-[#17181D] px-4 py-3 text-base sm:text-sm text-[#F4F4F5] shadow-[2px_2px_0px_#000000] transition focus:outline-none resize-none ${
                         touched.message && validation.message
-                          ? "border-[#EF4444]/60 focus:border-[#EF4444]"
-                          : "border-white/10 focus:border-white/30"
+                          ? "border-[#EF4444] focus:border-[#EF4444] focus:shadow-[3px_3px_0px_#EF4444]"
+                          : "border-white/15 focus:border-[#E2B36E] focus:shadow-[3px_3px_0px_#E2B36E]"
                       }`}
                     />
                     {touched.message && validation.message && (
-                      <p className="mt-1 text-xs text-[#EF4444]">{validation.message}</p>
+                      <p className="mt-1 text-xs text-[#EF4444] font-semibold">{validation.message}</p>
                     )}
                   </div>
 
                   {status === "error" && (
-                    <div className="flex flex-col gap-2 rounded-xl border border-[#EF4444]/30 bg-[#EF4444]/10 p-3.5 text-xs text-[#EF4444]">
+                    <div className="flex flex-col gap-2 rounded-xl border-2 border-[#EF4444] bg-[#EF4444]/10 p-3.5 text-xs text-[#EF4444] shadow-[3px_3px_0px_#000000]">
                       <div className="flex items-center gap-2">
                         <AlertCircle size={16} className="shrink-0" />
-                        <span>{errorMessage}</span>
+                        <span className="font-semibold">{errorMessage}</span>
                       </div>
                       <a
                         href={`mailto:brafnan26@gmail.com?subject=${encodeURIComponent(
@@ -327,7 +327,7 @@ export default function ContactSection() {
                         )}&body=${encodeURIComponent(
                           `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\n\nMessage:\n${form.message.trim()}`
                         )}`}
-                        className="mt-1 inline-flex items-center gap-1.5 font-medium text-[#E2B36E] hover:underline"
+                        className="mt-1 inline-flex items-center gap-1.5 font-bold text-[#E2B36E] hover:underline"
                       >
                         Click here to open pre-filled in your email client &rarr;
                       </a>
@@ -337,13 +337,13 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#F4F4F5] py-3.5 text-xs font-bold text-[#090A0C] shadow-sm transition hover:bg-[#FFFFFF] hover:shadow-warm-glow disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-2 rounded-xl border-2 border-black bg-[#E2B36E] py-3.5 text-xs font-extrabold text-[#090A0C] shadow-[4px_4px_0px_#FFFFFF] transition hover:bg-[#F0C485] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_#FFFFFF] active:translate-x-1 active:translate-y-1 active:shadow-none disabled:opacity-50"
                   >
                     {status === "submitting" ? (
                       <span>Sending message...</span>
                     ) : (
                       <>
-                        <Send size={14} />
+                        <Send size={14} className="stroke-[2.5]" />
                         <span>Send Message</span>
                       </>
                     )}

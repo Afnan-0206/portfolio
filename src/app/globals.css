@@ -124,13 +124,14 @@ pre {
   transition: width 0.1s linear;
 }
 
-/* ── Spotlight Card Magic ── */
+/* ── Spotlight Card with Neobrutalism Depth ── */
 .spotlight-card {
   position: relative;
   overflow: hidden;
   background-color: #111217;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 4px 4px 0px #000000;
+  transition: border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .spotlight-card::before {
@@ -151,7 +152,7 @@ pre {
 .spotlight-card::after {
   content: '';
   position: absolute;
-  inset: -1px;
+  inset: -2px;
   border-radius: inherit;
   background: radial-gradient(
     400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
@@ -170,8 +171,93 @@ pre {
 }
 
 .spotlight-card:hover {
-  border-color: rgba(226, 179, 110, 0.25);
-  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.8), 0 0 30px -10px rgba(226, 179, 110, 0.08);
+  border-color: #E2B36E;
+  box-shadow: 6px 6px 0px #000000, 0 0 24px -8px rgba(226, 179, 110, 0.25);
+  transform: translate(-1px, -1px);
+}
+
+/* ── Neobrutalism UI Utility Classes ── */
+.neo-card {
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 4px 4px 0px #000000;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neo-card:hover {
+  border-color: #E2B36E;
+  box-shadow: 6px 6px 0px #000000, 4px 4px 0px #E2B36E;
+  transform: translate(-1px, -1px);
+}
+
+.neo-pill {
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 2px 2px 0px #000000;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neo-pill:hover {
+  border-color: #E2B36E;
+  box-shadow: 3px 3px 0px #E2B36E;
+  transform: translate(-1px, -1px);
+}
+
+.neo-btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000000;
+  background-color: #E2B36E;
+  color: #090A0C;
+  font-weight: 800;
+  box-shadow: 3px 3px 0px #FFFFFF;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neo-btn-gold:hover {
+  background-color: #F0C485;
+  box-shadow: 5px 5px 0px #FFFFFF;
+  transform: translate(-2px, -2px);
+}
+
+.neo-btn-gold:active {
+  box-shadow: 1px 1px 0px #FFFFFF;
+  transform: translate(1px, 1px);
+}
+
+.neo-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: #141519;
+  color: #F4F4F5;
+  font-weight: 700;
+  box-shadow: 4px 4px 0px #000000;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neo-btn-dark:hover {
+  border-color: #E2B36E;
+  color: #FFFFFF;
+  box-shadow: 5px 5px 0px #E2B36E;
+  transform: translate(-2px, -2px);
+}
+
+.neo-btn-dark:active {
+  box-shadow: 1px 1px 0px #000000;
+  transform: translate(1px, 1px);
+}
+
+.neo-tag {
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 2px 2px 0px #000000;
+  transition: all 0.15s ease;
+}
+
+.neo-tag:hover {
+  border-color: #E2B36E;
+  box-shadow: 2px 2px 0px #E2B36E;
+  transform: translate(-1px, -1px);
 }
 
 /* ── Metallic Shimmer Text ── */
@@ -224,14 +310,44 @@ pre {
 }
 
 .prose-custom h2 {
-  color: var(--text-primary);
-  font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  color: #F4F4F5;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.prose-custom h2::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #E2B36E;
+  border-radius: 2px;
+  box-shadow: 2px 2px 0px #000000;
 }
 
 .prose-custom ul {
   list-style: none;
+}
+
+.prose-custom section > div[class*="border"],
+.prose-custom section div[class*="rounded"] {
+  border-width: 2px !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prose-custom section > div[class*="border"]:hover,
+.prose-custom section div[class*="rounded"]:hover {
+  border-color: #E2B36E !important;
+  box-shadow: 5px 5px 0px #E2B36E !important;
+  transform: translate(-1px, -1px);
 }
 
 /* ── Reduced motion ── */

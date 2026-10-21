@@ -61,18 +61,27 @@ const bowAt = (drumDeg: number, bow: number) => -bow * (1 - Math.cos(rad(drumDeg
 
 /** Computes the combined CSS transform for a card in ring (m=0) and drum (m=1) states */
 function place(
-  ringDeg: number,
+  ringAngleDeg: number,
   drumDeg: number,
   ringR: number,
   drumR: number,
   bow: number,
   m: number
 ) {
-  return (
-    `translateX(${m * bowAt(drumDeg, bow)}px)` +
-    ` rotateZ(${(1 - m) * ringDeg}deg) translateY(${-(1 - m) * ringR}px)` +
-    ` rotateX(${m * drumDeg}deg) translateZ(${m * drumR}px)`
-  );
+  // Ring position on circle in XY plane at rest (m = 0)
+  const xRing = Math.sin(rad(ringAngleDeg)) * ringR;
+  const yRing = -Math.cos(rad(ringAngleDeg)) * ringR;
+
+  // Drum position along lateral bow arc when active (m = 1)
+  const xDrum = bowAt(drumDeg, bow);
+
+  // Smooth interpolation between ring and drum positions
+  const x = lerp(xRing, xDrum, m);
+  const y = lerp(yRing, 0, m);
+  const z = m * drumR;
+  const rx = m * drumDeg;
+
+  return `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0px) rotateX(${rx.toFixed(2)}deg) translateZ(${z.toFixed(2)}px)`;
 }
 
 type Stage = { w: number; h: number };
@@ -182,7 +191,7 @@ export function WorksWheel({
         const card = cardRefs.current[i];
         if (card) {
           card.style.transform = place(
-            d * (360 / (count || 1)),
+            i * (360 / (count || 1)),
             drumDeg,
             ringR,
             drumR,
@@ -354,10 +363,10 @@ export function WorksWheel({
                   marginTop: -metrics.cardH / 2,
                 }}
               >
-                <div className="size-full transition-transform duration-150 ease-out origin-center">
+                <div className="size-full transition-transform duration-150 ease-out origin-center [backface-visibility:hidden]">
                   <CardWrapper
                     {...(linkProps as any)}
-                    className="relative block size-full overflow-hidden rounded-xl border border-white/10 bg-[#121316] shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-300 group-hover:border-[#E2B36E]/40 pointer-events-auto cursor-pointer"
+                    className="relative block size-full overflow-hidden rounded-xl border-2 border-white/20 bg-[#121316] shadow-[6px_6px_0px_#000000] transition-all duration-300 group-hover:border-[#E2B36E] group-hover:shadow-[8px_8px_0px_#E2B36E] pointer-events-auto cursor-pointer"
                     aria-label={`View ${item.title} case study`}
                   >
                     {!hasError ? (
@@ -370,7 +379,7 @@ export function WorksWheel({
                       />
                     ) : (
                       <div className="size-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-[#17181D] to-[#0D0E11]">
-                        <span className="font-mono text-xs uppercase tracking-wider text-[#E2B36E]">
+                        <span className="font-mono text-xs uppercase tracking-wider text-[#E2B36E] font-bold">
                           Systems Project
                         </span>
                         <h4 className="mt-2 text-base font-bold text-[#F4F4F5]">{item.title}</h4>
@@ -382,7 +391,7 @@ export function WorksWheel({
 
                     {/* Hover Action Badge */}
                     {action && item.href ? (
-                      <span className="pointer-events-none absolute right-3 bottom-3 flex translate-y-1 items-center gap-1.5 rounded-full border border-[#E2B36E]/30 bg-[#090A0C]/90 px-3 py-1 font-mono text-[11px] text-[#E2B36E] opacity-0 backdrop-blur-md transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 shadow-md">
+                      <span className="pointer-events-none absolute right-3 bottom-3 flex translate-y-1 items-center gap-1.5 rounded-full border-2 border-black bg-[#E2B36E] px-3 py-1 font-mono text-[11px] font-bold text-black opacity-0 backdrop-blur-md transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 shadow-[2px_2px_0px_#FFFFFF]">
                         <span>{action}</span>
                         <svg viewBox="0 0 12 12" className="size-2.5" aria-hidden="true">
                           <path
@@ -411,13 +420,13 @@ export function WorksWheel({
         style={{ fontSize: Math.max(14, metrics.title * 0.45) }}
       >
         <div className="flex flex-col items-center gap-2 text-center px-4">
-          <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-[#E2B36E]">
+          <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-[#E2B36E] font-bold">
             Curated Systems
           </span>
-          <span className="text-base sm:text-2xl font-bold text-[#F4F4F5] tracking-wide">
+          <span className="text-base sm:text-2xl font-extrabold text-[#F4F4F5] tracking-wide">
             {label}
           </span>
-          <span className="text-[11px] text-[#71717A] flex items-center gap-1.5 font-sans mt-0.5">
+          <span className="text-[11px] text-[#A1A1AA] flex items-center gap-1.5 font-sans mt-0.5 font-medium">
             <span>Scroll or drag cards to explore</span>
             <span className="text-[#E2B36E] animate-bounce">↓</span>
           </span>
@@ -430,11 +439,11 @@ export function WorksWheel({
         className="pointer-events-none absolute top-1/2 left-[5%] sm:left-[8%] -translate-y-1/2 tracking-tight opacity-0 max-w-[34%] sm:max-w-[28%] z-10"
       >
         <div className="space-y-1.5">
-          <span className="font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#E2B36E] block">
+          <span className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#E2B36E] block">
             Project 0{active + 1}
           </span>
           <h3
-            className="font-bold text-[#F4F4F5] leading-tight drop-shadow-lg text-lg sm:text-2xl md:text-3xl"
+            className="font-extrabold text-[#F4F4F5] leading-tight drop-shadow-lg text-lg sm:text-2xl md:text-3xl"
           >
             {items[active]?.title}
           </h3>
@@ -456,15 +465,15 @@ export function WorksWheel({
               type="button"
               onClick={() => to(i + 1)}
               className={cn(
-                "cursor-pointer transition-all duration-200 outline-none text-xs sm:text-sm font-mono flex items-center justify-end gap-2 group py-0.5 ml-auto",
+                "cursor-pointer transition-all duration-200 outline-none text-xs sm:text-sm font-mono flex items-center justify-end gap-2 group py-0.5 px-2 rounded-lg ml-auto border",
                 i === active
-                  ? "text-[#E2B36E] font-bold scale-105"
-                  : "text-[#71717A] hover:text-[#D4D4D8]"
+                  ? "text-[#E2B36E] font-bold border-2 border-[#E2B36E] bg-[#16171D] shadow-[2px_2px_0px_#E2B36E] scale-105"
+                  : "text-[#71717A] border-transparent hover:text-[#D4D4D8] hover:border-white/10"
               )}
               aria-label={`Select ${item.title}`}
               aria-current={i === active ? "true" : undefined}
             >
-              <span className="text-[10px] text-[#52525B] group-hover:text-[#A1A1AA]">
+              <span className="text-[10px] text-[#52525B] group-hover:text-[#A1A1AA] font-bold">
                 0{i + 1}
               </span>
               <span className="truncate max-w-[120px] sm:max-w-[160px] md:max-w-none">

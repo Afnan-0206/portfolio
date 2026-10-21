@@ -17,9 +17,9 @@ export default function Journey() {
           transition={{ duration: 0.5 }}
           className="mb-10 sm:mb-16 max-w-3xl"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#141519] px-3.5 py-1.5 backdrop-blur-md mb-3 sm:mb-4">
+          <div className="inline-flex items-center gap-2 rounded-full border-2 border-white/20 bg-[#141519] px-3.5 py-1.5 shadow-[3px_3px_0px_#000000] backdrop-blur-md mb-3 sm:mb-4">
             <Milestone size={13} className="text-[#E2B36E]" />
-            <span className="font-mono text-xs font-semibold tracking-widest text-[#E2B36E] uppercase">
+            <span className="font-mono text-xs font-bold tracking-widest text-[#E2B36E] uppercase">
               EXPERIENCE &amp; TRAJECTORY
             </span>
           </div>
@@ -56,10 +56,10 @@ export default function Journey() {
                 >
                   {/* Step Node Icon */}
                   <div
-                    className={`absolute left-0 top-1.5 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full font-mono text-[10px] sm:text-xs font-bold transition-all duration-300 shadow-md ${
+                    className={`absolute left-0 top-1.5 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full font-mono text-[10px] sm:text-xs font-bold transition-all duration-200 border-2 shadow-[2px_2px_0px_#000000] ${
                       isLast
-                        ? "border border-[#E2B36E] bg-[#E2B36E] text-[#090A0C]"
-                        : "border border-white/10 bg-[#17181D] text-[#A1A1AA]"
+                        ? "border-black bg-[#E2B36E] text-[#090A0C]"
+                        : "border-white/15 bg-[#17181D] text-[#A1A1AA]"
                     }`}
                     aria-hidden="true"
                   >
@@ -68,10 +68,10 @@ export default function Journey() {
 
                   {/* Card */}
                   <div
-                    className={`relative rounded-2xl border p-4 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-white/20 hover:-translate-y-0.5 ${
+                    className={`relative rounded-2xl border-2 p-4 sm:p-6 backdrop-blur-md transition-all duration-200 hover:border-[#E2B36E] hover:shadow-[6px_6px_0px_#E2B36E] hover:-translate-x-0.5 hover:-translate-y-0.5 ${
                       isLast
-                        ? "border-white/15 bg-[#141519] shadow-card"
-                        : "border-white/10 bg-[#121316] shadow-card"
+                        ? "border-white/20 bg-[#141519] shadow-[5px_5px_0px_#000000]"
+                        : "border-white/15 bg-[#121316] shadow-[4px_4px_0px_#000000]"
                     }`}
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
@@ -84,7 +84,7 @@ export default function Journey() {
                       </h3>
 
                       {isLast && (
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-[#10B981]/30 bg-[#10B981]/10 px-2.5 py-0.5 sm:px-3 sm:py-1 font-mono text-[9px] sm:text-[10px] font-bold text-[#10B981]">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#10B981]/40 bg-[#10B981]/15 px-2.5 py-0.5 sm:px-3 sm:py-1 font-mono text-[9px] sm:text-[10px] font-bold text-[#10B981] shadow-[2px_2px_0px_#000000]">
                           <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
                           ACTIVE FOCUS
                         </span>

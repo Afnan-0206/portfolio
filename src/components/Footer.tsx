@@ -50,17 +50,17 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-white/10 bg-[#090A0C] overflow-hidden">
+    <footer className="relative border-t-2 border-white/15 bg-[#090A0C] overflow-hidden">
 
       {/* Ambient glow top */}
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-px w-3/4 bg-gradient-to-r from-transparent via-[#E2B36E]/40 to-transparent" aria-hidden="true" />
       <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-48 w-[600px] rounded-full bg-[#E2B36E]/4 blur-[80px]" aria-hidden="true" />
 
       {/* ── CTA Strip ── */}
-      <div className="relative px-4 py-8 sm:px-6 sm:py-10 lg:px-8 border-b border-white/5">
+      <div className="relative px-4 py-8 sm:px-6 sm:py-10 lg:px-8 border-b-2 border-white/10">
         <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6">
           <div className="text-center sm:text-left space-y-1">
-            <p className="text-xs sm:text-sm font-mono text-[#E2B36E] uppercase tracking-widest">Open to opportunities</p>
+            <p className="text-xs sm:text-sm font-mono text-[#E2B36E] uppercase tracking-widest font-bold">Open to opportunities</p>
             <h2 className="text-xl sm:text-3xl font-extrabold text-[#F4F4F5] leading-tight">
               Let&apos;s build something{" "}
               <span className="bg-gradient-to-r from-[#FFF1D0] via-[#E2B36E] to-[#C99342] bg-clip-text text-transparent">
@@ -77,10 +77,10 @@ export default function Footer() {
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }
             }}
-            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#F4F4F5] px-6 py-3 text-sm font-bold text-[#090A0C] shadow-lg transition hover:bg-[#FFFFFF] hover:shadow-[0_0_30px_rgba(226,179,110,0.3)] shrink-0"
+            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border-2 border-black bg-[#E2B36E] px-6 py-3.5 text-sm font-extrabold text-[#090A0C] shadow-[4px_4px_0px_#FFFFFF] transition-all hover:bg-[#F0C485] hover:shadow-[6px_6px_0px_#FFFFFF] hover:-translate-x-0.5 hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0"
           >
             Start a Conversation
-            <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 stroke-[2.5]" />
           </a>
         </div>
       </div>
@@ -93,18 +93,18 @@ export default function Footer() {
             {/* Brand */}
             <div className="space-y-4 sm:space-y-5">
               <div className="flex items-center gap-3">
-                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-white/15 bg-[#18191E] shadow-sm">
+                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl border-2 border-white/20 bg-[#18191E] shadow-[3px_3px_0px_#000000]">
                   <Image
                     src="/images/afnan-avatar.png"
                     alt="Afnan B.R."
                     fill
-                    sizes="40px"
+                    sizes="44px"
                     className="object-cover"
                   />
                 </div>
                 <div>
-                  <p className="font-bold text-sm text-[#F4F4F5] tracking-tight">Afnan B.R.</p>
-                  <p className="text-xs text-[#71717A]">AI Product Builder · Full-Stack Developer</p>
+                  <p className="font-extrabold text-base text-[#F4F4F5] tracking-tight">Afnan B.R.</p>
+                  <p className="text-xs text-[#A1A1AA] font-medium">AI Product Builder · Full-Stack Developer</p>
                 </div>
               </div>
 
@@ -113,23 +113,23 @@ export default function Footer() {
               </p>
 
               {/* Status pill */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#10B981]/20 bg-[#10B981]/8 px-3.5 py-1.5">
+              <div className="inline-flex items-center gap-2 rounded-xl border-2 border-[#10B981]/30 bg-[#10B981]/10 px-3.5 py-1.5 shadow-[2px_2px_0px_#000000]">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#10B981] opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#10B981]" />
                 </span>
-                <span className="font-mono text-[11px] font-semibold text-[#10B981] uppercase tracking-wider">Available for internships</span>
+                <span className="font-mono text-[11px] font-bold text-[#10B981] uppercase tracking-wider">Available for internships</span>
               </div>
 
-              <div className="flex items-center gap-1.5 text-xs text-[#71717A]">
-                <MapPin size={13} aria-hidden="true" />
+              <div className="flex items-center gap-1.5 text-xs text-[#A1A1AA] font-mono">
+                <MapPin size={13} className="text-[#E2B36E]" aria-hidden="true" />
                 <span>Bengaluru, India</span>
               </div>
             </div>
 
             {/* Nav links */}
             <div className="space-y-3">
-              <p className="font-mono text-[10px] tracking-widest text-[#71717A] uppercase">Navigation</p>
+              <p className="font-mono text-xs tracking-widest text-[#E2B36E] uppercase font-bold">Navigation</p>
               <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2.5" role="list">
                 {NAV_LINKS.map(({ label, href }) => (
                   <li key={label}>
@@ -141,7 +141,7 @@ export default function Footer() {
                           handleNavClick(href);
                         }
                       }}
-                      className="text-sm text-[#A1A1AA] transition hover:text-[#FFFFFF]"
+                      className="text-sm font-medium text-[#A1A1AA] transition hover:text-[#FFFFFF] hover:translate-x-1 inline-block"
                     >
                       {label}
                     </a>
@@ -152,13 +152,13 @@ export default function Footer() {
 
             {/* Social + contact */}
             <div className="space-y-3">
-              <p className="font-mono text-[10px] tracking-widest text-[#71717A] uppercase">Connect</p>
+              <p className="font-mono text-xs tracking-widest text-[#E2B36E] uppercase font-bold">Connect</p>
               <nav aria-label="Footer social links" className="flex flex-col gap-3">
                 <a
                   href="https://github.com/Afnan-0206"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-[#A1A1AA] transition hover:text-[#FFFFFF]"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[#A1A1AA] transition hover:text-[#FFFFFF] hover:translate-x-1"
                   aria-label="GitHub"
                 >
                   <GithubIcon size={14} />
@@ -168,7 +168,7 @@ export default function Footer() {
                   href="https://www.linkedin.com/in/afnan-391912363"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-[#A1A1AA] transition hover:text-[#FFFFFF]"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[#A1A1AA] transition hover:text-[#FFFFFF] hover:translate-x-1"
                   aria-label="LinkedIn"
                 >
                   <LinkedinIcon size={14} />
@@ -176,10 +176,10 @@ export default function Footer() {
                 </a>
                 <a
                   href="mailto:brafnan26@gmail.com"
-                  className="inline-flex items-center gap-2 text-sm text-[#A1A1AA] transition hover:text-[#FFFFFF] break-all"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[#A1A1AA] transition hover:text-[#FFFFFF] hover:translate-x-1 break-all"
                   aria-label="Email"
                 >
-                  <Mail size={14} aria-hidden="true" className="shrink-0" />
+                  <Mail size={14} aria-hidden="true" className="shrink-0 text-[#E2B36E]" />
                   brafnan26@gmail.com
                 </a>
               </nav>
@@ -189,13 +189,13 @@ export default function Footer() {
           {/* Tech Stack strip */}
           <div className="mt-8 sm:mt-12 mb-6 sm:mb-8 flex flex-wrap items-center gap-2">
             <div className="flex items-center gap-1.5 mr-2">
-              <Cpu size={13} className="text-[#E2B36E]" aria-hidden="true" />
-              <span className="font-mono text-[10px] tracking-widest text-[#71717A] uppercase">Stack</span>
+              <Cpu size={14} className="text-[#E2B36E]" aria-hidden="true" />
+              <span className="font-mono text-xs tracking-widest text-[#E2B36E] uppercase font-bold">Stack</span>
             </div>
             {TECH_STACK.map((tech) => (
               <span
                 key={tech}
-                className="rounded-full border border-white/5 bg-[#111217] px-3 py-1 font-mono text-[10px] text-[#52525B] tracking-wide"
+                className="rounded-lg border-2 border-white/10 bg-[#111217] px-3 py-1 font-mono text-[11px] font-bold text-[#A1A1AA] shadow-[2px_2px_0px_#000000] hover:border-[#E2B36E] hover:text-[#FFFFFF] transition-all"
               >
                 {tech}
               </span>
@@ -203,15 +203,15 @@ export default function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex flex-col items-start gap-3 border-t border-white/5 pt-6 sm:pt-8 sm:flex-row sm:items-center sm:justify-between text-xs text-[#52525B]">
-            <div className="flex items-center gap-2">
-              <Zap size={12} className="text-[#E2B36E] shrink-0" aria-hidden="true" />
+          <div className="flex flex-col items-start gap-3 border-t-2 border-white/10 pt-6 sm:pt-8 sm:flex-row sm:items-center sm:justify-between text-xs text-[#71717A]">
+            <div className="flex items-center gap-2 font-mono">
+              <Zap size={13} className="text-[#E2B36E] shrink-0" aria-hidden="true" />
               <span>
                 Designed &amp; engineered by Afnan B.R. —{" "}
-                <span className="text-[#71717A]">every pixel, every agent, every API.</span>
+                <span className="text-[#A1A1AA]">every pixel, every agent, every API.</span>
               </span>
             </div>
-            <p className="text-[#52525B]">© {year} Afnan B.R. All rights reserved.</p>
+            <p className="text-[#71717A] font-mono">© {year} Afnan B.R. All rights reserved.</p>
           </div>
         </div>
       </div>

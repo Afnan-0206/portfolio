@@ -1,10 +1,16 @@
 // Central data file — single source of truth for all portfolio content
-// Only facts supported by the actual project repositories and the prompt are listed.
+// Only facts supported by actual project repositories, benchmarks, and live deployments are listed.
+
+export interface ProjectMetric {
+  label: string;
+  value: string;
+}
 
 export interface Project {
   id: string;
   slug: string;
   category: string;
+  badge: string;
   title: string;
   shortDesc: string;
   problem: string;
@@ -13,16 +19,26 @@ export interface Project {
   tags: string[];
   repoUrl: string;
   liveUrl?: string;
+  caseStudyUrl?: string;
+  status: "Active Web Tool" | "Research Benchmark" | "Live Application" | "Production Portal" | "Local-First Tool" | "Open Source CLI";
   accentColor: string;
   featured: boolean;
+  metrics: ProjectMetric[];
 }
 
-export interface Experiment {
+export interface SecondaryProject {
   id: string;
+  slug: string;
   title: string;
+  category: string;
   description: string;
+  problem: string;
+  approach: string;
   tags: string[];
   repoUrl: string;
+  liveUrl?: string;
+  caseStudyUrl?: string;
+  status: string;
 }
 
 export interface Credential {
@@ -43,131 +59,220 @@ export interface CapabilityGroup {
   items: string[];
 }
 
-// ─── Featured Projects ───────────────────────────────────────────────────────
+export interface JourneyStep {
+  id: string;
+  label: string;
+  description: string;
+}
+
+// ─── Featured Projects (Curated Top 5) ───────────────────────────────────────
 
 export const featuredProjects: Project[] = [
   {
-    id: "bizpilot",
-    slug: "bizpilot",
-    category: "FLAGSHIP · MULTI-AGENT AI",
-    title: "BizPilot AI",
+    id: "isocheck",
+    slug: "isocheck",
+    category: "SYSTEMS · DATABASE INTERNALS",
+    badge: "LEAD PROJECT · SYSTEMS CORRECTNESS",
+    title: "IsoCheck",
     shortDesc:
-      "A multi-agent business copilot that converts informal customer messages into verified quotations, invoices and multilingual replies.",
+      "A black-box transactional isolation checker with a C++20 checking engine and Python workload harness that infers dependency graphs and detects isolation anomalies from client-observed histories.",
     problem:
-      "Small service businesses frequently receive unstructured requests through WhatsApp and manually calculate pricing, GST, quotations and customer replies—a slow, error-prone process.",
+      "Modern relational and distributed databases frequently violate advertised isolation levels under concurrent multi-client load. Verifying isolation traditionally requires internal lock tables or write-ahead logs, which managed cloud databases never expose.",
     solution:
-      "BizPilot passes each request through a transparent five-agent pipeline: Intake → Context → Generation → Approval → Review. Each agent's output is visible so the business owner understands exactly what the system decided and why.",
+      "IsoCheck treats the database strictly as a black box, recording client-observed transactions using unique list-append micro-operations. It reconstructs per-key version orders, synthesizes directed dependency graphs (wr and ww edges), and runs Tarjan's Strongly Connected Components (SCC) and minimal cycle search to find isolation anomalies.",
     keyContribution:
-      "Designed the full multi-agent architecture with rule-based fallback so the system degrades gracefully when the Gemini API is unavailable. Built the PDF export and WhatsApp-ready sharing flow.",
-    tags: ["React", "Node.js", "Gemini", "Tailwind CSS"],
-    repoUrl: "https://github.com/Afnan-0206/BizPilot",
-    liveUrl: "https://biz-pilot.vercel.app",
-    accentColor: "#22D3EE",
+      "Engineered the C++20 checking engine compiled to WebAssembly for zero-install in-browser checking; verified G0 (Write Cycles), G1a (Aborted Reads), G1c (Circular Flow), and Garbage Reads against formal theoretical frameworks (Adya 1999, Elle).",
+    tags: ["C++20", "WebAssembly", "Python 3.12", "PostgreSQL", "Graph Theory", "Tarjan SCC"],
+    repoUrl: "https://github.com/Afnan-0206/IsoCheck",
+    liveUrl: "https://isocheck.pages.dev/#/playground",
+    caseStudyUrl: "/work/isocheck",
+    status: "Active Web Tool",
+    accentColor: "#10B981",
     featured: true,
+    metrics: [
+      { label: "Core Engine", value: "C++20 & WebAssembly" },
+      { label: "Anomalies Checked", value: "G0, G1a, G1c, Garbage Reads" },
+      { label: "Client Execution", value: "100% In-Browser Sandbox" },
+    ],
   },
   {
-    id: "sri-vinayaka-pg",
-    slug: "sri-vinayaka-pg",
-    category: "CLIENT PRODUCT · FULL-STACK",
-    title: "Sri Vinayaka PG",
+    id: "inferload",
+    slug: "inferload",
+    category: "DEVELOPER TOOLS · LLM INFRASTRUCTURE",
+    badge: "LLM BENCHMARKING & CAPACITY",
+    title: "InferLoad",
     shortDesc:
-      "A complete PG accommodation platform combining a public website with a full operational management dashboard.",
+      "A client-side performance-testing and capacity-planning laboratory for LLM inference endpoints (vLLM, Ollama, OpenAI-compatible) designed around the split mechanics of generative prefill and decode.",
     problem:
-      "PG owners typically manage rooms, residents, rent, enquiries and visits through disconnected messages, notebooks or spreadsheets—with no audit trail.",
+      "Standard HTTP load tools (wrk, k6, Locust) measure generic request round-trip latency, obscuring critical generative inference dynamics: compute-bound prefill vs memory-bound auto-regressive decode, time to first token (TTFT), inter-token latency (ITL), and KV-cache starvation.",
     solution:
-      "A unified system containing a public room and facility website alongside an admin dashboard for resident management, rent-payment tracking, enquiry pipeline, visit scheduling, analytics and audit logs—all backed by Supabase with row-level security.",
+      "InferLoad generates YAML-defined synthetic workloads across closed-loop concurrency and open-loop Poisson arrival streams. It parses chunked streaming responses to measure TTFT, first-byte network latency, ITL, and aggregate tokens per second, calculating unrounded percentiles (p50, p95, p99) and flagging SLO threshold breaches.",
     keyContribution:
-      "Architected the Supabase schema with RLS and automated audit-log triggers. Built both the public-facing site and the admin interface as a single cohesive product.",
-    tags: ["React", "TypeScript", "Supabase", "PostgreSQL"],
-    repoUrl: "https://github.com/Afnan-0206/Shri-Vinayaka-Pg",
-    liveUrl: "https://shri-vinayaka-pg.vercel.app",
-    accentColor: "#8B5CF6",
+      "Implemented the streaming token parser and statistical distribution engine; built automated saturation inflection analysis to pinpoint where server queueing degrades TTFT below operational latency targets.",
+    tags: ["Python 3.12", "LLM Serving", "vLLM", "Ollama", "FastAPI", "AsyncIO", "Capacity Planning"],
+    repoUrl: "https://github.com/Afnan-0206/inferLoad",
+    liveUrl: "https://inferload.onrender.com",
+    caseStudyUrl: "/work/inferload",
+    status: "Live Application",
+    accentColor: "#22D3EE",
     featured: true,
+    metrics: [
+      { label: "Granular Metrics", value: "TTFT, ITL, Tokens/sec" },
+      { label: "Workload Models", value: "Closed-Loop & Poisson Arrival" },
+      { label: "Analysis Engine", value: "Saturation & SLO Inflection" },
+    ],
+  },
+  {
+    id: "fairlane",
+    slug: "fairlane",
+    category: "SYSTEMS RESEARCH · LLM SCHEDULING",
+    badge: "RESEARCH BENCHMARK · EMPIRICAL DATA",
+    title: "FairLane",
+    shortDesc:
+      "An experimental token-fair scheduling and admission-control benchmark comparing FIFO, Round-Robin, and Virtual Token Counter (VTC) policies under continuous batching constraints for multi-tenant LLM serving.",
+    problem:
+      "Under continuous batching, standard FIFO and request-count round-robin queues allow tenants submitting large prompts or long generations to monopolize GPU KV-cache capacity, subjecting co-located tenants with shorter requests to catastrophic queueing delays.",
+    solution:
+      "FairLane models continuous-batching LLM schedulers and compares FIFO, request-count Round-Robin, and Virtual Token Counter (VTC) algorithms under both break and skip admission modes across heterogeneous workloads (short interactive chat vs long-context RAG).",
+    keyContribution:
+      "Executed rigorous benchmarks across N = 30 independent random seeds with 95% non-parametric bootstrap confidence intervals; documented transparent hypothesis pre-registration, horizon-dependent FIFO degradation (up to 160x slowdown), and VTC fairness guarantees.",
+    tags: ["Python", "Go", "Continuous Batching", "Scheduling Algorithms", "Bootstrap Statistics", "Systems Research"],
+    repoUrl: "https://github.com/Afnan-0206/FairLane",
+    caseStudyUrl: "/work/fairlane",
+    status: "Research Benchmark",
+    accentColor: "#F59E0B",
+    featured: true,
+    metrics: [
+      { label: "Statistical Rigor", value: "N = 30 Seeds, 95% Bootstrap CI" },
+      { label: "Policies Evaluated", value: "FIFO, Round-Robin, VTC" },
+      { label: "Measured Slowdown", value: "160.4x (FIFO) → 2.0x (VTC)" },
+    ],
+  },
+  {
+    id: "bizpilot",
+    slug: "bizpilot",
+    category: "AGENTIC WORKFLOWS · OPERATIONS PRODUCT",
+    badge: "MULTI-AGENT BUSINESS COPILOT",
+    title: "BizPilot AI",
+    shortDesc:
+      "A multi-agent business operations copilot that converts informal WhatsApp customer requests into verified GST quotations, invoices, and multilingual customer replies.",
+    problem:
+      "Small service businesses (caterers, repair shops, contractors) receive informal customer requests on chat apps and manually compute unit pricing, GST, and quotations—a slow, error-prone friction that delays customer responses.",
+    solution:
+      "BizPilot passes each request through a transparent 5-agent pipeline: Intake → Context → Generation → Approval → Review. The Review Agent verifies line items and GST calculations against a catalog with an automated regeneration loop, and high-value orders trigger an approval gate.",
+    keyContribution:
+      "Engineered the full multi-agent pipeline with deterministic rule-based fallback when external LLM APIs encounter rate limits, built client-side jsPDF invoice generation, and created one-tap WhatsApp wa.me prefilled sharing.",
+    tags: ["React 19", "Node.js", "Express", "Gemini API", "jsPDF", "Tailwind CSS"],
+    repoUrl: "https://github.com/Afnan-0206/BizPilot",
+    liveUrl: "https://biz-pilot.vercel.app",
+    caseStudyUrl: "/work/bizpilot",
+    status: "Live Application",
+    accentColor: "#E2B36E",
+    featured: true,
+    metrics: [
+      { label: "Pipeline Nodes", value: "5 Collaborative Agents" },
+      { label: "Verification", value: "Catalog Cross-Check & Fallback" },
+      { label: "Sharing Flow", value: "Client jsPDF + WhatsApp wa.me" },
+    ],
   },
   {
     id: "autofix-ai",
     slug: "autofix-ai",
-    category: "AUTONOMOUS AI · DEVOPS",
+    category: "DEVELOPER TOOLS · AGENTIC DEVOPS",
+    badge: "AUTONOMOUS INCIDENT RESPONSE",
     title: "AutoFix AI",
     shortDesc:
-      "A six-agent DevOps incident-response system that researches errors, validates proposed fixes and generates actionable technical reports.",
+      "A 6-agent autonomous DevOps incident-response command center that investigates production error traces, evaluates fixes in a self-correcting feedback loop, and drafts pull requests.",
     problem:
-      "Debugging DevOps incidents requires searching documentation, evaluating multiple solutions and writing structured reports—time-consuming work that blocks engineers from shipping.",
+      "Debugging production incidents requires searching technical documentation and issue trackers, verifying patch viability, writing incident post-mortems, and drafting stakeholder communications—consuming valuable developer time during outages.",
     solution:
-      "Six specialised agents collaborate: Manager creates the investigation plan, Researcher searches relevant sources, Analyst selects the best solution, Tester validates it, Writer produces the incident report, and Action Agent drafts communication and pull-request content. When a fix is rejected, the loop restarts using the tester's feedback.",
+      "Six specialised agent nodes collaborate: Manager plans the investigation, Researcher searches documentation and GitHub issues, Analyst synthesizes solutions, Tester validates against error context with an automated feedback loop, Writer produces the incident report, and Action Agent drafts PR content.",
     keyContribution:
-      "Implemented the self-correction feedback loop between the Tester and Researcher agents, and designed the incident-report schema produced by the Writer agent.",
-    tags: ["React", "Node.js", "Anthropic API", "Express"],
+      "Implemented the self-correction loop between Tester and Researcher agents, designed structured incident post-mortem schemas, and built an interactive agent command center with real-time log streaming.",
+    tags: ["React", "TypeScript", "Node.js", "Express", "Multi-Agent AI", "DevOps Tooling"],
     repoUrl: "https://github.com/Afnan-0206/autofix-ai-incidents",
+    liveUrl: "https://autofix-ten-zeta.vercel.app",
+    caseStudyUrl: "/work/autofix-ai",
+    status: "Live Application",
     accentColor: "#34D399",
     featured: true,
-  },
-  {
-    id: "f1-race-strategy",
-    slug: "f1-race-strategy",
-    category: "MACHINE LEARNING · SPORTS ANALYTICS",
-    title: "F1 Race Strategy AI",
-    shortDesc:
-      "A machine-learning system for predicting Formula 1 finishing positions and exploring race scenarios using historical data.",
-    problem:
-      "Predicting race outcomes requires combining driver form, qualifying positions, championship context and track characteristics in a way that generalises across seasons.",
-    solution:
-      "Feature engineering on historical F1 data, time-based cross-validation to avoid data leakage, and a LightGBM regression model. A Streamlit interface lets users explore scenario inputs interactively.",
-    keyContribution:
-      "Designed the feature engineering pipeline (driver form, grid position, championship standing) and implemented time-based train/test splitting to prevent leakage from future races.",
-    tags: ["Python", "LightGBM", "Pandas", "Streamlit"],
-    repoUrl: "https://github.com/Afnan-0206/f1-race-prediction",
-    accentColor: "#F59E0B",
-    featured: true,
-  },
-  {
-    id: "nammafix-ai",
-    slug: "nammafix-ai",
-    category: "CIVIC AI · HACKATHON MVP",
-    title: "NammaFix AI",
-    shortDesc:
-      "A civic reporting prototype that turns citizen-submitted local issues into structured, prioritised reports using Gemini-assisted analysis.",
-    problem:
-      "Citizens often have no structured way to report local infrastructure issues, and reports that do exist are unorganised, underprioritised and hard to act on.",
-    solution:
-      "Text and photo issue submission with browser geolocation, Gemini-powered categorisation and severity analysis, duplicate detection, community verification and a prototype authority dashboard with an impact scoreboard. A deterministic fallback handles API failures transparently.",
-    keyContribution:
-      "Built the Gemini integration for issue categorisation with a deterministic fallback, and implemented the geolocation and duplicate-detection logic.",
-    tags: ["React", "Gemini", "JavaScript", "Browser APIs"],
-    repoUrl: "https://github.com/Afnan-0206/nammafix-ai",
-    liveUrl: "https://nammafix-ai.vercel.app",
-    accentColor: "#EC4899",
-    featured: true,
+    metrics: [
+      { label: "Agent Nodes", value: "6 Orchestrated Agents" },
+      { label: "Correction Loop", value: "Tester → Researcher Retry" },
+      { label: "Artifacts", value: "Structured Incident Report + PR Diff" },
+    ],
   },
 ];
 
-// ─── Experiments & Additional Builds ────────────────────────────────────────
+// ─── Selected Secondary Projects (Curated Top 3) ────────────────────────────
 
-export const experiments: Experiment[] = [
+export const secondaryProjects: SecondaryProject[] = [
   {
-    id: "cloudops",
-    title: "CloudOps Responder",
+    id: "scopesentry-local",
+    slug: "scopesentry-local",
+    title: "ScopeSentry Local",
+    category: "LOCAL AI · CLIENT CONTRACTS",
     description:
-      "A technical experiment in Python and Docker that simulates cloud incident environments, grades automated responses and evaluates incident-handling logic in isolated containers.",
-    tags: ["Python", "Docker", "Incident Response"],
-    repoUrl: "https://github.com/Afnan-0206/cloud-incident-openenv",
+      "A local-first AI assistant for freelancers and agencies that analyzes client requests against signed agreements, identifying potential scope changes with verbatim source citations and zero cloud API transmission.",
+    problem:
+      "Pasting confidential client agreements into cloud LLM APIs violates non-disclosure agreements, while manually verifying whether client requests fall within agreed deliverables causes billing disputes.",
+    approach:
+      "Runs 100% locally via Ollama (Qwen2.5) bound strictly to loopback. Features a deterministic evidence verifier that cross-checks citations verbatim against the raw agreement text, preventing hallucinated quotes, and classifies requests conservatively into INCLUDED, POTENTIAL SCOPE CHANGE, or NEEDS CLARIFICATION.",
+    tags: ["Ollama", "Qwen2.5", "React", "Express", "Local-First", "Privacy"],
+    repoUrl: "https://github.com/Afnan-0206/scopesentry-local",
+    liveUrl: "https://scopesentry.pages.dev",
+    status: "Local-First Tool",
   },
   {
-    id: "formgenius",
-    title: "FormGenius",
+    id: "ask-olake",
+    slug: "ask-olake",
+    title: "Ask OLake",
+    category: "CITATION-FIRST AI · DEV TOOLS",
     description:
-      "A zero-prompt AI career-intelligence application that accepts structured inputs, analyses résumé data using Gemini and surfaces tailored insights through a Streamlit interface.",
-    tags: ["Python", "Gemini", "Streamlit"],
-    repoUrl: "https://github.com/Afnan-0206/formgenius",
+      "A citation-first technical assistant for answering questions about the OLake data lakehouse engine, indexing 2,454 knowledge chunks across official documentation and repositories with strict source attribution.",
+    problem:
+      "Developer assistants frequently hallucinate configuration flags, connector capabilities, and Iceberg table maintenance settings when documentation is dense or evolving.",
+    approach:
+      "Combines warm-index BM25 lexical retrieval, structured citation verification and renumbering, multi-provider model failover (GLM-4.7 Flash → Gemini 2.5 Flash Lite → DeepSeek), and explicit abstention when technical evidence is insufficient.",
+    tags: ["BM25 Retrieval", "Express", "React", "OpenRouter", "Documentation Engine"],
+    repoUrl: "https://github.com/Afnan-0206/ask-olake",
+    status: "Open Source Tool",
   },
   {
-    id: "edusphere",
-    title: "EduSphere School",
+    id: "sri-vinayaka-pg",
+    slug: "sri-vinayaka-pg",
+    title: "Sri Vinayaka PG",
+    category: "FULL-STACK · OPERATIONS MANAGEMENT",
     description:
-      "A polished school landing page built as a client-facing frontend exercise, demonstrating responsive layout, component structure and clean visual hierarchy.",
-    tags: ["HTML", "CSS", "JavaScript"],
-    repoUrl: "https://github.com/Afnan-0206/edusphere-school-landing-page",
+      "A complete PG accommodation platform combining a public room showcase website with a full operational management dashboard for tenant lifecycles, rent ledgers, and audit logging.",
+    problem:
+      "Hostel owners manage resident check-ins, rent payments, room allocations, and visitor enquiries across disconnected notebooks and spreadsheets with no audit trail.",
+    approach:
+      "Dual-portal architecture built with React 19, TypeScript, and Supabase PostgreSQL. Implements Row-Level Security policies, automated audit-log triggers on write operations, visit scheduling, and live occupancy tracking.",
+    tags: ["React 19", "TypeScript", "Supabase", "PostgreSQL", "RLS", "Tailwind CSS"],
+    repoUrl: "https://github.com/Afnan-0206/Shri-Vinayaka-Pg",
+    liveUrl: "https://shri-vinayaka-pg.vercel.app",
+    caseStudyUrl: "/work/sri-vinayaka-pg",
+    status: "Live Production Portal",
   },
+];
+
+// Backwards-compatible alias for any consumer expecting experiments
+export const experiments = secondaryProjects.map((sp) => ({
+  id: sp.id,
+  title: sp.title,
+  description: sp.description,
+  tags: sp.tags,
+  repoUrl: sp.repoUrl,
+  liveUrl: sp.liveUrl,
+  caseStudyUrl: sp.caseStudyUrl,
+  category: sp.category,
+}));
+
+// All active projects helper
+export const allProjects: (Project | SecondaryProject)[] = [
+  ...featuredProjects,
+  ...secondaryProjects,
 ];
 
 // ─── Credentials & Summit Experiences ──────────────────────────────────────
@@ -275,84 +380,86 @@ export const credentials: Credential[] = [
 
 export const capabilities: CapabilityGroup[] = [
   {
-    id: "ai-systems",
-    title: "AI Systems",
+    id: "systems-infra",
+    title: "Systems & Infrastructure",
     items: [
-      "Multi-agent workflows",
-      "Gemini & Anthropic integrations",
-      "Structured generation",
-      "AI fallback logic",
-      "Prompt & output validation",
+      "C++20 & WebAssembly",
+      "Transactional isolation verification",
+      "Dependency graph analysis (SCC)",
+      "LLM inference benchmarking (TTFT/ITL)",
+      "Continuous batching & scheduling",
+      "Docker & Linux environments",
+    ],
+  },
+  {
+    id: "ai-systems",
+    title: "Agentic AI & LLMs",
+    items: [
+      "Multi-agent state machines",
+      "Self-correcting feedback loops",
+      "Deterministic verification & fallback",
+      "Local inference (Ollama)",
+      "BM25 lexical retrieval & citations",
+      "Structured JSON schemas",
     ],
   },
   {
     id: "fullstack",
     title: "Full-Stack Engineering",
-    items: ["React", "Next.js", "TypeScript", "Node.js", "Express", "REST APIs"],
-  },
-  {
-    id: "data-ml",
-    title: "Data & Machine Learning",
     items: [
-      "Python",
-      "Pandas",
-      "NumPy",
-      "LightGBM",
-      "Scikit-learn",
-      "Model evaluation",
+      "React 19 & Next.js 14",
+      "TypeScript (Strict)",
+      "Node.js & Express REST APIs",
+      "Tailwind CSS & Framer Motion",
+      "Browser Web APIs",
+      "Client-side PDF & share flows",
     ],
   },
   {
-    id: "databases-deployment",
-    title: "Databases & Deployment",
+    id: "databases-devops",
+    title: "Databases & Cloud",
     items: [
-      "Supabase",
-      "PostgreSQL",
-      "Row-Level Security",
-      "Vercel",
-      "Render",
-      "Git & GitHub",
+      "PostgreSQL & Supabase",
+      "Row-Level Security (RLS)",
+      "Database schema & audit triggers",
+      "Vercel & Render deployment",
+      "Git & GitHub Actions",
+      "RESTful API design",
     ],
   },
 ];
 
 // ─── Journey ──────────────────────────────────────────────────────────────────
 
-export interface JourneyStep {
-  id: string;
-  label: string;
-  description: string;
-}
-
 export const journeySteps: JourneyStep[] = [
   {
     id: "j1",
-    label: "Web Foundations",
+    label: "Systems & Web Foundations",
     description:
-      "Started building responsive web interfaces, learning HTML, CSS and JavaScript through real client-facing exercises.",
+      "Built rigorous programming foundations in C++, Python, and modern web architectures, focusing on data structures, networking, and clean system interfaces.",
   },
   {
     id: "j2",
-    label: "Client Projects",
+    label: "Full-Stack Client Systems",
     description:
-      "Built education and client-facing websites, developing a sense for visual hierarchy, usability and clean component structure.",
+      "Architected database-backed applications with PostgreSQL and Supabase, implementing Row-Level Security, automated audit logs, and responsive administrative dashboards.",
   },
   {
     id: "j3",
-    label: "Database-Backed Platforms",
+    label: "Multi-Agent AI & Workflows",
     description:
-      "Progressed into database-backed admin platforms with Supabase and PostgreSQL, adding authentication, row-level security and audit logging.",
+      "Engineered multi-agent systems with transparent reasoning pipelines, self-correction feedback loops, and deterministic fallbacks for business operations and DevOps.",
   },
   {
     id: "j4",
-    label: "AI & Multi-Agent Systems",
+    label: "LLM Systems & Experimental Evaluation",
     description:
-      "Developed AI and multi-agent products for hackathons—building visible reasoning pipelines, fallback logic and structured output validation.",
+      "Built empirical infrastructure: black-box transactional isolation checking (C++20/Wasm), LLM inference load testing (TTFT/ITL metrics), and token-fair scheduling under continuous batching constraints.",
   },
   {
     id: "j5",
-    label: "Now · Summits & Production",
+    label: "Now · Systems Depth & Summits",
     description:
-      "Co-organizing India's Premier Conference on Agentic AI (AgentsNexus), hacking at Bengaluru Tech Week Buildathons, and shipping resilient full-stack multi-agent systems.",
+      "Organizing crew at AgentsNexus (India's Premier Agentic AI Summit), hacking at Bengaluru Tech Week, and engineering verifiable, reliable AI and systems software.",
   },
 ];

@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
+import "./morph-orb.css";
+import PortfolioChatbot from "@/components/PortfolioChatbot";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -99,6 +101,7 @@ export default function RootLayout({
       </head>
       <body className="bg-[#050817] antialiased">
         {children}
+        <PortfolioChatbot />
       </body>
     </html>
   );

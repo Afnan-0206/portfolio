@@ -1,0 +1,394 @@
+/* ─── MorphOrb Component & Chatbot Stylesheet ───
+   Namespaced strictly under .mo-* to protect the portfolio design system.
+   Palette: Dark Obsidian (#08090B / #121316), Warm Gold (#E2B36E), Crisp White (#F4F4F5).
+*/
+
+/* Container & Stage */
+.mo-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.mo-content-area {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+}
+
+/* ─── Input Pill Phase (Fixed Bottom) ─── */
+.mo-pill-container {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mo-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: rgba(18, 19, 22, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 6px 8px 6px 16px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.25s ease;
+}
+
+.mo-pill:hover,
+.mo-pill:focus-within {
+  border-color: rgba(226, 179, 110, 0.45);
+  box-shadow: 0 4px 25px -2px rgba(0, 0, 0, 0.7), 0 0 16px -4px rgba(226, 179, 110, 0.25);
+}
+
+.mo-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #F4F4F5;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-family: inherit;
+  padding: 6px 4px;
+}
+
+.mo-input::placeholder {
+  color: #71717A;
+}
+
+.mo-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: #E2B36E;
+  color: #08090B;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.mo-submit-btn:hover:not(:disabled) {
+  background: #F59E0B;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(226, 179, 110, 0.4);
+}
+
+.mo-submit-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── Suggestion Chips ─── */
+.mo-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 2px;
+}
+
+.mo-chip {
+  background: rgba(24, 25, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #A1A1AA;
+  border-radius: 9999px;
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.mo-chip:hover {
+  background: rgba(226, 179, 110, 0.12);
+  border-color: rgba(226, 179, 110, 0.35);
+  color: #F4F4F5;
+  transform: translateY(-1px);
+}
+
+.mo-chip:focus-visible {
+  outline: 2px solid #E2B36E;
+  outline-offset: 2px;
+}
+
+/* ─── Canvas Particle Orb Phase ─── */
+.mo-canvas-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+}
+
+.mo-canvas {
+  display: block;
+  pointer-events: none;
+  filter: drop-shadow(0 0 25px rgba(226, 179, 110, 0.35));
+}
+
+.mo-orb-glow {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(226, 179, 110, 0.18) 0%, rgba(245, 158, 11, 0.08) 50%, transparent 75%);
+  pointer-events: none;
+  animation: mo-pulse-glow 3s ease-in-out infinite alternate;
+}
+
+/* Status Label */
+.mo-status-container {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.mo-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(18, 19, 22, 0.9);
+  border: 1px solid rgba(226, 179, 110, 0.3);
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: #E2B36E;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  animation: mo-fade-in 0.3s ease-out;
+}
+
+.mo-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #E2B36E;
+  box-shadow: 0 0 8px #E2B36E;
+  animation: mo-pulse-dot 1.5s infinite;
+}
+
+/* ─── Answer Card Phase ─── */
+.mo-answer-card {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(18, 19, 22, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 16px;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: mo-slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.mo-answer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mo-answer-category {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #E2B36E;
+}
+
+.mo-answer-body {
+  font-size: 0.8125rem;
+  line-height: 1.45rem;
+  color: #E4E4E7;
+  max-height: 310px;
+  overflow-y: auto;
+  padding-right: 6px;
+  overscroll-behavior: contain;
+}
+
+.mo-answer-body p {
+  margin-bottom: 8px;
+}
+
+.mo-answer-body p:last-child {
+  margin-bottom: 0;
+}
+
+.mo-answer-body strong {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.mo-answer-body ul,
+.mo-answer-body ol {
+  margin-left: 18px;
+  margin-bottom: 8px;
+}
+
+.mo-answer-body li {
+  margin-bottom: 4px;
+}
+
+.mo-answer-body a {
+  color: #E2B36E;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.mo-answer-body a:hover {
+  color: #F59E0B;
+}
+
+/* Links List */
+.mo-links-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mo-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #E2B36E;
+  background: rgba(226, 179, 110, 0.08);
+  border: 1px solid rgba(226, 179, 110, 0.25);
+  border-radius: 6px;
+  padding: 4px 10px;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+}
+
+.mo-action-link:hover {
+  background: rgba(226, 179, 110, 0.18);
+  border-color: rgba(226, 179, 110, 0.45);
+  color: #FFFFFF;
+}
+
+/* Reset / Ask Another Question Button */
+.mo-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #F4F4F5;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mo-reset-btn:hover {
+  background: rgba(226, 179, 110, 0.12);
+  border-color: rgba(226, 179, 110, 0.3);
+  color: #E2B36E;
+}
+
+/* Scrollbar within answer card */
+.mo-answer-body::-webkit-scrollbar {
+  width: 4px;
+}
+.mo-answer-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mo-answer-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+.mo-answer-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(226, 179, 110, 0.3);
+}
+
+/* ─── Keyframe Animations ─── */
+@keyframes mo-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mo-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mo-pulse-glow {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes mo-pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ─── Reduced Motion Support ─── */
+@media (prefers-reduced-motion: reduce) {
+  .mo-stage,
+  .mo-pill,
+  .mo-submit-btn,
+  .mo-chip,
+  .mo-answer-card,
+  .mo-reset-btn,
+  .mo-action-link {
+    transition: none !important;
+    animation: none !important;
+  }
+  .mo-orb-glow {
+    animation: none !important;
+    display: none;
+  }
+  .mo-status-dot {
+    animation: none !important;
+  }
+}
